@@ -1,0 +1,43 @@
+﻿<Page x:Class="HolyAngelMaternitySystem.PatientRecords"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:HolyAngelMaternitySystem"
+      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+      mc:Ignorable="d" 
+      xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+      d:DesignHeight="1080" d:DesignWidth="1920"
+      Background="FloralWhite"
+      Title="PatientRecords">
+
+    <Grid>
+        <TextBlock HorizontalAlignment="Left" Margin="25,10,0,0" TextWrapping="Wrap" Text="Patient Information " FontWeight="Bold" VerticalAlignment="Top"/>
+        <Label x:Name="lblPatientSearch" Grid.Row="0" Grid.Column="0" PreviewMouseLeftButtonUp="LblPatientSearch_PreviewMouseLeftButtonUp" VerticalAlignment="Top" Height="30" Width="30" ToolTip="Display Patient List" Cursor="Hand" Margin="140,3,1750,0">
+            <iconPacks:PackIconMaterial Kind="AccountSearch" Height="20" Width="20" Foreground="ForestGreen" HorizontalAlignment="Left"/>
+        </Label>
+        
+        <Label Content="Patient's ID" HorizontalAlignment="Left" Margin="116,158,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtPatientID" HorizontalAlignment="Left" Height="23" Margin="239,157,0,0" TextWrapping="Wrap" IsReadOnly="True" VerticalAlignment="Top" Width="169"/>
+
+        <Label Content="Patient's Name" HorizontalAlignment="Left" Margin="116,208,0,0" VerticalAlignment="Top"/>
+        <TextBox Controls:TextBoxHelper.Watermark="First name M.I Last name" x:Name="txtFullName" HorizontalAlignment="Left" Height="23" Margin="239,208,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="259"/>
+        <Label Content="Home Address" HorizontalAlignment="Left" Margin="116,252,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtAddress" HorizontalAlignment="Left" Height="23" Margin="239,252,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="357"/>
+        <Label Content="Birthdate" HorizontalAlignment="Left" Margin="116,295,0,0" VerticalAlignment="Top"/>
+        <DatePicker x:Name="txtBirthDate" HorizontalAlignment="Left" Height="23" Margin="239,295,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Status" HorizontalAlignment="Left" Margin="116,340,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="txtCivStatus" HorizontalAlignment="Left" Height="23" Margin="239,340,0,0" VerticalAlignment="Top" Width="120">
+            <ComboBoxItem>Single</ComboBoxItem>
+            <ComboBoxItem>Married</ComboBoxItem>
+            <ComboBoxItem>Divorced</ComboBoxItem>
+            <ComboBoxItem>Widowed</ComboBoxItem>
+        </ComboBox>
+        <Label Content="Cellphone No." HorizontalAlignment="Left" Margin="116,386,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtCellNo"  HorizontalAlignment="Left" Height="23" Margin="239,386,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+
+        <Button x:Name="btnSave" Click="BtnSave_Click" Content="Save" HorizontalAlignment="Left" Margin="304,510,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="btnEdit" Click="BtnEdit_Click" Content="Edit" HorizontalAlignment="Left" Margin="547,510,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="btnDelete" Click="BtnDelete_Click" Content="Delete" HorizontalAlignment="Left" Margin="414,510,0,0" VerticalAlignment="Top" Width="74"/>
+    </Grid>
+</Page>

@@ -20,9 +20,89 @@ namespace HolyAngelMaternitySystem
     /// </summary>
     public partial class MainWindow : Window
     {
+        PatientRecords pr = new PatientRecords();
+        DoctorAnalysis da = new DoctorAnalysis();
+        AddPatientRecord apr = new AddPatientRecord();
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void BtnLogout_Click(object sender, RoutedEventArgs e)
+        {
+            string sMessageBoxText = "Do you want to log out?";
+            string sCaption = "Logout";
+            MessageBoxButton btnMessageBox = MessageBoxButton.YesNoCancel;
+            MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
+
+            MessageBoxResult dr = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+
+            switch (dr)
+            {
+                case MessageBoxResult.Yes:
+                    this.DialogResult = false;
+                    Close();
+                    break;
+                case MessageBoxResult.No:
+                    break;
+            }
+        }
+
+
+
+        private void BtnExit_Click(object sender, RoutedEventArgs e)
+        {
+            string sMessageBoxText = "Do you want to exit the application?";
+            string sCaption = "Exit";
+            MessageBoxButton btnMessageBox = MessageBoxButton.YesNoCancel;
+            MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
+
+            MessageBoxResult dr = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+
+            switch (dr)
+            {
+                case MessageBoxResult.Yes:
+                    this.DialogResult = true;
+                    Application.Current.Shutdown();
+                    break;
+                case MessageBoxResult.No:
+                    break;
+            }
+        }
+
+        private void Frame_Navigating(object sender, System.Windows.Navigation.NavigatingCancelEventArgs e)
+        {
+            if (e.NavigationMode == NavigationMode.Forward)
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void BtnAccounts_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnAddPatient_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(pr);
+        }
+
+
+
+        private void BtnDoctorAnalysis_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(da);
+        }
+
+        private void BtnViewPatientRecord_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnAddPatientRecord_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(apr);
         }
     }
 }

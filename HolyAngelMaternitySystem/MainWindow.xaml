@@ -4,9 +4,58 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HolyAngelMaternitySystem"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Holy Angels Maternity &amp; Polyclinic"
+        d:DesignHeight="1080"
+        d:DesignWidth="1920"
+        Background="FloralWhite"
+        WindowState="Maximized">
     <Grid>
-        
+        <StackPanel>
+            <DockPanel>
+                <Menu DockPanel.Dock="Top" Margin="0,0,250,0">
+                    <MenuItem Header="_File">
+                        <MenuItem Header="_Logout" Click="BtnLogout_Click" />
+                        <MenuItem x:Name="btnExit" Header="_Exit" Click="BtnExit_Click" />
+                    </MenuItem>
+                    <MenuItem Header="_Records">
+                        <MenuItem x:Name="btnAddPatient" Click="BtnAddPatient_Click" Header="_Add Patient Information" >
+                            <MenuItem.Icon>
+                                <iconPacks:PackIconMaterial Kind="AccountPlus" Cursor="Hand"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem x:Name="btnAddPatientRecord" Click="BtnAddPatientRecord_Click " Header="_Add Patient Record" >
+                            <MenuItem.Icon>
+                                <iconPacks:PackIconMaterial Kind="CommentEdit" Cursor="Hand"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem x:Name="btnDoctorAnalysis" Click="BtnDoctorAnalysis_Click" Header="_Doctor Anaylsis">
+                            <MenuItem.Icon>
+                                <iconPacks:PackIconMaterial Kind="HomeAnalytics"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem x:Name="btnViewPatientRecord" Click="BtnViewPatientRecord_Click" Header="_View Patient Record">
+                            <MenuItem.Icon>
+                                <iconPacks:PackIconMaterial Kind="AccountSearch" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </MenuItem>
+                    <MenuItem Header="_Accounts">
+                        <MenuItem x:Name="btnAccounts" Click="BtnAccounts_Click" Header="_Manage users">
+                            <MenuItem.Icon>
+                                <iconPacks:PackIconMaterial Kind="AccountEdit"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </MenuItem>
+                </Menu>
+            </DockPanel>
+            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Frame x:Name="Frame"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Navigating="Frame_Navigating" NavigationUIVisibility="Hidden"/>
+            </Grid>
+        </StackPanel>
     </Grid>
 </Window>
