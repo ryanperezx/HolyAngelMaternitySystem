@@ -40,12 +40,20 @@ namespace HolyAngelMaternitySystem
 
         }
 
-        private void generateUniquePatientID()
+        private void LblGenerate_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-
+            DateTime year = DateTime.Today;
+            txtPatientID.Text = Convert.ToString(year.Year) + "-";
         }
 
+
         private void LblPatientSearch_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            PatientList pl = new PatientList();
+            pl.Show();
+        }
+
+        private void LblSearch_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
 
         }

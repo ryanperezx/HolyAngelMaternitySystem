@@ -16,28 +16,29 @@
         <Label x:Name="lblPatientSearch" Grid.Row="0" Grid.Column="0" PreviewMouseLeftButtonUp="LblPatientSearch_PreviewMouseLeftButtonUp" VerticalAlignment="Top" Height="30" Width="30" ToolTip="Display Patient List" Cursor="Hand" Margin="140,3,1750,0">
             <iconPacks:PackIconMaterial Kind="AccountSearch" Height="20" Width="20" Foreground="ForestGreen" HorizontalAlignment="Left"/>
         </Label>
-        
-        <Label Content="Patient's ID" HorizontalAlignment="Left" Margin="116,158,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtPatientID" HorizontalAlignment="Left" Height="23" Margin="239,157,0,0" TextWrapping="Wrap" IsReadOnly="True" VerticalAlignment="Top" Width="169"/>
-
-        <Label Content="Patient's Name" HorizontalAlignment="Left" Margin="116,208,0,0" VerticalAlignment="Top"/>
-        <TextBox Controls:TextBoxHelper.Watermark="First name M.I Last name" x:Name="txtFullName" HorizontalAlignment="Left" Height="23" Margin="239,208,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="259"/>
-        <Label Content="Home Address" HorizontalAlignment="Left" Margin="116,252,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtAddress" HorizontalAlignment="Left" Height="23" Margin="239,252,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="357"/>
-        <Label Content="Birthdate" HorizontalAlignment="Left" Margin="116,295,0,0" VerticalAlignment="Top"/>
-        <DatePicker x:Name="txtBirthDate" HorizontalAlignment="Left" Height="23" Margin="239,295,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Status" HorizontalAlignment="Left" Margin="116,340,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="txtCivStatus" HorizontalAlignment="Left" Height="23" Margin="239,340,0,0" VerticalAlignment="Top" Width="120">
+        <Label Content="Patient's ID:" HorizontalAlignment="Left" Margin="115,130,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtPatientID" HorizontalAlignment="Left" Height="23" Margin="210,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblSearch" Cursor="Hand" MouseLeftButtonUp="LblSearch_MouseLeftButtonUp" Height="35" HorizontalAlignment="Left" VerticalAlignment="Top" Width="34" Margin="335,121,0,0"  Foreground="ForestGreen" >
+            <iconPacks:PackIconMaterial  Kind="Magnify" Height="24" Width="23"/>
+        </Label>
+        <Label Content="Patient's Name:" HorizontalAlignment="Left" Margin="115,178,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtFullName" HorizontalAlignment="Left" Height="23" Margin="210,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196"/>
+        <Label Content="Home Address:" HorizontalAlignment="Left" Margin="115,225,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtAddress" HorizontalAlignment="Left" Height="23" Margin="210,225,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="357"/>
+        <Label Content="Birthdate:" HorizontalAlignment="Left" Margin="115,280,0,0" VerticalAlignment="Top"/>
+        <DatePicker x:Name="txtBirthDate" HorizontalAlignment="Left" Height="23" Margin="210,280,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Status: " HorizontalAlignment="Left" Margin="115,330,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cmbCivStatus" HorizontalAlignment="Left" Height="23" Margin="210,330,0,0" VerticalAlignment="Top" Width="120">
             <ComboBoxItem>Single</ComboBoxItem>
             <ComboBoxItem>Married</ComboBoxItem>
             <ComboBoxItem>Divorced</ComboBoxItem>
             <ComboBoxItem>Widowed</ComboBoxItem>
         </ComboBox>
-        <Label Content="Cellphone No." HorizontalAlignment="Left" Margin="116,386,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtCellNo"  HorizontalAlignment="Left" Height="23" Margin="239,386,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Cellphone No.:" HorizontalAlignment="Left" Margin="115,380,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtCellNo"  HorizontalAlignment="Left" Height="23" Margin="210,380 ,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="130"/>
 
         <Button x:Name="btnSave" Click="BtnSave_Click" Content="Save" HorizontalAlignment="Left" Margin="304,510,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="btnEdit" Click="BtnEdit_Click" Content="Edit" HorizontalAlignment="Left" Margin="547,510,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="btnEdit" Click="BtnEdit_Click" Content="Edit" HorizontalAlignment="Left" Margin="193,510,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="btnDelete" Click="BtnDelete_Click" Content="Delete" HorizontalAlignment="Left" Margin="414,510,0,0" VerticalAlignment="Top" Width="74"/>
     </Grid>
 </Page>

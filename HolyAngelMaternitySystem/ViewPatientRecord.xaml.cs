@@ -16,19 +16,13 @@ using System.Windows.Shapes;
 namespace HolyAngelMaternitySystem
 {
     /// <summary>
-    /// Interaction logic for AgeOfGestation.xaml
+    /// Interaction logic for ViewPatientRecord.xaml
     /// </summary>
-    public partial class AddPatientRecord : Page
+    public partial class ViewPatientRecord : Page
     {
-        public AddPatientRecord()
+        public ViewPatientRecord()
         {
             InitializeComponent();
-        }
-
-        private void LblPatientSearch_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            PatientList pl = new PatientList();
-            pl.Show();
         }
 
         private void LblSearch_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -36,10 +30,14 @@ namespace HolyAngelMaternitySystem
 
         }
 
-        private void computeAgeOfGestation()
+        private void LblPatientSearch_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
 
         }
 
+        private void BtnPatientRecord_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

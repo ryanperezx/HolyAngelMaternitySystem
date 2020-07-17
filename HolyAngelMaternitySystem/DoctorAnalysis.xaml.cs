@@ -28,6 +28,12 @@ namespace HolyAngelMaternitySystem
 
         }
 
+        private void populateDiagTreatment()
+        {
+
+
+        }
+
         private void LblSearch_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
 
@@ -50,7 +56,8 @@ namespace HolyAngelMaternitySystem
 
         private void LblPatientSearch_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-
+            PatientList pl = new PatientList();
+            pl.Show();
         }
     }
 }

@@ -16,29 +16,30 @@
         <Label x:Name="lblPatientSearch" Grid.Row="0" Grid.Column="0" PreviewMouseLeftButtonUp="LblPatientSearch_PreviewMouseLeftButtonUp" VerticalAlignment="Top" Height="30" Width="30" ToolTip="Display Patient List" Cursor="Hand" Margin="134,4,1756,0">
             <iconPacks:PackIconMaterial Kind="AccountSearch" Height="20" Width="20" Foreground="ForestGreen" HorizontalAlignment="Left"/>
         </Label>
-        <Label Content="Patient's ID:" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="138,0,1710,936"/>
-        <TextBox x:Name="txtPatientID"  HorizontalAlignment="Center" Height="23" TextWrapping="Wrap"  VerticalAlignment="Bottom" Width="120" Margin="215,0,1585,936"/>
-        <Label x:Name="lblSearch" Cursor="Hand" MouseLeftButtonUp="LblSearch_MouseLeftButtonUp" Height="35" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="34" Margin="340,0,1546,932" >
+        <Label Content="Patient's ID:" HorizontalAlignment="Left" Margin="115,130,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtPatientID" HorizontalAlignment="Left" Height="23" Margin="222,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblSearch" Cursor="Hand" MouseLeftButtonUp="LblSearch_MouseLeftButtonUp" Height="35" HorizontalAlignment="Left" VerticalAlignment="Top" Width="34" Margin="347,121,0,0"  Foreground="ForestGreen" >
             <iconPacks:PackIconMaterial  Kind="Magnify" Height="24" Width="23"/>
         </Label>
-        <Label Content="Patient's Name:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="118,174,0,0"/>
-        <TextBox x:Name="txtFullName" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap"  VerticalAlignment="Top" Width="239" Margin="215,174,1466,0"/>
-        <Label Content="Weight:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="160,232,0,0"/>
-        <TextBox x:Name="txtWeight" HorizontalAlignment="Left" Height="22" Margin="215,232,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Blood Pressure:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="119,292,0,0"/>
-        <TextBox x:Name="txtBP" HorizontalAlignment="Left" Height="22" Margin="215,292,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Age of Gestation:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="108,349,0,0"/>
-        <TextBox x:Name="txtAOG" HorizontalAlignment="Left" Height="22" Margin="215,349,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Patient's Name:" HorizontalAlignment="Left" Margin="115,178,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtFullName" HorizontalAlignment="Left" Height="23" Margin="222,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196"/>
+        <Label Content="Weight:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="115,233,0,0"/>
+        <TextBox x:Name="txtWeight" HorizontalAlignment="Left" Height="22" Margin="222,233,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Blood Pressure:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="115,288,0,0"/>
+        <TextBox x:Name="txtBP" HorizontalAlignment="Left" Height="22" Margin="222,288,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Age of Gestation:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="115,343,0,0"/>
+        <TextBox x:Name="txtAOG" HorizontalAlignment="Left" Height="22" Margin="222,343,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
 
-        <DataGrid x:Name="dgList" HorizontalAlignment="Right" Height="584" Width="844" VerticalAlignment="Center"  Margin="1017,105,59,391" >
+        <DataGrid x:Name="dgList" HorizontalAlignment="Right" Height="680" Width="960" VerticalAlignment="Center"  Margin="910,104,51,298" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Date" Binding="{Binding date}" Width="120" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Weight" Binding="{Binding weight}" IsReadOnly="True" Width="100"/>
                 <DataGridTextColumn Header="Blood Pressure" Binding="{Binding BP}" IsReadOnly="True" Width="120 "/>
-                <DataGridTextColumn Header="AOG" Binding="{Binding ageofGest}" Width="100" IsReadOnly="True"/>
+                <DataGridTextColumn Header="AOG" Binding="{Binding ageofGest}" Width="100"/>
                 <DataGridTextColumn Header="EUT" Binding="{Binding eut}" Width="100" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
+        <Button Content="Save" HorizontalAlignment="Left" Margin="163,414,0,0" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </Page>

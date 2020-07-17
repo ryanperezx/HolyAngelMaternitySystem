@@ -23,6 +23,7 @@ namespace HolyAngelMaternitySystem
         PatientRecords pr = new PatientRecords();
         DoctorAnalysis da = new DoctorAnalysis();
         AddPatientRecord apr = new AddPatientRecord();
+        ViewPatientRecord vpr = new ViewPatientRecord();
         public MainWindow()
         {
             InitializeComponent();
@@ -97,7 +98,7 @@ namespace HolyAngelMaternitySystem
 
         private void BtnViewPatientRecord_Click(object sender, RoutedEventArgs e)
         {
-
+            Frame.Navigate(vpr);
         }
 
         private void BtnAddPatientRecord_Click(object sender, RoutedEventArgs e)

@@ -1,6 +1,6 @@
 ﻿using MahApps.Metro.Controls;
 using NLog;
-using System;
+using System.Data.SqlClient;
 using System.Windows;
 using System.Windows.Input;
 
@@ -64,9 +64,23 @@ namespace HolyAngelMaternitySystem
 
         private void BtnLogin_Click(object sender, RoutedEventArgs e)
         {
-            Hide();
-            new MainWindow().ShowDialog();
-            ShowDialog();
+            SqlConnection conn = DBUtils.GetDBConnection();
+            conn.Open();
+            using (SqlCommand cmd = new SqlCommand("SELECT * from tblAccounts", conn))
+            {
+                int userCount = (int)cmd.ExecuteScalar();
+                if (userCount == 0)
+                {
+                    MessageBox.Show("Empty!");
+                }
+                else
+                {
+                    Hide();
+                    new MainWindow().ShowDialog();
+                    ShowDialog();
+                }
+            }
+
         }
     }
 }
