@@ -64,15 +64,16 @@ namespace HolyAngelMaternitySystem
 
         private void BtnLogin_Click(object sender, RoutedEventArgs e)
         {
+            /*
             SqlConnection conn = DBUtils.GetDBConnection();
             conn.Open();
-            using (SqlCommand cmd = new SqlCommand("SELECT * from tblAccounts", conn))
+            using (SqlCommand cmd = new SqlCommand("SELECT COUNT(1) from tblAccounts where id", conn))
             {
                 int userCount = (int)cmd.ExecuteScalar();
                 if (userCount == 0)
                 {
                     MessageBox.Show("Empty!");
-                }
+                } 
                 else
                 {
                     Hide();
@@ -80,6 +81,10 @@ namespace HolyAngelMaternitySystem
                     ShowDialog();
                 }
             }
+            */
+            Hide();
+            new MainWindow().ShowDialog();
+            ShowDialog();
 
         }
     }

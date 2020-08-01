@@ -1,0 +1,48 @@
+﻿<Page x:Class="HolyAngelMaternitySystem.AddPatientRecord"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:HolyAngelMaternitySystem"
+      mc:Ignorable="d"  
+      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+      xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+       d:DesignHeight="1080" d:DesignWidth="1920"
+      Background="FloralWhite"
+      Title="AddPatientRecord">
+
+    <Grid>
+        <TextBlock HorizontalAlignment="Left" Margin="25,10,0,0" TextWrapping="Wrap" Text="Add Patient Record" FontWeight="Bold" VerticalAlignment="Top"/>
+        <Label x:Name="lblReset" PreviewMouseLeftButtonDown="LblReset_PreviewMouseLeftButtonDown" VerticalAlignment="Top"  Height="50" Margin="1860,10,10,0" Cursor="Hand"  Width="50">
+            <iconPacks:PackIconMaterial Kind="Refresh" Height="40" Width="40" Foreground="ForestGreen" HorizontalAlignment="Left"/>
+        </Label>
+        <Label x:Name="lblPatientSearch" Grid.Row="0" Grid.Column="0" PreviewMouseLeftButtonUp="LblPatientSearch_PreviewMouseLeftButtonUp" VerticalAlignment="Top" Height="30" Width="30" ToolTip="Display Patient List" Cursor="Hand" Margin="134,4,1756,0">
+            <iconPacks:PackIconMaterial Kind="AccountSearch" Height="20" Width="20" Foreground="ForestGreen" HorizontalAlignment="Left"/>
+        </Label>
+        <Label Content="Patient's ID:" HorizontalAlignment="Left" Margin="115,130,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtPatientID" HorizontalAlignment="Left" Height="23" Margin="222,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblSearch" Cursor="Hand" MouseLeftButtonUp="LblSearch_MouseLeftButtonUp" Height="35" HorizontalAlignment="Left" VerticalAlignment="Top" Width="34" Margin="347,121,0,0"  Foreground="ForestGreen" >
+            <iconPacks:PackIconMaterial  Kind="Magnify" Height="24" Width="23"/>
+        </Label>
+        <Label Content="Patient's Name:" HorizontalAlignment="Left" Margin="115,178,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtFullName" HorizontalAlignment="Left" Height="23" Margin="222,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196" IsReadOnly="True"/>
+        <Label Content="Date:" HorizontalAlignment="Left" Margin="115,233,0,0" VerticalAlignment="Top"/>
+        <DatePicker x:Name="txtDate" HorizontalAlignment="Left" Margin="222,233,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Weight:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="115,288,0,0"/>
+        <TextBox x:Name="txtWeight" HorizontalAlignment="Left" Height="22" Margin="222,288,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Blood Pressure:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="115,343,0,0"/>
+        <TextBox x:Name="txtBP" HorizontalAlignment="Left" Height="22" Margin="222,343,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Age of Gestation:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="115,398,0,0"/>
+        <TextBox x:Name="txtAOG" HorizontalAlignment="Left" Height="22" Margin="222,398,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+
+        <DataGrid x:Name="dgList" HorizontalAlignment="Right" Height="680" Width="960" VerticalAlignment="Center" ItemsSource="{Binding}" Margin="910,104,51,298" AutoGenerateColumns="False" CanUserAddRows="False" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Date" Binding="{Binding date}" Width="120" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Weight" Binding="{Binding weight}" IsReadOnly="True" Width="120"/>
+                <DataGridTextColumn Header="Blood Pressure" Binding="{Binding bloodPressure}" IsReadOnly="True" Width="120 "/>
+                <DataGridTextColumn Header="AOG" Binding="{Binding aog}" Width="120"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="btnSave" Click="BtnSave_Click" Content="Save" HorizontalAlignment="Left" Margin="177,471,0,0" VerticalAlignment="Top" Width="120"/>
+    </Grid>
+</Page>

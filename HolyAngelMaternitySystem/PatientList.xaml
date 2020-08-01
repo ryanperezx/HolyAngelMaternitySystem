@@ -8,20 +8,21 @@
         Title="Patient List " Height="500" Width="900">
     <Grid>
         <Label Content="Patient's ID:" HorizontalAlignment="Left" Margin="34,31,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtPatientID" HorizontalAlignment="Left" Height="23" Margin="111,31,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtPatientID" HorizontalAlignment="Left" Height="23" Margin="111,31,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="TxtPatientID_TextChanged"/>
         <Label Content="First Name:" HorizontalAlignment="Left" Margin="274,31,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtFirstName" HorizontalAlignment="Left" Height="23" Margin="349,31,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196"/>
+        <TextBox x:Name="txtFirstName" HorizontalAlignment="Left" Height="23" Margin="349,31,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196" TextChanged="TxtFirstName_TextChanged"/>
         <Label Content="Last Name:" HorizontalAlignment="Left" Margin="550,31,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtLastName" HorizontalAlignment="Left" Height="23" Margin="624,31,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="136"/>
+        <TextBox x:Name="txtLastName" HorizontalAlignment="Left" Height="23" Margin="624,31,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="136" TextChanged="TxtLastName_TextChanged"/>
         <ListView x:Name="lvPatientInfo" HorizontalAlignment="Center" Height="305" VerticalAlignment="Center" Width="800" ItemsSource="{Binding}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Patient ID" Width="120"/>
-                    <GridViewColumn Header="Full Name" Width="200"/>
-                    <GridViewColumn Header="Age" Width="80"/>
-                    <GridViewColumn Header="Birthdate" Width="120"/>
-                    <GridViewColumn Header="Status" Width="120"/>
-                    <GridViewColumn Header="Contact No." Width="200"/>
+                    <GridViewColumn Header="Patient ID" DisplayMemberBinding="{Binding patientID}" Width="120"/>
+                    <GridViewColumn Header="Full Name" Width="200" DisplayMemberBinding="{Binding fullName}"/>
+                    <GridViewColumn Header="Address" Width="150" DisplayMemberBinding="{Binding address}"/>
+                    <GridViewColumn Header="Birthdate" Width="120" DisplayMemberBinding="{Binding birthDate}"/>
+                    <GridViewColumn Header="Age" Width="80" DisplayMemberBinding="{Binding age}"/>
+                    <GridViewColumn Header="Status" Width="120" DisplayMemberBinding="{Binding status}"/>
+                    <GridViewColumn Header="Contact No." Width="200" DisplayMemberBinding="{Binding contactNo}"/>
 
 
                 </GridView>

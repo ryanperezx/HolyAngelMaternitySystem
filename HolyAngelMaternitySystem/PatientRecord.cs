@@ -6,35 +6,47 @@ using System.Threading.Tasks;
 
 namespace HolyAngelMaternitySystem
 {
-    class PatientRecord
+   class PatientRecord
     {
 
         //patient basic info
-        string patientID
+        public string patientID
         {
             get;
             set;
         }
 
-        string fullName
+        public string fullName
         {
             get;
             set;
         }
 
-        DateTime birthDate
+        public string birthDate
+        {
+            get;
+            set;
+        }
+        
+        public string address
         {
             get;
             set;
         }
 
-        string status
+        public int age
         {
             get;
             set;
         }
 
-        string contactNo
+        public string status
+        {
+            get;
+            set;
+        }
+
+        public string contactNo
         {
             get;
             set;
@@ -42,30 +54,49 @@ namespace HolyAngelMaternitySystem
 
         //patient record
 
-        double weight
+        public double weight
         {
             get;
             set;
         }
 
-        string bloodPressure
+        public string date
         {
             get;
             set;
         }
 
-        string aot
+        public string bloodPressure
         {
             get;
             set;
         }
 
-        string eut
+        public string aog
         {
             get;
             set;
         }
 
+        public string eut
+        {
+            get;
+            set;
+        }
+
+        //doctor analysis
+
+        public string diagnosis
+        {
+            get;
+            set;
+        }
+
+        public string findings
+        {
+            get;
+            set;
+        }
 
 
     }

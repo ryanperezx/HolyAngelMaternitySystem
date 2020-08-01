@@ -16,13 +16,21 @@
         <Label x:Name="lblPatientSearch" Grid.Row="0" Grid.Column="0" PreviewMouseLeftButtonUp="LblPatientSearch_PreviewMouseLeftButtonUp" VerticalAlignment="Top" Height="30" Width="30" ToolTip="Display Patient List" Cursor="Hand" Margin="140,3,1750,0">
             <iconPacks:PackIconMaterial Kind="AccountSearch" Height="20" Width="20" Foreground="ForestGreen" HorizontalAlignment="Left"/>
         </Label>
+        <Label x:Name="lblReset" PreviewMouseLeftButtonDown="LblReset_PreviewMouseLeftButtonDown" VerticalAlignment="Top"  Height="50" Margin="1860,10,10,0" Cursor="Hand"  Width="50">
+            <iconPacks:PackIconMaterial Kind="Refresh" Height="40" Width="40" Foreground="ForestGreen" HorizontalAlignment="Left"/>
+        </Label>
         <Label Content="Patient's ID:" HorizontalAlignment="Left" Margin="115,130,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtPatientID" HorizontalAlignment="Left" Height="23" Margin="210,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblGenerate" Cursor="Hand" MouseLeftButtonUp="LblGenerate_MouseLeftButtonUp " Height="35" HorizontalAlignment="Left" VerticalAlignment="Top" Width="34" Margin="335,121,0,0"  Foreground="ForestGreen" Visibility="Hidden" >
+            <iconPacks:PackIconMaterial  Kind="PageNext"  Height="24" Width="23"/>
+        </Label>
         <Label x:Name="lblSearch" Cursor="Hand" MouseLeftButtonUp="LblSearch_MouseLeftButtonUp" Height="35" HorizontalAlignment="Left" VerticalAlignment="Top" Width="34" Margin="335,121,0,0"  Foreground="ForestGreen" >
-            <iconPacks:PackIconMaterial  Kind="Magnify" Height="24" Width="23"/>
+            <iconPacks:PackIconMaterial  Kind="SelectionSearch"  Height="24" Width="23"/>
         </Label>
         <Label Content="Patient's Name:" HorizontalAlignment="Left" Margin="115,178,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtFullName" HorizontalAlignment="Left" Height="23" Margin="210,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196"/>
+        <TextBox Controls:TextBoxHelper.Watermark="First Name" x:Name="txtFirstName" HorizontalAlignment="Left" Height="23" Margin="210,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="159"/>
+        <TextBox Controls:TextBoxHelper.Watermark="Last Name" x:Name="txtLastName" HorizontalAlignment="Left" Height="23" Margin="374,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="193"/>
+
         <Label Content="Home Address:" HorizontalAlignment="Left" Margin="115,225,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtAddress" HorizontalAlignment="Left" Height="23" Margin="210,225,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="357"/>
         <Label Content="Birthdate:" HorizontalAlignment="Left" Margin="115,280,0,0" VerticalAlignment="Top"/>
@@ -36,9 +44,9 @@
         </ComboBox>
         <Label Content="Cellphone No.:" HorizontalAlignment="Left" Margin="115,380,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtCellNo"  HorizontalAlignment="Left" Height="23" Margin="210,380 ,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="130"/>
-
-        <Button x:Name="btnSave" Click="BtnSave_Click" Content="Save" HorizontalAlignment="Left" Margin="304,510,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="btnEdit" Click="BtnEdit_Click" Content="Edit" HorizontalAlignment="Left" Margin="193,510,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="btnDelete" Click="BtnDelete_Click" Content="Delete" HorizontalAlignment="Left" Margin="414,510,0,0" VerticalAlignment="Top" Width="74"/>
+        <Button x:Name="btnAdd" Click="BtnAdd_Click" Content="ADD" HorizontalAlignment="Left" Margin="148,464,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="btnSave" Click="BtnSave_Click" Content="Save" HorizontalAlignment="Left" Margin="258,464,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button ToolTip="Only address, birthdate, status, and cellphone number can be updated" x:Name="btnEdit" Click="BtnEdit_Click" Content="Edit" HorizontalAlignment="Left" Margin="368,464,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="btnDelete" Click="BtnDelete_Click" Content="Delete" HorizontalAlignment="Left" Margin="481,464,0,0" VerticalAlignment="Top" Width="74"/>
     </Grid>
 </Page>

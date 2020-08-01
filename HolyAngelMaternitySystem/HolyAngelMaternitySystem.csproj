@@ -148,6 +148,12 @@
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>..\packages\NLog.4.7.2\lib\net45\NLog.dll</HintPath>
     </Reference>
+    <Reference Include="Syncfusion.Compression.Base, Version=18.1460.0.52, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
+    <Reference Include="Syncfusion.DocIO.Base, Version=18.1460.0.52, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
+    <Reference Include="Syncfusion.DocIO.WPF, Version=18.1460.0.52, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
+    <Reference Include="Syncfusion.DocToPDFConverter.Base, Version=18.1460.0.52, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
+    <Reference Include="Syncfusion.DocToPDFConverter.ClientProfile, Version=18.1400.0.52, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
+    <Reference Include="Syncfusion.OfficeChart.Base, Version=18.1460.0.52, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
@@ -187,11 +193,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AgeOfGestation.xaml.cs">
-      <DependentUpon>AgeOfGestation.xaml</DependentUpon>
+    <Compile Include="AddPatientRecord.xaml.cs">
+      <DependentUpon>AddPatientRecord.xaml</DependentUpon>
     </Compile>
     <Compile Include="DBSQLServerUtils.cs" />
     <Compile Include="DBUtils.cs" />
+    <Compile Include="DocumentFunctions.cs" />
     <Compile Include="PatientList.xaml.cs">
       <DependentUpon>PatientList.xaml</DependentUpon>
     </Compile>
@@ -202,7 +209,7 @@
     <Compile Include="ViewPatientRecord.xaml.cs">
       <DependentUpon>ViewPatientRecord.xaml</DependentUpon>
     </Compile>
-    <Page Include="AgeOfGestation.xaml">
+    <Page Include="AddPatientRecord.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -236,7 +243,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PatientRecords.xaml">
+    <Page Include="PatientInformation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -250,8 +257,8 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PatientRecords.xaml.cs">
-      <DependentUpon>PatientRecords.xaml</DependentUpon>
+    <Compile Include="PatientInformation.xaml.cs">
+      <DependentUpon>PatientInformation.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
