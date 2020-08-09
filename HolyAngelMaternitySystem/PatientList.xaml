@@ -23,8 +23,6 @@
                     <GridViewColumn Header="Age" Width="80" DisplayMemberBinding="{Binding age}"/>
                     <GridViewColumn Header="Status" Width="120" DisplayMemberBinding="{Binding status}"/>
                     <GridViewColumn Header="Contact No." Width="200" DisplayMemberBinding="{Binding contactNo}"/>
-
-
                 </GridView>
             </ListView.View>
         </ListView>

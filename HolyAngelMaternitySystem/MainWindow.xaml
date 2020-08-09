@@ -16,6 +16,7 @@
             <DockPanel>
                 <Menu DockPanel.Dock="Top" Margin="0,0,250,0">
                     <MenuItem Header="_File">
+                        <MenuItem x:Name="btnWelcome" Header="Start Page" Click="BtnWelcome_Click"/>
                         <MenuItem Header="_Logout" Click="BtnLogout_Click" />
                         <MenuItem x:Name="btnExit" Header="_Exit" Click="BtnExit_Click" />
                     </MenuItem>
@@ -33,6 +34,11 @@
                         <MenuItem x:Name="btnDoctorAnalysis" Click="BtnDoctorAnalysis_Click" Header="_Doctor Anaylsis">
                             <MenuItem.Icon>
                                 <iconPacks:PackIconMaterial Kind="HomeAnalytics"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem x:Name="btnEarlyUltrasound" Click="BtnEarlyUltrasound_Click" Header="_Early Ultrasound">
+                            <MenuItem.Icon>
+                                <iconPacks:PackIconMaterial Kind="MicrophoneVariant"/>
                             </MenuItem.Icon>
                         </MenuItem>
                         <MenuItem x:Name="btnViewPatientRecord" Click="BtnViewPatientRecord_Click" Header="_View Patient Record">

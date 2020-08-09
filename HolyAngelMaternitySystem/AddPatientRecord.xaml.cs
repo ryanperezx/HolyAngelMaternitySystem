@@ -59,6 +59,11 @@ namespace HolyAngelMaternitySystem
 
                                 count = 1;
 
+                                txtAOG.Text = null;
+                                txtBP.Text = null;
+                                txtDate.Text = null;
+                                txtWeight.Text = null;
+
                                 computeAgeOfGestation();
                             }
                         }
@@ -106,9 +111,15 @@ namespace HolyAngelMaternitySystem
                         while(difference >= 7)
                         {
                             week += 1;
-                            difference -= -7;
+                            difference -= 7;
                         }
                         day += difference;
+
+                        if(day >= 7)
+                        {
+                            week += 1;
+                            day -= 7;
+                        }
 
                         txtAOG.Text = week + " " + day + "/7";
 
@@ -138,7 +149,6 @@ namespace HolyAngelMaternitySystem
             }
             else
             {
-                //check if patient is existing
                 int count = 0;
                 SqlConnection conn = DBUtils.GetDBConnection();
                 conn.Open();

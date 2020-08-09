@@ -2,6 +2,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -57,6 +58,9 @@ namespace HolyAngelMaternitySystem
                                 int birthDateIndex = reader.GetOrdinal("birthDate");
                                 txtBirthDate.Text = Convert.ToString(reader.GetValue(birthDateIndex));
 
+                                txtAge.Text = Convert.ToString(Math.Abs(Convert.ToDateTime(txtBirthDate.Text).Year - DateTime.Today.Year) - 1);
+
+
                                 txtFullName.Text = firstName + " " + lastName;
 
                             }
@@ -100,10 +104,13 @@ namespace HolyAngelMaternitySystem
                             int findingsIndex = reader.GetOrdinal("findings");
                             string findings = Convert.ToString(reader.GetValue(findingsIndex));
 
-                            int diagnosisIndex = reader.GetOrdinal("diagnosisTreatment");
+                            int diagnosisIndex = reader.GetOrdinal("diagnosis");
                             string diagnosis = Convert.ToString(reader.GetValue(diagnosisIndex));
 
-                            int eutIndex = reader.GetOrdinal("endoscopicUltrasoundTomography");
+                            int treamentIndex = reader.GetOrdinal("treatment");
+                            string treatment = Convert.ToString(reader.GetValue(treamentIndex));
+
+                            int eutIndex = reader.GetOrdinal("earlyUltrasound");
                             string eut = Convert.ToString(reader.GetValue(eutIndex));
 
                             records.Add(new PatientRecord
@@ -113,6 +120,7 @@ namespace HolyAngelMaternitySystem
                                 bloodPressure = bloodPressure,
                                 date = date.ToString("MM/dd/yyyy"),
                                 eut = eut,
+                                treatment = treatment,
                                 diagnosis = diagnosis,
                                 findings = findings
                             });
@@ -137,6 +145,7 @@ namespace HolyAngelMaternitySystem
             txtCellNo.Text = null;
             txtBirthDate.Text = null;
             txtAddress.Text = null;
+            txtAge.Text = null;
         }
 
         private void BtnPrint_Click(object sender, RoutedEventArgs e)
@@ -153,10 +162,10 @@ namespace HolyAngelMaternitySystem
                 IWParagraph personalInfo;
                 IWParagraph firstPersonalInfo;
                 IWParagraph secondPersonalInfo;
-                IWParagraph columnNames;
+                IWTable table;
+
 
                 document.AddSection();
-                WTextBody sectionBody = section.Body;
                 text = title.AppendText("HOLY ANGELS MATERNITY AND POLYCLINIC");
                 title.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Center;
                 text.CharacterFormat.FontName = "Arial";
@@ -173,11 +182,9 @@ namespace HolyAngelMaternitySystem
                 text = doc.AppendText("SHEILA MARIE C. GIRON-SANTOS, M.D., FPOGS");
                 doc.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Center;
                 text.CharacterFormat.FontName = "Times New Roman";
-                text.CharacterFormat.FontSize = 16;
                 doc = section.AddParagraph();
                 doc.AppendText("Obstetrician-Gynecologist");
                 doc.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Center;
-                text.CharacterFormat.FontSize = 8;
                 doc = section.AddParagraph();
                 doc.AppendText("Fellow, Philippine Obstetrical & Gynecological Society");
                 doc.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Center;
@@ -197,11 +204,33 @@ namespace HolyAngelMaternitySystem
                 text.CharacterFormat.Bold = false;
                 secondPersonalInfo = section.AddParagraph();
                 text = secondPersonalInfo.AppendText("Home Address: " + txtAddress.Text + " Cellphone No: " + txtCellNo.Text);
-                columnNames = section.AddParagraph();
-                text = columnNames.AppendText("Date WT BP AOG EUT OB-GYNE HISTORY,P.E. AND LABORATORY FINDINGS DIAGNOSIS/TREATMENT");
+                text.CharacterFormat.FontSize = 10;
+                secondPersonalInfo = section.AddParagraph();
 
+                table = section.AddTable();
+                table.ResetCells(22, 6);
+                table.TableFormat.Borders.Color = Color.YellowGreen;
+                table.TableFormat.BackColor = Color.DarkGreen;
 
-
+                text = table[0, 0].AddParagraph().AppendText("Date");
+                text.CharacterFormat.FontSize = 8;
+                text.CharacterFormat.Bold = true;
+                text = table[0, 1].AddParagraph().AppendText("WT");
+                text.CharacterFormat.FontSize = 8;
+                text.CharacterFormat.Bold = true;
+                text = table[0, 2].AddParagraph().AppendText("AOG");
+                text.CharacterFormat.Bold = true;
+                text.CharacterFormat.FontSize = 8;
+                text = table[0, 3].AddParagraph().AppendText("EUT");
+                text.CharacterFormat.Bold = true;
+                text.CharacterFormat.FontSize = 8;
+                text = table[0, 4].AddParagraph().AppendText("OB-GYNE HISTORY,P.E. AND LABORATORY FINDINGS");
+                text.CharacterFormat.Bold = true;
+                text.CharacterFormat.FontSize = 8;
+                text = table[0, 5].AddParagraph().AppendText("DIAGNOSIS/TREATMENT");
+                text.CharacterFormat.Bold = true;
+                text.CharacterFormat.FontSize = 8;
+                //loop contents of table
 
                 document.Save(path + "\\[" + txtFullName.Text + "]" + "Patient Record.docx");
 

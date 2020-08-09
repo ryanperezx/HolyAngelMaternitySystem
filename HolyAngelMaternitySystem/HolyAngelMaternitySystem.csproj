@@ -193,12 +193,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Accounts.xaml.cs">
+      <DependentUpon>Accounts.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddPatientRecord.xaml.cs">
       <DependentUpon>AddPatientRecord.xaml</DependentUpon>
     </Compile>
     <Compile Include="DBSQLServerUtils.cs" />
     <Compile Include="DBUtils.cs" />
     <Compile Include="DocumentFunctions.cs" />
+    <Compile Include="EarlyUltrasound.xaml.cs">
+      <DependentUpon>EarlyUltrasound.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PatientList.xaml.cs">
       <DependentUpon>PatientList.xaml</DependentUpon>
     </Compile>
@@ -209,7 +215,18 @@
     <Compile Include="ViewPatientRecord.xaml.cs">
       <DependentUpon>ViewPatientRecord.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WelcomePage.xaml.cs">
+      <DependentUpon>WelcomePage.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Accounts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AddPatientRecord.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EarlyUltrasound.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -252,6 +269,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ViewPatientRecord.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WelcomePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

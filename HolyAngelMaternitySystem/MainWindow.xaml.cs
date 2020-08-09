@@ -24,9 +24,13 @@ namespace HolyAngelMaternitySystem
         DoctorAnalysis da = new DoctorAnalysis();
         AddPatientRecord apr = new AddPatientRecord();
         ViewPatientRecord vpr = new ViewPatientRecord();
+        WelcomePage wp = new WelcomePage();
+        Accounts ac = new Accounts();
+        EarlyUltrasound eu = new EarlyUltrasound();
         public MainWindow()
         {
             InitializeComponent();
+            Frame.Navigate(wp);
         }
 
         private void BtnLogout_Click(object sender, RoutedEventArgs e)
@@ -81,15 +85,13 @@ namespace HolyAngelMaternitySystem
 
         private void BtnAccounts_Click(object sender, RoutedEventArgs e)
         {
-
+            Frame.Navigate(ac);
         }
 
         private void BtnAddPatient_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(pr);
         }
-
-
 
         private void BtnDoctorAnalysis_Click(object sender, RoutedEventArgs e)
         {
@@ -104,6 +106,16 @@ namespace HolyAngelMaternitySystem
         private void BtnAddPatientRecord_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(apr);
+        }
+
+        private void BtnWelcome_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(wp);
+        }
+
+        private void BtnEarlyUltrasound_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(eu);
         }
     }
 }

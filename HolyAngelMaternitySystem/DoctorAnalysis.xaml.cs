@@ -20,15 +20,16 @@ namespace HolyAngelMaternitySystem
             InitializeComponent();
             dgList.ItemsSource = records;
             dgList.MinRowHeight = 50;
-            populateDiagTreatment();
+            populateDiagnosis();
+            populateTreatment();
 
         }
 
-        private void populateDiagTreatment()
+        private void populateDiagnosis()
         {
             SqlConnection conn = DBUtils.GetDBConnection();
             conn.Open();
-            using (SqlCommand cmd = new SqlCommand("SELECT treatment from tblDiagnosis", conn))
+            using (SqlCommand cmd = new SqlCommand("SELECT diagnosis from tblDiagnosis", conn))
             {
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
@@ -37,10 +38,33 @@ namespace HolyAngelMaternitySystem
                         cmbDiagnosis.Items.Clear();
                         while (reader.Read())
                         {
+                            int diagnosisIndex = reader.GetOrdinal("diagnosis");
+                            string diagnosis = Convert.ToString(reader.GetValue(diagnosisIndex));
+
+                            cmbDiagnosis.Items.Add(diagnosis);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void populateTreatment()
+        {
+            SqlConnection conn = DBUtils.GetDBConnection();
+            conn.Open();
+            using (SqlCommand cmd = new SqlCommand("SELECT treatment from tblTreatment", conn))
+            {
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        cmbTreatment.Items.Clear();
+                        while (reader.Read())
+                        {
                             int treatmentIndex = reader.GetOrdinal("treatment");
                             string treatment = Convert.ToString(reader.GetValue(treatmentIndex));
 
-                            cmbDiagnosis.Items.Add(treatment);
+                            cmbTreatment.Items.Add(treatment);
                         }
                     }
                 }
@@ -101,10 +125,12 @@ namespace HolyAngelMaternitySystem
             txtPatientID.Text = null;
             cmbDiagnosis.Text = null;
             txtDate.Text = null;
-            txtEUT.Text = null;
             cmbDiagnosis.SelectedIndex = -1;
+            cmbTreatment.SelectedIndex = -1;
             txtFindings.Document.Blocks.Clear();
-            populateDiagTreatment();
+            populateTreatment();
+            populateDiagnosis();
+
         }
 
         private void fillList()
@@ -136,10 +162,13 @@ namespace HolyAngelMaternitySystem
                             int findingsIndex = reader.GetOrdinal("findings");
                             string findings = Convert.ToString(reader.GetValue(findingsIndex));
 
-                            int diagnosisIndex = reader.GetOrdinal("diagnosisTreatment");
+                            int diagnosisIndex = reader.GetOrdinal("diagnosis");
                             string diagnosis = Convert.ToString(reader.GetValue(diagnosisIndex));
 
-                            int eutIndex = reader.GetOrdinal("endoscopicUltrasoundTomography");
+                            int treatmentIndex = reader.GetOrdinal("treatment");
+                            string treatment = Convert.ToString(reader.GetValue(treatmentIndex));
+
+                            int eutIndex = reader.GetOrdinal("earlyUltrasound");
                             string eut = Convert.ToString(reader.GetValue(eutIndex));
 
                             records.Add(new PatientRecord
@@ -150,6 +179,7 @@ namespace HolyAngelMaternitySystem
                                 date = date.ToString("MM/dd/yyyy"),
                                 eut = eut,
                                 diagnosis = diagnosis,
+                                treatment = treatment,
                                 findings = findings
                             });
                         }
@@ -165,24 +195,22 @@ namespace HolyAngelMaternitySystem
             {
                 MessageBox.Show("Please search for the patient ID first");
             }
-            else if (string.IsNullOrEmpty(cmbDiagnosis.Text))
+            if (string.IsNullOrEmpty(txtDate.Text))
             {
-                MessageBox.Show("Please enter/select diagnosis or treatment");
-                cmbDiagnosis.Focus();
+                MessageBox.Show("Please enter date that is to be updated");
             }
-            else if (string.IsNullOrEmpty(Findings))
+            else if(string.IsNullOrEmpty(cmbDiagnosis.Text) && string.IsNullOrEmpty(cmbTreatment.Text) && string.IsNullOrEmpty(Findings))
             {
-                MessageBox.Show("Please enter your findings");
-                txtFindings.Focus();
+                MessageBox.Show("One or more fields are empty!");
             }
             else
             {
                 int count = 0;
                 SqlConnection conn = DBUtils.GetDBConnection();
                 conn.Open();
-                using (SqlCommand cmd = new SqlCommand("SELECT COUNT(1) from tblDiagnosis where treatment = @treatment", conn))
+                using (SqlCommand cmd = new SqlCommand("SELECT COUNT(1) from tblDiagnosis where diagnosis = @diagnosis", conn))
                 {
-                    cmd.Parameters.AddWithValue("@treatment", cmbDiagnosis.Text);
+                    cmd.Parameters.AddWithValue("@diagnosis", cmbDiagnosis.Text);
                     try
                     {
                         count = (int)cmd.ExecuteScalar();
@@ -194,34 +222,13 @@ namespace HolyAngelMaternitySystem
                 }
                 if (count == 0)
                 {
-                    using (SqlCommand cmd = new SqlCommand("INSERT into tblDiagnosis (treatment) VALUES (@treatment)", conn))
+                    using (SqlCommand cmd = new SqlCommand("INSERT into tblDiagnosis (diagnosis) VALUES (@diagnosis)", conn))
                     {
-                        cmd.Parameters.AddWithValue("@treatment", cmbDiagnosis.Text);
+                        cmd.Parameters.AddWithValue("@diagnosis", cmbDiagnosis.Text);
                         try
                         {
                             cmd.ExecuteNonQuery();
-                            populateDiagTreatment();
-
-                            var found = records.FirstOrDefault(x => Convert.ToDateTime(txtDate.Text) == Convert.ToDateTime(x.date));
-                            if (found != null)
-                            {
-                                if (!string.IsNullOrEmpty(txtEUT.Text))
-                                {
-                                    found.eut = txtEUT.Text;
-                                }
-
-                                found.diagnosis = cmbDiagnosis.Text;
-                                found.findings = Findings;
-
-                            }
-                            else
-                            {
-                                MessageBox.Show("There are no past records in the indicated date.");
-                                MessageBox.Show(txtDate.Text);
-                                return;
-                            }
-
-
+                            populateDiagnosis();
                         }
                         catch (SqlException ex)
                         {
@@ -229,27 +236,47 @@ namespace HolyAngelMaternitySystem
                         }
                     }
                 }
+                using (SqlCommand cmd = new SqlCommand("SELECT COUNT(1) from tblTreatment where treatment = @treatment", conn))
+                {
+                    cmd.Parameters.AddWithValue("@treatment", cmbTreatment.Text);
+                    try
+                    {
+                        count = (int)cmd.ExecuteScalar();
+                    }
+                    catch (SqlException ex)
+                    {
+                        MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
+                    }
+                }
+                if(count == 0)
+                {
+                    using (SqlCommand cmd = new SqlCommand("INSERT into tblTreatment (treatment) VALUES (@treatment)", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@treatment", cmbTreatment.Text);
+                        try
+                        {
+                            cmd.ExecuteNonQuery();
+                            populateTreatment();
+                        }
+                        catch (SqlException ex)
+                        {
+                            MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
+                        }
+                    }
+                }
+
+                var found = records.FirstOrDefault(x => Convert.ToDateTime(txtDate.Text) == Convert.ToDateTime(x.date));
+                if (found != null)
+                {
+                    found.diagnosis = cmbDiagnosis.Text;
+                    found.treatment = cmbTreatment.Text;
+                    found.findings = Findings;
+                }
                 else
                 {
-                    var found = records.FirstOrDefault(x => Convert.ToDateTime(txtDate.Text) == Convert.ToDateTime(x.date));
-                    if (found != null)
-                    {
-                        if (!string.IsNullOrEmpty(txtEUT.Text))
-                        {
-                            found.eut = txtEUT.Text;
-                        }
-
-                        found.diagnosis = cmbDiagnosis.Text;
-                        found.findings = Findings;
-                    }
-                    else
-                    {
-                        MessageBox.Show("There are no past records in the indicated date.");
-                        MessageBox.Show(txtDate.Text);
-                        return;
-                    }
-
-
+                    MessageBox.Show("There are no past records in the indicated date.");
+                    MessageBox.Show(txtDate.Text);
+                    return;
                 }
                 dgList.Items.Refresh();
 
@@ -281,12 +308,13 @@ namespace HolyAngelMaternitySystem
                             MessageBox.Show("Dates are not equal!");
                             return;
                         }
-                        using (SqlCommand cmd = new SqlCommand("UPDATE tblPatientRecord SET findings = @findings, endoscopicUltrasoundTomography = @eut, diagnosisTreatment = @diagnosis where patientID = @patientID and dateVisit = @date", conn))
+                        using (SqlCommand cmd = new SqlCommand("UPDATE tblPatientRecord SET findings = @findings, diagnosis = @diagnosis, treatment = @treatment where patientID = @patientID and dateVisit = @date", conn))
                         {
+                            //..not working again ffs
                             cmd.Parameters.AddWithValue("@findings", lastSet.findings);
-                            cmd.Parameters.AddWithValue("@eut", lastSet.eut);
                             cmd.Parameters.AddWithValue("@diagnosis", lastSet.diagnosis);
                             cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
+                            cmd.Parameters.AddWithValue("@treatment", lastSet.treatment);
                             cmd.Parameters.AddWithValue("@date", lastSet.date);
                             try
                             {

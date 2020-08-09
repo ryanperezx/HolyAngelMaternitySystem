@@ -7,7 +7,7 @@
       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
       mc:Ignorable="d" 
       xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-      d:DesignHeight="1080" d:DesignWidth="1920"
+      d:DesignHeight="768" d:DesignWidth="1366 "
       Background="FloralWhite"
       Title="PatientRecords">
 
@@ -16,7 +16,7 @@
         <Label x:Name="lblPatientSearch" Grid.Row="0" Grid.Column="0" PreviewMouseLeftButtonUp="LblPatientSearch_PreviewMouseLeftButtonUp" VerticalAlignment="Top" Height="30" Width="30" ToolTip="Display Patient List" Cursor="Hand" Margin="140,3,1750,0">
             <iconPacks:PackIconMaterial Kind="AccountSearch" Height="20" Width="20" Foreground="ForestGreen" HorizontalAlignment="Left"/>
         </Label>
-        <Label x:Name="lblReset" PreviewMouseLeftButtonDown="LblReset_PreviewMouseLeftButtonDown" VerticalAlignment="Top"  Height="50" Margin="1860,10,10,0" Cursor="Hand"  Width="50">
+        <Label x:Name="lblReset" PreviewMouseLeftButtonDown="LblReset_PreviewMouseLeftButtonDown" VerticalAlignment="Top"  Height="50" HorizontalAlignment="Right"  Cursor="Hand"  Width="50">
             <iconPacks:PackIconMaterial Kind="Refresh" Height="40" Width="40" Foreground="ForestGreen" HorizontalAlignment="Left"/>
         </Label>
         <Label Content="Patient's ID:" HorizontalAlignment="Left" Margin="115,130,0,0" VerticalAlignment="Top"/>
@@ -36,12 +36,8 @@
         <Label Content="Birthdate:" HorizontalAlignment="Left" Margin="115,280,0,0" VerticalAlignment="Top"/>
         <DatePicker x:Name="txtBirthDate" HorizontalAlignment="Left" Height="23" Margin="210,280,0,0" VerticalAlignment="Top" Width="120"/>
         <Label Content="Status: " HorizontalAlignment="Left" Margin="115,330,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="cmbCivStatus" HorizontalAlignment="Left" Height="23" Margin="210,330,0,0" VerticalAlignment="Top" Width="120">
-            <ComboBoxItem>Single</ComboBoxItem>
-            <ComboBoxItem>Married</ComboBoxItem>
-            <ComboBoxItem>Divorced</ComboBoxItem>
-            <ComboBoxItem>Widowed</ComboBoxItem>
-        </ComboBox>
+        <ComboBox x:Name="cmbCivStatus" HorizontalAlignment="Left" Height="23" Margin="210,330,0,0" VerticalAlignment="Top" Width="120" IsEditable="True" IsReadOnly="True" />
+
         <Label Content="Cellphone No.:" HorizontalAlignment="Left" Margin="115,380,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtCellNo"  HorizontalAlignment="Left" Height="23" Margin="210,380 ,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="130"/>
         <Button x:Name="btnAdd" Click="BtnAdd_Click" Content="ADD" HorizontalAlignment="Left" Margin="148,464,0,0" VerticalAlignment="Top" Width="75"/>

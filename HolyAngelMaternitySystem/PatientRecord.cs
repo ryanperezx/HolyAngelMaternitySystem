@@ -98,6 +98,12 @@ namespace HolyAngelMaternitySystem
             set;
         }
 
+        public string treatment
+        {
+            get;
+            set;
+        }
+
 
     }
 }

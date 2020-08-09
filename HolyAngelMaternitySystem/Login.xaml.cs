@@ -24,7 +24,7 @@ namespace HolyAngelMaternitySystem
         private void LblForgot_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             Hide();
-            new ForgotPassword().ShowDialog();
+            new ForgotPassword("asd").ShowDialog();
             ShowDialog();
         }
 

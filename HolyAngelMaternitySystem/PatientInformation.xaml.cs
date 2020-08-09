@@ -17,6 +17,10 @@ namespace HolyAngelMaternitySystem
         public PatientRecords()
         {
             InitializeComponent();
+            cmbCivStatus.Items.Add("Single");
+            cmbCivStatus.Items.Add("Married");
+            cmbCivStatus.Items.Add("Divorced");
+            cmbCivStatus.Items.Add("Widowed");
         }
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
@@ -25,6 +29,16 @@ namespace HolyAngelMaternitySystem
             lblGenerate.Visibility = Visibility.Visible;
             lblSearch.Visibility = Visibility.Collapsed;
             txtPatientID.IsReadOnly = true;
+            txtFirstName.IsReadOnly = false;
+            txtLastName.IsReadOnly = false;
+            txtFirstName.Text = null;
+            txtLastName.Text = null;
+            txtAddress.Text = null;
+            txtBirthDate.Text = null;
+            txtCellNo.Text = null;
+            txtFirstName.Text = null;
+            txtLastName.Text = null;
+            cmbCivStatus.SelectedIndex = -1;
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
@@ -277,6 +291,9 @@ namespace HolyAngelMaternitySystem
 
                                 int birthDateIndex = reader.GetOrdinal("birthDate");
                                 txtBirthDate.Text = Convert.ToString(reader.GetValue(birthDateIndex));
+
+                                txtFirstName.IsReadOnly = true;
+                                txtLastName.IsReadOnly = true;
 
                                 state = 2;
                             }
