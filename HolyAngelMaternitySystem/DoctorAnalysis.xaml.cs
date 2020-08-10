@@ -157,7 +157,7 @@ namespace HolyAngelMaternitySystem
                             string bloodPressure = Convert.ToString(reader.GetValue(bloodPressureIndex));
 
                             int dateIndex = reader.GetOrdinal("dateVisit");
-                            DateTime date = Convert.ToDateTime(reader.GetValue(dateIndex));
+                            string date = Convert.ToString(reader.GetValue(dateIndex));
 
                             int findingsIndex = reader.GetOrdinal("findings");
                             string findings = Convert.ToString(reader.GetValue(findingsIndex));
@@ -176,7 +176,7 @@ namespace HolyAngelMaternitySystem
                                 aog = aog,
                                 weight = weight,
                                 bloodPressure = bloodPressure,
-                                date = date.ToString("MM/dd/yyyy"),
+                                date = date,
                                 eut = eut,
                                 diagnosis = diagnosis,
                                 treatment = treatment,
@@ -302,24 +302,30 @@ namespace HolyAngelMaternitySystem
                     case MessageBoxResult.Yes:
                         SqlConnection conn = DBUtils.GetDBConnection();
                         conn.Open();
-                        var lastSet = records.Last();
-                        if(Convert.ToDateTime(txtDate.Text) != Convert.ToDateTime(lastSet.date))
+                        var found = records.FirstOrDefault(x => Convert.ToDateTime(txtDate.Text) == Convert.ToDateTime(x.date));
+                        if (txtDate.Text == found.date)
                         {
-                            MessageBox.Show("Dates are not equal!");
-                            return;
+                            MessageBox.Show("is equal");
+                        }
+                        else
+                        {
+                            MessageBox.Show("is not");
+                            MessageBox.Show(txtDate.Text);
+                            MessageBox.Show(found.date);
                         }
                         using (SqlCommand cmd = new SqlCommand("UPDATE tblPatientRecord SET findings = @findings, diagnosis = @diagnosis, treatment = @treatment where patientID = @patientID and dateVisit = @date", conn))
                         {
                             //..not working again ffs
-                            cmd.Parameters.AddWithValue("@findings", lastSet.findings);
-                            cmd.Parameters.AddWithValue("@diagnosis", lastSet.diagnosis);
+                            cmd.Parameters.AddWithValue("@findings", found.findings);
+                            cmd.Parameters.AddWithValue("@diagnosis", found.diagnosis);
                             cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
-                            cmd.Parameters.AddWithValue("@treatment", lastSet.treatment);
-                            cmd.Parameters.AddWithValue("@date", lastSet.date);
+                            cmd.Parameters.AddWithValue("@treatment", found.treatment);
+                            cmd.Parameters.AddWithValue("@date", found.date);
                             try
                             {
 
                                 int count = cmd.ExecuteNonQuery();
+
                                 MessageBox.Show("Record has been added!");
                             }
                             catch (SqlException ex)

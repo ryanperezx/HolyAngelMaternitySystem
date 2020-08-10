@@ -25,8 +25,19 @@
             <iconPacks:PackIconMaterial  Kind="Magnify" Height="24" Width="23"/>
         </Label>
         <Label Content="Patient's Name:" HorizontalAlignment="Left" Margin="115,178,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtFullName" HorizontalAlignment="Left" Height="23" Margin="210,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196"/>
+        <TextBox x:Name="txtFullName" HorizontalAlignment="Left" Height="23" Margin="210,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196" IsReadOnly="True"/>
         <Label Content="Date:" HorizontalAlignment="Left" Margin="115,229,0,0" VerticalAlignment="Top"/>
         <DatePicker x:Name="txtDate" HorizontalAlignment="Left" Margin="210,229,0,0" VerticalAlignment="Top" Width="196"/>
+        <Label Content="Ultrasound:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="115,288,0,0"/>
+        <TextBox x:Name="txtUltrasound" HorizontalAlignment="Left" Height="22" Margin="210,288,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <DataGrid x:Name="dgList" HorizontalAlignment="Right" Height="560" Width="820" VerticalAlignment="Top" ItemsSource="{Binding}" Margin="0,92,34,0" AutoGenerateColumns="False" CanUserAddRows="False" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Date" Binding="{Binding date}" Width="120" IsReadOnly="True"/>
+                <DataGridTextColumn Header="AOG by LMP" Binding="{Binding aog}" Width="120" IsReadOnly="True"/>
+                <DataGridTextColumn Header="AOG by EUTZ" Binding="{Binding eut}" Width="120" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="btnSave" Click="BtnSave_Click" Content="Save" HorizontalAlignment="Left" Margin="176,365,0,0" VerticalAlignment="Top" Width="120"/>
+
     </Grid>
 </Page>

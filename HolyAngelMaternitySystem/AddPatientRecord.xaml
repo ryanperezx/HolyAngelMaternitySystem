@@ -40,7 +40,7 @@
                 <DataGridTextColumn Header="Date" Binding="{Binding date}" Width="120" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Weight" Binding="{Binding weight}" IsReadOnly="True" Width="120"/>
                 <DataGridTextColumn Header="Blood Pressure" Binding="{Binding bloodPressure}" IsReadOnly="True" Width="120 "/>
-                <DataGridTextColumn Header="AOG by LMP" Binding="{Binding aog}" Width="120"/>
+                <DataGridTextColumn Header="AOG by LMP" Binding="{Binding aog}" Width="120" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="btnSave" Click="BtnSave_Click" Content="Save" HorizontalAlignment="Left" Margin="177,471,0,0" VerticalAlignment="Top" Width="120"/>
