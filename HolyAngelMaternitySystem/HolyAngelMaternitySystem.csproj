@@ -201,7 +201,6 @@
     </Compile>
     <Compile Include="DBSQLServerUtils.cs" />
     <Compile Include="DBUtils.cs" />
-    <Compile Include="DocumentFunctions.cs" />
     <Compile Include="EarlyUltrasound.xaml.cs">
       <DependentUpon>EarlyUltrasound.xaml</DependentUpon>
     </Compile>

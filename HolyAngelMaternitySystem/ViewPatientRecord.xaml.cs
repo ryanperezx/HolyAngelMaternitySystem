@@ -1,5 +1,4 @@
-﻿using Syncfusion.DocIO.DLS;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using System.Drawing;
@@ -147,7 +146,7 @@ namespace HolyAngelMaternitySystem
             txtAddress.Text = null;
             txtAge.Text = null;
         }
-
+        /*
         private void BtnPrint_Click(object sender, RoutedEventArgs e)
         {
             WordDocument document = new WordDocument();
@@ -238,6 +237,7 @@ namespace HolyAngelMaternitySystem
             document.Close();
 
         }
+        */
 
         private int computeAge(string dateOfBirth)
         {
