@@ -25,7 +25,7 @@ namespace HolyAngelMaternitySystem
             SqlConnection conn = DBUtils.GetDBConnection();
             conn.Open();
             //query should be based on patientrecord
-            using (SqlCommand cmd = new SqlCommand("SELECT TOP 10 pi.patientID, pi.firstName, pi.lastName, pi.homeAddress, pi.civStatus, pi.cellphoneNo, pi.birthDate from tblPersonalInfo pi INNER JOIN tblPatientRecord pr on pi.patientID = pr.patientID", conn))
+            using (SqlCommand cmd = new SqlCommand("SELECT DISTINCT TOP 10 pi.patientID, pi.firstName, pi.lastName, pi.homeAddress, pi.civStatus, pi.cellphoneNo, pi.birthDate from tblPersonalInfo pi INNER JOIN tblPatientRecord pr on pi.patientID = pr.patientID", conn))
             {
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {

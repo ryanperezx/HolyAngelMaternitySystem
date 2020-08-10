@@ -17,26 +17,28 @@
             <iconPacks:PackIconMaterial Kind="Refresh" Height="40" Width="40" Foreground="ForestGreen" HorizontalAlignment="Left"/>
         </Label>
         <Label Content="Username :" HorizontalAlignment="Left" Margin="184,115,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtUser" HorizontalAlignment="Left" Height="36" Margin="304,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" MaxLength="15"/>
+        <TextBox x:Name="txtUser" HorizontalAlignment="Left" Height="36" Margin="304,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" MaxLength="15" FontSize="15"/>
         <Label x:Name="searchUser" Margin="519,112,0,0" Height="30" Width="30" Cursor="Hand" HorizontalAlignment="Left" VerticalAlignment="Top" MouseLeftButtonUp="SearchUser_MouseLeftButtonUp">
             <iconPacks:PackIconMaterial  Kind="Magnify" Height="20" Width="20"/>
         </Label>
 
         <Label Content="Last Name :" HorizontalAlignment="Left" Margin="184,175,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtLastName" HorizontalAlignment="Left" Height="37" Margin="304,170,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" MaxLength="15"/>
+        <TextBox x:Name="txtLastName" HorizontalAlignment="Left" Height="37" Margin="304,170,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" MaxLength="15" FontSize="15"/>
         <Label Content="First Name :" HorizontalAlignment="Left" Margin="184,240,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtFirstName" HorizontalAlignment="Left" Height="37" Margin="304,235,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" MaxLength="20"/>
+        <TextBox x:Name="txtFirstName" HorizontalAlignment="Left" Height="37" Margin="304,235,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" MaxLength="20" FontSize="15"/>
         <Label x:Name= "lblUserLvl" Content ="User Level :" HorizontalAlignment="Left" Margin="184,300,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="cmbUserLevel" HorizontalAlignment="Left" Margin="304,300,0,0" VerticalAlignment="Top" Width="320">
-            <ComboBoxItem Content="Secretary"/>
-            <ComboBoxItem Content="Human Resource"/>
+            <ComboBoxItem Content="Doctor"/>
+            <ComboBoxItem Content="Reception"/>
+            <ComboBoxItem Content="Medical Technologist"/>  
+
         </ComboBox>
         <Label Content="Password :" HorizontalAlignment="Left" Margin="197,412,0,0" VerticalAlignment="Top"/>
         <PasswordBox x:Name="txtPass" HorizontalAlignment="Left" VerticalAlignment="Top" Width="210" Margin="304,413,0,0" PasswordChanged="TxtPass_PasswordChanged" MaxLength="15"/>
         <Label Content="Confirm Password :" HorizontalAlignment="Left" Margin="148,479,0,0" VerticalAlignment="Top"/>
         <PasswordBox x:Name="txtConfirmPass" HorizontalAlignment="Left" VerticalAlignment="Top" Width="210" Margin="304,479,0,0" MaxLength="15"/>
 
-        <Label x:Name="lblPassword" Content="{Binding PasswordStatus}" HorizontalAlignment="Left" Margin="558,432,0,0" VerticalAlignment="Top" FontSize="15" RenderTransformOrigin="0.2,2"/>
+        <Label x:Name="lblPassword" Content="{Binding PasswordStatus}" HorizontalAlignment="Left" Margin="519,421,0,0" VerticalAlignment="Top" FontSize="15"/>
 
         <Label Content="Security Question :" HorizontalAlignment="Left" Margin="767,115,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="cmbQuestion" Controls:TextBoxHelper.Watermark="Select Security Question" HorizontalAlignment="Left" VerticalAlignment="Top" Width="400" Margin="910,115,0,0">

@@ -17,6 +17,7 @@ namespace HolyAngelMaternitySystem
         {
             InitializeComponent();
             SqlConnection conn = DBUtils.GetDBConnection();
+            user = username;
             conn.Open();
             using (SqlCommand cmd = new SqlCommand("SELECT securityQuestion, answer FROM tblAccounts WHERE username = @username", conn))
             {
@@ -81,13 +82,20 @@ namespace HolyAngelMaternitySystem
                         case MessageBoxResult.Yes:
                             SqlConnection conn = DBUtils.GetDBConnection();
                             conn.Open();
-                            using (SqlCommand cmd1 = new SqlCommand("UPDATE tblAccounts SET password = @password, tries = @tries WHERE username = @username", conn))
+                            using (SqlCommand cmd1 = new SqlCommand("UPDATE tblAccounts SET password = @password, tries = 0 WHERE username = @username", conn))
                             {
                                 cmd1.Parameters.AddWithValue("@username", user);
                                 cmd1.Parameters.AddWithValue("@password", txtNewPass.Password);
-                                cmd1.Parameters.AddWithValue("@tries", 0);
-                                cmd1.ExecuteNonQuery();
-                                MessageBox.Show("Password has been changed.");
+                                try
+                                {
+                                    cmd1.ExecuteNonQuery();
+                                    MessageBox.Show("Password has been changed.");
+                                }
+                                catch(SqlException ex)
+                                {
+                                    MessageBox.Show("Error has been encountered: " + ex);
+                                }
+
 
                                 Log = LogManager.GetLogger("AccountLog");
                                 Log.Info("Account: " + user + " changed their password");

@@ -85,7 +85,7 @@ namespace HolyAngelMaternitySystem
                                             }
                                             catch (SqlException ex)
                                             {
-                                                MessageBox.Show("Error! Log has been updated with the error.");
+                                                MessageBox.Show("Error! Log has been updated with the error." + ex);
                                                 Log = LogManager.GetLogger("*");
                                                 Log.Error(ex, "Query Error");
                                             }
@@ -211,27 +211,34 @@ namespace HolyAngelMaternitySystem
                     userCount = (int)cmd.ExecuteScalar();
                     if (userCount > 0)
                     {
-                        using (SqlCommand cmd1 = new SqlCommand("SELECT * from tblAccounts where username = @username", conn))
+                        using (SqlCommand cmd1 = new SqlCommand("SELECT firstName, lastName, securityQuestion from tblAccounts where username = @username", conn))
                         {
                             cmd1.Parameters.AddWithValue("@username", txtUser.Text);
-                            using (SqlDataReader reader = cmd.ExecuteReader())
+                            using (SqlDataReader reader = cmd1.ExecuteReader())
                             {
                                 if (reader.HasRows)
                                 {
-                                    reader.Read();
+                                    try
+                                    {
+                                        reader.Read();
+                                        int firstNameIndex = reader.GetOrdinal("firstName");
+                                        string firstName = Convert.ToString(reader.GetValue(firstNameIndex));
 
-                                    int firstNameIndex = reader.GetOrdinal("firstName");
-                                    string firstName = Convert.ToString(reader.GetValue(firstNameIndex));
+                                        int lastNameIndex = reader.GetOrdinal("lastName");
+                                        string lastName = Convert.ToString(reader.GetValue(lastNameIndex));
 
-                                    int lastNameIndex = reader.GetOrdinal("lastName");
-                                    string lastName = Convert.ToString(reader.GetValue(lastNameIndex));
+                                        int securityQuestionIndex = reader.GetOrdinal("securityQuestion");
+                                        string securityQuestion = Convert.ToString(reader.GetValue(securityQuestionIndex));
 
-                                    int securityQuestionIndex = reader.GetOrdinal("securityQuestion");
-                                    string securityQuestion = Convert.ToString(reader.GetValue(securityQuestionIndex));
+                                        txtFirstName.Text = firstName;
+                                        txtLastName.Text = lastName;
+                                        cmbQuestion.Text = securityQuestion;
+                                    }
+                                    catch(Exception ex)
+                                    {
+                                        MessageBox.Show("Error: " + ex);
+                                    }
 
-                                    txtFirstName.Text = firstName;
-                                    txtLastName.Text = lastName;
-                                    cmbQuestion.Text = securityQuestion;
                                 }
                             }
                         }
