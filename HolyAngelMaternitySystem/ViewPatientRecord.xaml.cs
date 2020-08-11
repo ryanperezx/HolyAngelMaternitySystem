@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using NLog;
 namespace HolyAngelMaternitySystem
 {
     /// <summary>
@@ -13,6 +14,8 @@ namespace HolyAngelMaternitySystem
     public partial class ViewPatientRecord : Page
     {
         ObservableCollection<PatientRecord> records = new ObservableCollection<PatientRecord>();
+        private static Logger Log = LogManager.GetCurrentClassLogger();
+
         public ViewPatientRecord()
         {
             InitializeComponent();

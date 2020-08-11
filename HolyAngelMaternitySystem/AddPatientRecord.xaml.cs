@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-
+using NLog;
 namespace HolyAngelMaternitySystem
 {
     /// <summary>
@@ -13,6 +13,7 @@ namespace HolyAngelMaternitySystem
     public partial class AddPatientRecord : Page
     {
         ObservableCollection<PatientRecord> records = new ObservableCollection<PatientRecord>();
+        private static Logger Log = LogManager.GetCurrentClassLogger();
 
         public AddPatientRecord()
         {
@@ -187,11 +188,15 @@ namespace HolyAngelMaternitySystem
                                 {
                                     cmd.ExecuteNonQuery();
                                     MessageBox.Show("Record has been added!");
+                                    Log = LogManager.GetLogger("patientRecord");
+                                    Log.Info("Patient:  " + txtPatientID.Text + " has added an record!");
                                     fillRecord();
                                 }
                                 catch (SqlException ex)
                                 {
                                     MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
+                                    Log = LogManager.GetLogger("*");
+                                    Log.Error(ex, "Query Error");
                                 }
                             }
                             break;

@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
+using NLog;
 
 namespace HolyAngelMaternitySystem
 {
@@ -15,6 +16,7 @@ namespace HolyAngelMaternitySystem
     public partial class DoctorAnalysis : Page
     {
         ObservableCollection<PatientRecord> records = new ObservableCollection<PatientRecord>();
+        private static Logger Log = LogManager.GetCurrentClassLogger();
         public DoctorAnalysis()
         {
             InitializeComponent();
@@ -218,6 +220,8 @@ namespace HolyAngelMaternitySystem
                     catch (SqlException ex)
                     {
                         MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
+                        Log = LogManager.GetLogger("*");
+                        Log.Error(ex, "Query Error");
                     }
                 }
                 if (count == 0)
@@ -233,6 +237,8 @@ namespace HolyAngelMaternitySystem
                         catch (SqlException ex)
                         {
                             MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
+                            Log = LogManager.GetLogger("*");
+                            Log.Error(ex, "Query Error");
                         }
                     }
                 }
@@ -246,6 +252,8 @@ namespace HolyAngelMaternitySystem
                     catch (SqlException ex)
                     {
                         MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
+                        Log = LogManager.GetLogger("*");
+                        Log.Error(ex, "Query Error");
                     }
                 }
                 if(count == 0)
@@ -261,6 +269,8 @@ namespace HolyAngelMaternitySystem
                         catch (SqlException ex)
                         {
                             MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
+                            Log = LogManager.GetLogger("*");
+                            Log.Error(ex, "Query Error");
                         }
                     }
                 }
@@ -303,19 +313,8 @@ namespace HolyAngelMaternitySystem
                         SqlConnection conn = DBUtils.GetDBConnection();
                         conn.Open();
                         var found = records.FirstOrDefault(x => Convert.ToDateTime(txtDate.Text) == Convert.ToDateTime(x.date));
-                        if (txtDate.Text == found.date)
-                        {
-                            MessageBox.Show("is equal");
-                        }
-                        else
-                        {
-                            MessageBox.Show("is not");
-                            MessageBox.Show(txtDate.Text);
-                            MessageBox.Show(found.date);
-                        }
                         using (SqlCommand cmd = new SqlCommand("UPDATE tblPatientRecord SET findings = @findings, diagnosis = @diagnosis, treatment = @treatment where patientID = @patientID and dateVisit = @date", conn))
                         {
-                            //..not working again ffs
                             cmd.Parameters.AddWithValue("@findings", found.findings);
                             cmd.Parameters.AddWithValue("@diagnosis", found.diagnosis);
                             cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
@@ -325,12 +324,15 @@ namespace HolyAngelMaternitySystem
                             {
 
                                 int count = cmd.ExecuteNonQuery();
-
+                                Log = LogManager.GetLogger("patientRecord");
+                                Log.Info("Patient:  " + txtPatientID.Text + " has been updated with doctor's analysis!");
                                 MessageBox.Show("Record has been added!");
                             }
                             catch (SqlException ex)
                             {
                                 MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
+                                Log = LogManager.GetLogger("*");
+                                Log.Error(ex, "Query Error");
                             }
                         }
                         break;

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-
+using NLog;
 namespace HolyAngelMaternitySystem
 {
     /// <summary>
@@ -14,6 +14,7 @@ namespace HolyAngelMaternitySystem
     public partial class PatientRecords : Page
     {
         int state = 0;
+        private static Logger Log = LogManager.GetCurrentClassLogger();
         public PatientRecords()
         {
             InitializeComponent();
@@ -85,11 +86,15 @@ namespace HolyAngelMaternitySystem
                                 {
                                     cmd.ExecuteNonQuery();
                                     MessageBox.Show("Patient Information has been added!");
+                                    Log = LogManager.GetLogger("patientInfo");
+                                    Log.Info("Patient:  " + txtPatientID.Text + " has been registered!");
                                     emptyFields();
                                 }
                                 catch (SqlException ex)
                                 {
                                     MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
+                                    Log = LogManager.GetLogger("*");
+                                    Log.Error(ex, "Query Error");
                                 }
 
                             }
@@ -142,11 +147,15 @@ namespace HolyAngelMaternitySystem
                                 {
                                     cmd.ExecuteNonQuery();
                                     MessageBox.Show("Patient Information has been updated!");
+                                    Log = LogManager.GetLogger("patientInfo");
+                                    Log.Info("Patient:  " + txtPatientID.Text + " has been updated!");
                                     emptyFields();
                                 }
                                 catch (SqlException ex)
                                 {
                                     MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
+                                    Log = LogManager.GetLogger("*");
+                                    Log.Error(ex, "Query Error");
                                 }
                             }
                             break;
@@ -189,6 +198,8 @@ namespace HolyAngelMaternitySystem
                     catch(SqlException ex)
                     {
                         MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
+                        Log = LogManager.GetLogger("*");
+                        Log.Error(ex, "Query Error");
                     }
                 }
                 if(count == 0)
@@ -219,6 +230,8 @@ namespace HolyAngelMaternitySystem
                                 catch (SqlException ex)
                                 {
                                     MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
+                                    Log = LogManager.GetLogger("*");
+                                    Log.Error(ex, "Query Error");
                                 }
                             }
                             break;
