@@ -14,7 +14,7 @@
     <Grid>
         <StackPanel>
             <DockPanel>
-                <Menu DockPanel.Dock="Top" Margin="0,0,250,0">
+                <Menu DockPanel.Dock="Top">
                     <MenuItem Header="_File">
                         <MenuItem x:Name="btnWelcome" Header="Start Page" Click="BtnWelcome_Click"/>
                         <MenuItem Header="_Logout" Click="BtnLogout_Click" />
