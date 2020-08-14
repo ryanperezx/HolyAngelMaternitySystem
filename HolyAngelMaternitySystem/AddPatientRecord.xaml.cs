@@ -177,13 +177,14 @@ namespace HolyAngelMaternitySystem
                     switch (dr)
                     {
                         case MessageBoxResult.Yes:
-                            using (SqlCommand cmd = new SqlCommand("INSERT into tblPatientRecord (patientID, dateVisit, bloodPressure, weight, ageOfGestation) VALUES (@patientID, @date, @bloodPressure, @weight, @aog)", conn))
+                            using (SqlCommand cmd = new SqlCommand("INSERT into tblPatientRecord (patientID, dateVisit, bloodPressure, weight, ageOfGestation, earlyUltrasound) VALUES (@patientID, @date, @bloodPressure, @weight, @aog, @eut)", conn))
                             {
                                 cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
                                 cmd.Parameters.AddWithValue("@date", txtDate.Text);
                                 cmd.Parameters.AddWithValue("@bloodPressure", txtBP.Text);
                                 cmd.Parameters.AddWithValue("@weight", txtWeight.Text);
                                 cmd.Parameters.AddWithValue("@aog", txtAOG.Text);
+                                cmd.Parameters.AddWithValue("@eut", txtUltrasound.Text); 
                                 try
                                 {
                                     cmd.ExecuteNonQuery();
@@ -219,7 +220,7 @@ namespace HolyAngelMaternitySystem
         {
             SqlConnection conn = DBUtils.GetDBConnection();
             conn.Open();
-            using (SqlCommand cmd = new SqlCommand("SELECT dateVisit, weight, bloodPressure, ageOfGestation from tblPatientRecord where patientID = @patientID", conn))
+            using (SqlCommand cmd = new SqlCommand("SELECT dateVisit, weight, bloodPressure, ageOfGestation, earlyUltrasound from tblPatientRecord where patientID = @patientID", conn))
             {
                 cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
                 using (SqlDataReader reader = cmd.ExecuteReader())
@@ -241,9 +242,13 @@ namespace HolyAngelMaternitySystem
                             int dateIndex = reader.GetOrdinal("dateVisit");
                             DateTime date = Convert.ToDateTime(reader.GetValue(dateIndex));
 
+                            int eutIndex = reader.GetOrdinal("earlyUltrasound");
+                            string eut = Convert.ToString(reader.GetValue(eutIndex));
+
                             records.Add(new PatientRecord
                             {
                                 aog = aog,
+                                eut = eut,
                                 weight = weight,
                                 bloodPressure = bloodPressure,
                                 date = date.ToString("MM/dd/yyyy")

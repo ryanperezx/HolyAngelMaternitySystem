@@ -13,7 +13,7 @@
 
     <Grid>
         <TextBlock HorizontalAlignment="Left" Margin="25,10,0,0" TextWrapping="Wrap" Text="Doctor Analysis " FontWeight="Bold" VerticalAlignment="Top"/>
-        <Label x:Name="lblPatientSearch" Grid.Row="0" Grid.Column="0" PreviewMouseLeftButtonUp="LblPatientSearch_PreviewMouseLeftButtonUp" VerticalAlignment="Top" Height="30" Width="30" ToolTip="Display Patient List" Cursor="Hand" Margin="121,3,1769,0">
+        <Label x:Name="lblPatientSearch" PreviewMouseLeftButtonUp="LblPatientSearch_PreviewMouseLeftButtonUp" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="30" ToolTip="Display Patient List" Cursor="Hand" Margin="121,5,0,0">
             <iconPacks:PackIconMaterial Kind="AccountSearch" Height="20" Width="20" Foreground="ForestGreen" HorizontalAlignment="Left"/>
         </Label>
         <Label x:Name="lblReset" PreviewMouseLeftButtonDown="LblReset_PreviewMouseLeftButtonDown" VerticalAlignment="Top"  Height="50" HorizontalAlignment="Right"  Cursor="Hand"  Width="50">
@@ -28,23 +28,28 @@
         <TextBox x:Name="txtFullName" HorizontalAlignment="Left" Height="23" Margin="210,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196"/>
         <Label Content="Date:" HorizontalAlignment="Left" Margin="115,229,0,0" VerticalAlignment="Top"/>
         <DatePicker x:Name="txtDate" HorizontalAlignment="Left" Margin="210,229,0,0" VerticalAlignment="Top" Width="196"/>
-        <RichTextBox x:Name="txtFindings" Controls:TextBoxHelper.Watermark="OB-GYNE History, P.E and Laboratory Findings" HorizontalAlignment="Left"  Height="100" VerticalAlignment="Top" Width="400" Margin="54,399,912,269"/>
-        <ComboBox x:Name="cmbDiagnosis" IsEditable="True"  Controls:TextBoxHelper.Watermark="Write diagnosis here.." HorizontalAlignment="Left" Height="28" VerticalAlignment="Top" Width="400" Margin="54,340,0,0"/>
-        <ComboBox x:Name="cmbTreatment" IsEditable="True"  Controls:TextBoxHelper.Watermark="Write treatment.." HorizontalAlignment="Left" Height="28" VerticalAlignment="Top" Width="400" Margin="54,291,0,0"/>
-
-        <Button x:Name="BtnAdd" Content="Add to list" Click="BtnAdd_Click" HorizontalAlignment="Left" Margin="121,558,0,0" VerticalAlignment="Top" Width="100"/>
-        <Button x:Name="btnSave" Content="Save" Click="BtnSave_Click " HorizontalAlignment="Left" Margin="335,558,0,0" VerticalAlignment="Top" Width="74"/>
+        <RichTextBox x:Name="txtFindings" Controls:TextBoxHelper.Watermark="OB/ Gyne History/ P.E/ Laboratory Findings" HorizontalAlignment="Left"  Height="100" VerticalAlignment="Top" Width="400" Margin="54,278,0,0"/>
+        <Label Content="FH:" HorizontalAlignment="Left" Margin="121,399,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtFH" HorizontalAlignment="Left" Height="23" Margin="210,399,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewTextInput="onlyNumbers"/>
+        <Label Content="FHT:" HorizontalAlignment="Left" Margin="121,443,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtFHT" HorizontalAlignment="Left" Height="23" Margin="210,443,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewTextInput="onlyNumbers"/>
+        <ComboBox x:Name="cmbDiagnosis" IsEditable="True"  Controls:TextBoxHelper.Watermark="Write diagnosis here.." HorizontalAlignment="Left" Height="28" VerticalAlignment="Top" Width="400" Margin="54,492,0,0"/>
+        <ComboBox x:Name="cmbTreatment" IsEditable="True"  Controls:TextBoxHelper.Watermark="Write treatment.." HorizontalAlignment="Left" Height="28" VerticalAlignment="Top" Width="400" Margin="54,540,0,0"/>
+        <Button x:Name="BtnAdd" Content="Add to list" Click="BtnAdd_Click" HorizontalAlignment="Left" Margin="121,588,0,0" VerticalAlignment="Top" Width="100"/>
+        <Button x:Name="btnSave" Content="Save" Click="BtnSave_Click " HorizontalAlignment="Left" Margin="335,588,0,0" VerticalAlignment="Top" Width="74"/>
 
         <DataGrid x:Name="dgList" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,92,34,0"  Height="560" Width="820" AutoGenerateColumns="False" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Date" Binding="{Binding date }" Width="110" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Weight" Binding="{Binding weight}" IsReadOnly="True" Width="90"/>
                 <DataGridTextColumn Header="Blood Pressure" Binding="{Binding bloodPressure}" IsReadOnly="True" Width="120 "/>
+                <DataGridTextColumn Header="FH" Binding="{Binding fh}" Width="80" IsReadOnly="True"/>
+                <DataGridTextColumn Header="FHT" Binding="{Binding fht}" Width="80" IsReadOnly="True"/>
                 <DataGridTextColumn Header="AOG by LMP" Binding="{Binding aog}" Width="100" IsReadOnly="True"/>
                 <DataGridTextColumn Header="AOG by EUTZ" Binding="{Binding eut}" Width="100" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Treatment" Binding="{Binding treatment}" IsReadOnly="True" Width="120"/>
                 <DataGridTextColumn Header="Diagnosis" Binding="{Binding diagnosis}" IsReadOnly="True" Width="120"/>
-                <DataGridTextColumn Header="OB-Gyne History, P.E and Laboratory Findings" Binding="{Binding findings}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Treatment" Binding="{Binding treatment}" IsReadOnly="True" Width="120"/>
+                <DataGridTextColumn Header="OB/ Gyne History/ P.E/ Laboratory Findings" Binding="{Binding findings}" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

@@ -36,9 +36,9 @@
                                 <iconPacks:PackIconMaterial Kind="HomeAnalytics"/>
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem x:Name="btnEarlyUltrasound" Click="BtnEarlyUltrasound_Click" Header="_Early Ultrasound">
+                        <MenuItem x:Name="btnEarlyUltrasound" Click="BtnEarlyUltrasound_Click" Header="_Ultrasound Report">
                             <MenuItem.Icon>
-                                <iconPacks:PackIconMaterial Kind="MicrophoneVariant"/>
+                                <iconPacks:PackIconMaterial Kind="NewspaperVariantMultiple"/>
                             </MenuItem.Icon>
                         </MenuItem>
                         <MenuItem x:Name="btnViewPatientRecord" Click="BtnViewPatientRecord_Click" Header="_View Patient Record">

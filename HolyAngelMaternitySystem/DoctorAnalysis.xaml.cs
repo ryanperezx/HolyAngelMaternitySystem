@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using NLog;
+using System.Text.RegularExpressions;
 
 namespace HolyAngelMaternitySystem
 {
@@ -130,6 +131,8 @@ namespace HolyAngelMaternitySystem
             cmbDiagnosis.SelectedIndex = -1;
             cmbTreatment.SelectedIndex = -1;
             txtFindings.Document.Blocks.Clear();
+            txtFH.Text = null;
+            txtFHT.Text = null;
             populateTreatment();
             populateDiagnosis();
 
@@ -164,6 +167,12 @@ namespace HolyAngelMaternitySystem
                             int findingsIndex = reader.GetOrdinal("findings");
                             string findings = Convert.ToString(reader.GetValue(findingsIndex));
 
+                            int fhIndex = reader.GetOrdinal("fh");
+                            string fh = Convert.ToString(reader.GetValue(fhIndex));
+
+                            int fhtIndex = reader.GetOrdinal("fht");
+                            string fht = Convert.ToString(reader.GetValue(fhtIndex));
+
                             int diagnosisIndex = reader.GetOrdinal("diagnosis");
                             string diagnosis = Convert.ToString(reader.GetValue(diagnosisIndex));
 
@@ -178,6 +187,8 @@ namespace HolyAngelMaternitySystem
                                 aog = aog,
                                 weight = weight,
                                 bloodPressure = bloodPressure,
+                                fht = fht,
+                                fh = fh,
                                 date = date,
                                 eut = eut,
                                 diagnosis = diagnosis,
@@ -188,6 +199,13 @@ namespace HolyAngelMaternitySystem
                     }
                 }
             }
+        }
+
+
+        private void onlyNumbers(object sender, TextCompositionEventArgs e)
+        {
+            var textBox = sender as TextBox;
+            e.Handled = Regex.IsMatch(e.Text, @"[^0-9\.]+");
         }
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
@@ -207,73 +225,8 @@ namespace HolyAngelMaternitySystem
             }
             else
             {
-                int count = 0;
                 SqlConnection conn = DBUtils.GetDBConnection();
                 conn.Open();
-                using (SqlCommand cmd = new SqlCommand("SELECT COUNT(1) from tblDiagnosis where diagnosis = @diagnosis", conn))
-                {
-                    cmd.Parameters.AddWithValue("@diagnosis", cmbDiagnosis.Text);
-                    try
-                    {
-                        count = (int)cmd.ExecuteScalar();
-                    }
-                    catch (SqlException ex)
-                    {
-                        MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
-                        Log = LogManager.GetLogger("*");
-                        Log.Error(ex, "Query Error");
-                    }
-                }
-                if (count == 0)
-                {
-                    using (SqlCommand cmd = new SqlCommand("INSERT into tblDiagnosis (diagnosis) VALUES (@diagnosis)", conn))
-                    {
-                        cmd.Parameters.AddWithValue("@diagnosis", cmbDiagnosis.Text);
-                        try
-                        {
-                            cmd.ExecuteNonQuery();
-                            populateDiagnosis();
-                        }
-                        catch (SqlException ex)
-                        {
-                            MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
-                            Log = LogManager.GetLogger("*");
-                            Log.Error(ex, "Query Error");
-                        }
-                    }
-                }
-                using (SqlCommand cmd = new SqlCommand("SELECT COUNT(1) from tblTreatment where treatment = @treatment", conn))
-                {
-                    cmd.Parameters.AddWithValue("@treatment", cmbTreatment.Text);
-                    try
-                    {
-                        count = (int)cmd.ExecuteScalar();
-                    }
-                    catch (SqlException ex)
-                    {
-                        MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
-                        Log = LogManager.GetLogger("*");
-                        Log.Error(ex, "Query Error");
-                    }
-                }
-                if(count == 0)
-                {
-                    using (SqlCommand cmd = new SqlCommand("INSERT into tblTreatment (treatment) VALUES (@treatment)", conn))
-                    {
-                        cmd.Parameters.AddWithValue("@treatment", cmbTreatment.Text);
-                        try
-                        {
-                            cmd.ExecuteNonQuery();
-                            populateTreatment();
-                        }
-                        catch (SqlException ex)
-                        {
-                            MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
-                            Log = LogManager.GetLogger("*");
-                            Log.Error(ex, "Query Error");
-                        }
-                    }
-                }
 
                 var found = records.FirstOrDefault(x => Convert.ToDateTime(txtDate.Text) == Convert.ToDateTime(x.date));
                 if (found != null)
@@ -281,11 +234,12 @@ namespace HolyAngelMaternitySystem
                     found.diagnosis = cmbDiagnosis.Text;
                     found.treatment = cmbTreatment.Text;
                     found.findings = Findings;
+                    found.fh = txtFH.Text;
+                    found.fht = txtFHT.Text;
                 }
                 else
                 {
-                    MessageBox.Show("There are no past records in the indicated date.");
-                    MessageBox.Show(txtDate.Text);
+                    MessageBox.Show("There are no past record of the indicated date.");
                     return;
                 }
                 dgList.Items.Refresh();
@@ -313,13 +267,15 @@ namespace HolyAngelMaternitySystem
                         SqlConnection conn = DBUtils.GetDBConnection();
                         conn.Open();
                         var found = records.FirstOrDefault(x => Convert.ToDateTime(txtDate.Text) == Convert.ToDateTime(x.date));
-                        using (SqlCommand cmd = new SqlCommand("UPDATE tblPatientRecord SET findings = @findings, diagnosis = @diagnosis, treatment = @treatment where patientID = @patientID and dateVisit = @date", conn))
+                        using (SqlCommand cmd = new SqlCommand("UPDATE tblPatientRecord SET findings = @findings, diagnosis = @diagnosis, treatment = @treatment, fh = @fh, fht = @fht where patientID = @patientID and dateVisit = @date", conn))
                         {
                             cmd.Parameters.AddWithValue("@findings", found.findings);
                             cmd.Parameters.AddWithValue("@diagnosis", found.diagnosis);
                             cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
                             cmd.Parameters.AddWithValue("@treatment", found.treatment);
                             cmd.Parameters.AddWithValue("@date", found.date);
+                            cmd.Parameters.AddWithValue("@fh", found.fh);
+                            cmd.Parameters.AddWithValue("@fht", found.fht);
                             try
                             {
 

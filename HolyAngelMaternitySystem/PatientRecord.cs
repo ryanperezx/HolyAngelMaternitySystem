@@ -104,6 +104,32 @@ namespace HolyAngelMaternitySystem
             set;
         }
 
+        public string fh
+        {
+            get;
+            set;
+        }
+
+        public string fht
+        {
+            get;
+            set;
+        }
+
+        //ultrasound report
+
+        public string ultrasoundReport
+        {
+            get;
+            set;
+        }
+
+        public string reportType
+        {
+            get;
+            set;
+        }
+
 
     }
 }

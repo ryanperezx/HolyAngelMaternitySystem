@@ -26,7 +26,7 @@ namespace HolyAngelMaternitySystem
         ViewPatientRecord vpr = new ViewPatientRecord();
         WelcomePage wp = new WelcomePage();
         Accounts ac = new Accounts();
-        EarlyUltrasound eu = new EarlyUltrasound();
+        UltrasoundReport ur = new UltrasoundReport();
         public MainWindow()
         {
             InitializeComponent();
@@ -113,9 +113,10 @@ namespace HolyAngelMaternitySystem
             Frame.Navigate(wp);
         }
 
+        //ultrasound Report
         private void BtnEarlyUltrasound_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(eu);
+            Frame.Navigate(ur);
         }
     }
 }

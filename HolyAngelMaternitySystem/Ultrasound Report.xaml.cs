@@ -4,19 +4,22 @@ using System.Data.SqlClient;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Documents;
 
 namespace HolyAngelMaternitySystem
 {
     /// <summary>
-    /// Interaction logic for EarlyUltrasound.xaml
+    /// Interaction logic for UltrasoundReport.xaml
     /// </summary>
-    public partial class EarlyUltrasound : Page
+    public partial class UltrasoundReport : Page
     {
         ObservableCollection<PatientRecord> records = new ObservableCollection<PatientRecord>();
-        public EarlyUltrasound()
+        public UltrasoundReport()
         {
             InitializeComponent();
             dgList.ItemsSource = records;
+            stack.DataContext = new ExpanderListViewModel();
+
         }
 
         private void LblPatientSearch_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -34,7 +37,6 @@ namespace HolyAngelMaternitySystem
         {
             txtPatientID.Text = null;
             txtFullName.Text = null;
-            txtUltrasound.Text = null;
             txtDate.Text = null;
             records.Clear();
         }
@@ -43,7 +45,7 @@ namespace HolyAngelMaternitySystem
         {
             SqlConnection conn = DBUtils.GetDBConnection();
             conn.Open();
-            using (SqlCommand cmd = new SqlCommand("SELECT dateVisit, ageOfGestation, earlyUltrasound from tblPatientRecord where patientID = @patientID", conn))
+            using (SqlCommand cmd = new SqlCommand("SELECT dateVisit, reportType, ultrasoundReport from tblPatientRecord where patientID = @patientID", conn))
             {
                 cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
                 using (SqlDataReader reader = cmd.ExecuteReader())
@@ -53,20 +55,20 @@ namespace HolyAngelMaternitySystem
                         records.Clear();
                         while (reader.Read())
                         {
-                            int aogIndex = reader.GetOrdinal("ageOfGestation");
-                            string aog = Convert.ToString(reader.GetValue(aogIndex));
+                            int reportTypeIndex = reader.GetOrdinal("reportType");
+                            string reportType = Convert.ToString(reader.GetValue(reportTypeIndex));
 
-                            int eutIndex = reader.GetOrdinal("earlyUltrasound");
-                            string eut = Convert.ToString(reader.GetValue(eutIndex));
+                            int ultrasoundReportIndex = reader.GetOrdinal("ultrasoundReport");
+                            string ultrasoundReport = Convert.ToString(reader.GetValue(ultrasoundReportIndex));
 
                             int dateIndex = reader.GetOrdinal("dateVisit");
                             string date = Convert.ToString(reader.GetValue(dateIndex));
 
                             records.Add(new PatientRecord
                             {
-                                aog = aog,
+                                ultrasoundReport = ultrasoundReport,
                                 date = date,
-                                eut = eut
+                                reportType = reportType
                             });
 
                         }
@@ -107,9 +109,6 @@ namespace HolyAngelMaternitySystem
 
                                 count = 1;
 
-                                txtUltrasound.Text = null;
-                                txtDate.Text = null;
-
                             }
                         }
                         else
@@ -127,7 +126,7 @@ namespace HolyAngelMaternitySystem
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(txtPatientID.Text) || string.IsNullOrEmpty(txtFullName.Text) || string.IsNullOrEmpty(txtDate.Text) || string.IsNullOrEmpty(txtUltrasound.Text))
+            if (string.IsNullOrEmpty(txtPatientID.Text) || string.IsNullOrEmpty(txtFullName.Text) || string.IsNullOrEmpty(txtDate.Text))
             {
                 MessageBox.Show("One or more fields are empty!");
             }
@@ -151,6 +150,31 @@ namespace HolyAngelMaternitySystem
                 }
                 if (count > 0)
                 {
+                    string reportType = "";
+                    string ultrasoundReport = "";
+                    //check what tab has text
+                    if (cmb1stTrimester.IsChecked == true)
+                    {
+                        reportType = "1st Trimester";
+                        ultrasoundReport = "Pregnancy uterine " + txt1stTriWeeks.Text + " weeks " + txt1stTriDays.Text + " days by CRL" + System.Environment.NewLine + "live singleton" + System.Environment.NewLine + "Normal both ovaries with corpus leteum on " + txt1stTriPresentation.Text; 
+                    }
+                    else if (cmb2nd3rdTrimester.IsChecked == true)
+                    {
+                        reportType = "2nd & 3rd Trimester";
+                        ultrasoundReport = "Pregnancy uterine " + txt2ndWeeks.Text + " weeks " + txt2ndDays.Text + " days by fetal biometry" + System.Environment.NewLine + "Live, singleton, in " + txt2ndPresentation.Text + " presentation " + System.Environment.NewLine + txtFluidVolume.Text + " amniotic fluid volume" + System.Environment.NewLine + "placenta anterior/posterior Grade " + txt2ndPlacenta.Text + " low lying/high lying";
+
+                    }
+                    else if (cmbGynecologist.IsChecked == true)
+                    {
+                        reportType = "Gynecology";
+                        ultrasoundReport = new TextRange(txtDiagnosis.Document.ContentStart, txtDiagnosis.Document.ContentEnd).Text;
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please select one of the checkbox before proceeding");
+                        return;
+                    }
                     string sMessageBoxText = "Confirming Updating Patient Record";
                     string sCaption = "Save Patient Record?";
                     MessageBoxButton btnMessageBox = MessageBoxButton.YesNoCancel;
@@ -160,15 +184,26 @@ namespace HolyAngelMaternitySystem
                     switch (dr)
                     {
                         case MessageBoxResult.Yes:
-                            using (SqlCommand cmd = new SqlCommand("UPDATE tblPatientRecord set earlyUltrasound = @eut where patientID = @patientID and dateVisit = @date", conn))
+                            using (SqlCommand cmd = new SqlCommand("UPDATE tblPatientRecord set ultrasoundReport = @ultrasoundReport, reportType = @reportType, others = @others where patientID = @patientID and dateVisit = @date", conn))
                             {
                                 cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
                                 cmd.Parameters.AddWithValue("@date", txtDate.Text);
-                                cmd.Parameters.AddWithValue("@eut", txtUltrasound.Text);
+                                cmd.Parameters.AddWithValue("@reportType", reportType);
+                                cmd.Parameters.AddWithValue("@ultrasoundReport", ultrasoundReport);
+                                cmd.Parameters.AddWithValue("@others", txtOthers.Text);
+                                //cmd.Parameters.AddWithValue("@eut", txtUltrasound.Text);
                                 try
                                 {
-                                    cmd.ExecuteNonQuery();
-                                    MessageBox.Show("Record has been updated!");
+                                    count = cmd.ExecuteNonQuery();
+                                    if(count > 0)
+                                    {
+                                        MessageBox.Show("Record has been updated!");
+
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Patient doesn't have any record on the input date!");
+                                    }
                                     fillRecord();
                                 }
                                 catch (SqlException ex)

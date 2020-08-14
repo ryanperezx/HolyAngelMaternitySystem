@@ -201,8 +201,10 @@
     </Compile>
     <Compile Include="DBSQLServerUtils.cs" />
     <Compile Include="DBUtils.cs" />
-    <Compile Include="EarlyUltrasound.xaml.cs">
-      <DependentUpon>EarlyUltrasound.xaml</DependentUpon>
+    <Compile Include="ExpanderListViewModel.cs" />
+    <Compile Include="ExpanderToBooleanConverter.cs" />
+    <Compile Include="Ultrasound Report.xaml.cs">
+      <DependentUpon>Ultrasound Report.xaml</DependentUpon>
     </Compile>
     <Compile Include="PatientList.xaml.cs">
       <DependentUpon>PatientList.xaml</DependentUpon>
@@ -225,7 +227,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="EarlyUltrasound.xaml">
+    <Page Include="Ultrasound Report.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
