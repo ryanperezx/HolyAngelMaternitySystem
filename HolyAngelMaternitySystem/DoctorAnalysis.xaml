@@ -43,13 +43,16 @@
                 <DataGridTextColumn Header="Date" Binding="{Binding date }" Width="110" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Weight" Binding="{Binding weight}" IsReadOnly="True" Width="90"/>
                 <DataGridTextColumn Header="Blood Pressure" Binding="{Binding bloodPressure}" IsReadOnly="True" Width="120 "/>
-                <DataGridTextColumn Header="FH" Binding="{Binding fh}" Width="80" IsReadOnly="True"/>
-                <DataGridTextColumn Header="FHT" Binding="{Binding fht}" Width="80" IsReadOnly="True"/>
+                <DataGridTextColumn Header="FH(cm)" Binding="{Binding fh}" Width="80" IsReadOnly="True"/>
+                <DataGridTextColumn Header="FHT(bpm)" Binding="{Binding fht}" Width="80" IsReadOnly="True"/>
                 <DataGridTextColumn Header="AOG by LMP" Binding="{Binding aog}" Width="100" IsReadOnly="True"/>
                 <DataGridTextColumn Header="AOG by EUTZ" Binding="{Binding eut}" Width="100" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Diagnosis" Binding="{Binding diagnosis}" IsReadOnly="True" Width="120"/>
                 <DataGridTextColumn Header="Treatment" Binding="{Binding treatment}" IsReadOnly="True" Width="120"/>
                 <DataGridTextColumn Header="OB/ Gyne History/ P.E/ Laboratory Findings" Binding="{Binding findings}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Report Type" Binding="{Binding reportType}" Width="200" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Ultrasound Report" Binding="{Binding ultrasoundReport}" Width="300" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Others" Binding="{Binding Others}" Width="300" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

@@ -182,6 +182,15 @@ namespace HolyAngelMaternitySystem
                             int eutIndex = reader.GetOrdinal("earlyUltrasound");
                             string eut = Convert.ToString(reader.GetValue(eutIndex));
 
+                            int ultrasoundReportIndex = reader.GetOrdinal("ultrasoundReport");
+                            string ultrasoundReport = Convert.ToString(reader.GetValue(ultrasoundReportIndex));
+
+                            int othersIndex = reader.GetOrdinal("others");
+                            string others = Convert.ToString(reader.GetValue(othersIndex));
+
+                            int reportTypeIndex = reader.GetOrdinal("reportType");
+                            string reportType = Convert.ToString(reader.GetValue(reportTypeIndex));
+
                             records.Add(new PatientRecord
                             {
                                 aog = aog,
@@ -193,7 +202,10 @@ namespace HolyAngelMaternitySystem
                                 eut = eut,
                                 diagnosis = diagnosis,
                                 treatment = treatment,
-                                findings = findings
+                                findings = findings,
+                                ultrasoundReport = ultrasoundReport,
+                                reportType = reportType,
+                                others = others
                             });
                         }
                     }
@@ -280,9 +292,17 @@ namespace HolyAngelMaternitySystem
                             {
 
                                 int count = cmd.ExecuteNonQuery();
-                                Log = LogManager.GetLogger("patientRecord");
-                                Log.Info("Patient:  " + txtPatientID.Text + " has been updated with doctor's analysis!");
-                                MessageBox.Show("Record has been added!");
+                                if (count > 0)
+                                {
+                                    MessageBox.Show("Record has been updated!");
+                                    Log = LogManager.GetLogger("patientRecord");
+                                    Log.Info("Patient:  " + txtPatientID.Text + " has been updated with doctor's analysis!");
+
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Patient doesn't have any record on the input date!");
+                                }
                             }
                             catch (SqlException ex)
                             {

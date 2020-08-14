@@ -67,14 +67,14 @@
                 </Grid>
             </Expander>
         </StackPanel>
-        <Button x:Name="btnSave" Click="BtnSave_Click" Content="Save" HorizontalAlignment="Left" Margin="208,625,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="btnSave" Click="BtnSave_Click" Content="Save" HorizontalAlignment="Left" Margin="208,648,0,0" VerticalAlignment="Top" Width="120"/>
 
         <DataGrid x:Name="dgList" HorizontalAlignment="Right" Height="560" Width="820" VerticalAlignment="Top" ItemsSource="{Binding}" Margin="0,92,34,0" AutoGenerateColumns="False" CanUserAddRows="False" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Date" Binding="{Binding date}" Width="120" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Report Type" Binding="{Binding reportType}" Width="200" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Ultrasound Report" Binding="{Binding ultrasoundReport}" Width="200" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Others" Binding="{Binding Others}" Width="200" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Ultrasound Report" Binding="{Binding ultrasoundReport}" Width="300" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Others" Binding="{Binding Others}" Width="300" IsReadOnly="True"/>
 
             </DataGrid.Columns>
         </DataGrid>

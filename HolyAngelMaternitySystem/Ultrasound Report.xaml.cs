@@ -38,6 +38,17 @@ namespace HolyAngelMaternitySystem
             txtPatientID.Text = null;
             txtFullName.Text = null;
             txtDate.Text = null;
+            txt1stTriDays.Text = null;
+            txt1stTriPresentation.Text = null;
+            txt1stTriWeeks.Text = null;
+            txt2ndDays.Text = null;
+            txt2ndPlacenta.Text = null;
+            txt2ndPresentation.Text = null;
+            txt2ndWeeks.Text = null;
+            txtDate.Text = null;
+            txtDiagnosis.Document.Blocks.Clear();
+            txtFluidVolume.Text = null;
+            txtOthers.Document.Blocks.Clear();
             records.Clear();
         }
 
@@ -45,7 +56,7 @@ namespace HolyAngelMaternitySystem
         {
             SqlConnection conn = DBUtils.GetDBConnection();
             conn.Open();
-            using (SqlCommand cmd = new SqlCommand("SELECT dateVisit, reportType, ultrasoundReport from tblPatientRecord where patientID = @patientID", conn))
+            using (SqlCommand cmd = new SqlCommand("SELECT dateVisit, reportType, ultrasoundReport, others from tblPatientRecord where patientID = @patientID", conn))
             {
                 cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
                 using (SqlDataReader reader = cmd.ExecuteReader())
@@ -64,11 +75,15 @@ namespace HolyAngelMaternitySystem
                             int dateIndex = reader.GetOrdinal("dateVisit");
                             string date = Convert.ToString(reader.GetValue(dateIndex));
 
+                            int othersIndex = reader.GetOrdinal("others");
+                            string others = Convert.ToString(reader.GetValue(othersIndex));
+
                             records.Add(new PatientRecord
                             {
                                 ultrasoundReport = ultrasoundReport,
                                 date = date,
-                                reportType = reportType
+                                reportType = reportType,
+                                others = others
                             });
 
                         }
@@ -152,6 +167,7 @@ namespace HolyAngelMaternitySystem
                 {
                     string reportType = "";
                     string ultrasoundReport = "";
+                    string others = new TextRange(txtOthers.Document.ContentStart, txtOthers.Document.ContentEnd).Text;
                     //check what tab has text
                     if (cmb1stTrimester.IsChecked == true)
                     {
@@ -190,7 +206,7 @@ namespace HolyAngelMaternitySystem
                                 cmd.Parameters.AddWithValue("@date", txtDate.Text);
                                 cmd.Parameters.AddWithValue("@reportType", reportType);
                                 cmd.Parameters.AddWithValue("@ultrasoundReport", ultrasoundReport);
-                                cmd.Parameters.AddWithValue("@others", txtOthers.Text);
+                                cmd.Parameters.AddWithValue("@others", others);
                                 //cmd.Parameters.AddWithValue("@eut", txtUltrasound.Text);
                                 try
                                 {
@@ -198,7 +214,6 @@ namespace HolyAngelMaternitySystem
                                     if(count > 0)
                                     {
                                         MessageBox.Show("Record has been updated!");
-
                                     }
                                     else
                                     {

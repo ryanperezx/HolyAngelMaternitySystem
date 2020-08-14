@@ -130,6 +130,12 @@ namespace HolyAngelMaternitySystem
             set;
         }
 
+        public string others
+        {
+            get;
+            set;
+        }
+
 
     }
 }
