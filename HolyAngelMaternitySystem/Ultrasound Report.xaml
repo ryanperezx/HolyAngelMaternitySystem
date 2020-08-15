@@ -74,7 +74,7 @@
                 <DataGridTextColumn Header="Date" Binding="{Binding date}" Width="120" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Report Type" Binding="{Binding reportType}" Width="200" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Ultrasound Report" Binding="{Binding ultrasoundReport}" Width="300" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Others" Binding="{Binding Others}" Width="300" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Others" Binding="{Binding others}" Width="300" IsReadOnly="True"/>
 
             </DataGrid.Columns>
         </DataGrid>

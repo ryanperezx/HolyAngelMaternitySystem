@@ -101,30 +101,50 @@ namespace HolyAngelMaternitySystem
                             string bloodPressure = Convert.ToString(reader.GetValue(bloodPressureIndex));
 
                             int dateIndex = reader.GetOrdinal("dateVisit");
-                            DateTime date = Convert.ToDateTime(reader.GetValue(dateIndex));
+                            string date = Convert.ToString(reader.GetValue(dateIndex));
 
                             int findingsIndex = reader.GetOrdinal("findings");
                             string findings = Convert.ToString(reader.GetValue(findingsIndex));
 
+                            int fhIndex = reader.GetOrdinal("fh");
+                            string fh = Convert.ToString(reader.GetValue(fhIndex));
+
+                            int fhtIndex = reader.GetOrdinal("fht");
+                            string fht = Convert.ToString(reader.GetValue(fhtIndex));
+
                             int diagnosisIndex = reader.GetOrdinal("diagnosis");
                             string diagnosis = Convert.ToString(reader.GetValue(diagnosisIndex));
 
-                            int treamentIndex = reader.GetOrdinal("treatment");
-                            string treatment = Convert.ToString(reader.GetValue(treamentIndex));
+                            int treatmentIndex = reader.GetOrdinal("treatment");
+                            string treatment = Convert.ToString(reader.GetValue(treatmentIndex));
 
                             int eutIndex = reader.GetOrdinal("earlyUltrasound");
                             string eut = Convert.ToString(reader.GetValue(eutIndex));
+
+                            int ultrasoundReportIndex = reader.GetOrdinal("ultrasoundReport");
+                            string ultrasoundReport = Convert.ToString(reader.GetValue(ultrasoundReportIndex));
+
+                            int othersIndex = reader.GetOrdinal("others");
+                            string others = Convert.ToString(reader.GetValue(othersIndex));
+
+                            int reportTypeIndex = reader.GetOrdinal("reportType");
+                            string reportType = Convert.ToString(reader.GetValue(reportTypeIndex));
 
                             records.Add(new PatientRecord
                             {
                                 aog = aog,
                                 weight = weight,
                                 bloodPressure = bloodPressure,
-                                date = date.ToString("MM/dd/yyyy"),
+                                fht = fht,
+                                fh = fh,
+                                date = date,
                                 eut = eut,
-                                treatment = treatment,
                                 diagnosis = diagnosis,
-                                findings = findings
+                                treatment = treatment,
+                                findings = findings,
+                                ultrasoundReport = ultrasoundReport,
+                                reportType = reportType,
+                                others = others
                             });
                         }
                     }
