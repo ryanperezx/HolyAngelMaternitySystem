@@ -34,36 +34,37 @@
             </StackPanel.Resources>
             <Expander IsExpanded="{Binding SelectedExpander, ConverterParameter=1, Converter={StaticResource ExpanderToBooleanConverter}, Mode=TwoWay}" Width="400" Header="Ultrasound Report Obstetrics for 1st Trimester" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <Grid Height="300">
-                    <Label Content="Weeks:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="34,37,0,0"/>
-                    <TextBox x:Name="txt1stTriWeeks" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="131,37,0,0"/>
-                    <Label Content="Days:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="34,77,0,0"/>
-                    <TextBox x:Name="txt1stTriDays" HorizontalAlignment="Left" Height="23" Margin="131,77,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                    <Label Content="Presentation:" HorizontalAlignment="Left" Margin="36,117,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="txt1stTriPresentation" HorizontalAlignment="Left" Height="23" Margin="131,117,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="Weeks:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="16,19,0,0"/>
+                    <TextBox x:Name="txt1stTriWeeks" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="111,19,0,0"/>
+                    <Label Content="Days:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="16,55,0,0"/>
+                    <TextBox x:Name="txt1stTriDays" HorizontalAlignment="Left" Height="23" Margin="111,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="Corpus leteum:" HorizontalAlignment="Left" Margin="16,95,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="txt1stCorpus" HorizontalAlignment="Left" Height="23" Margin="111,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="EDC:" HorizontalAlignment="Left" Margin="16,135,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="txt1stTriEDC" HorizontalAlignment="Left" Height="23" Margin="111,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <RichTextBox x:Name="txt1stOthers" Controls:TextBoxHelper.Watermark="Input other remarks here.." HorizontalAlignment="Left" Height="100"  VerticalAlignment="Top" Width="363" Margin="15,190,0,0"/>
                 </Grid>
             </Expander>
             <Expander IsExpanded="{Binding SelectedExpander, ConverterParameter=2, Converter={StaticResource ExpanderToBooleanConverter}, Mode=TwoWay}" Width="400" Header="Ultrasound Report Obstetrics for 2nd and 3rd Trimester" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <Grid Height="300">
-                    <Label Content="Weeks:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="34,25,0,0"/>
-                    <TextBox x:Name="txt2ndWeeks" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="168,25,0,0"/>
-                    <Label Content="Days:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="34,72,0,0"/>
-                    <TextBox x:Name="txt2ndDays" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="168,72,0,0"/>
-                    <Label Content="Presentation:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="34,116,0,0"/>
-                    <TextBox x:Name="txt2ndPresentation" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="168,116,0,0"/>
-                    <TextBox x:Name="txtFluidVolume" HorizontalAlignment="Left" Height="23" Margin="168,166,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                    <Label Content="Amniotic fluid volume:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="34,166,0,0"/>
-                    <Label Content="Placenta:" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="34,212,0,0"/>
-                    <TextBox x:Name="txt2ndPlacenta" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="168,212,0,0"/>
+                    <Label Content="Weeks:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="16,19,0,0"/>
+                    <TextBox x:Name="txt2ndWeeks" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="75,19,0,0"/>
+                    <Label Content="Days:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="200,19,0,0"/>
+                    <TextBox x:Name="txt2ndDays" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="259,19,0,0"/>
+                    <Label Content="Presentation:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="16,60,0,0"/>
+                    <TextBox x:Name="txt2ndPresentation" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="100,60,0,0"/>
+                    <TextBox x:Name="txtFluidVolume" HorizontalAlignment="Left" Height="23" Margin="150,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="Amniotic fluid volume:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="16,100,0,0"/>
+                    <Label Content="Placenta:" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="16,141,0,0"/>
+                    <TextBox x:Name="txt2ndPlacenta" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="78,141,0,0"/>
+                    <Label Content="EDC:" HorizontalAlignment="Left" Margin="203,141,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="txt2ndTriEDC" HorizontalAlignment="Left" Height="23" Margin="255,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <RichTextBox x:Name="txt2ndOthers" Controls:TextBoxHelper.Watermark="Input other remarks here.." HorizontalAlignment="Left" Height="100"  VerticalAlignment="Top" Width="363" Margin="15,190,0,0"/>
                 </Grid>
             </Expander>
-            <Expander IsExpanded="{Binding SelectedExpander, ConverterParameter=3, Converter={StaticResource ExpanderToBooleanConverter}, Mode=TwoWay}" Width="400" Header="Ultrasound Report Gynecologist" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Expander IsExpanded="{Binding SelectedExpander, ConverterParameter=3, Converter={StaticResource ExpanderToBooleanConverter}, Mode=TwoWay}" Width="400" Header="Ultrasound Report Gynecology" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <Grid Height="300">
-                    <RichTextBox x:Name="txtDiagnosis" Controls:TextBoxHelper.Watermark="Ultrasound Report Gynecologist Diagnosis" HorizontalAlignment="Left" Height="100"  VerticalAlignment="Top" Width="363" Margin="13,34,0,0"/>
-                </Grid>
-            </Expander>
-            <Expander IsExpanded="{Binding SelectedExpander, ConverterParameter=4, Converter={StaticResource ExpanderToBooleanConverter}, Mode=TwoWay}" Width="400" Header="Others" HorizontalAlignment="Left" VerticalAlignment="Top">
-                <Grid Height="300">
-                    <RichTextBox x:Name="txtOthers" Controls:TextBoxHelper.Watermark="Input other remarks here.." HorizontalAlignment="Left" Height="100"  VerticalAlignment="Top" Width="363" Margin="13,34,0,0"/>
+                    <RichTextBox x:Name="txtDiagnosis" Controls:TextBoxHelper.Watermark="Ultrasound Report Gynecology Diagnosis" FontSize="14" HorizontalAlignment="Left" Height="280"  VerticalAlignment="Top" Width="363" Margin="13,10,0,0"/>
                 </Grid>
             </Expander>
         </StackPanel>
@@ -78,9 +79,9 @@
 
             </DataGrid.Columns>
         </DataGrid>
-        <RadioButton x:Name="cmb1stTrimester" Content="1st Trimester" HorizontalAlignment="Left" Margin="75,197,0,0" VerticalAlignment="Top" GroupName="reportType"/>
-        <RadioButton x:Name="cmb2nd3rdTrimester" Content="2nd &amp; 3rd Trimester" HorizontalAlignment="Left" Margin="215,197,0,0" VerticalAlignment="Top" GroupName="reportType"/>
-        <RadioButton x:Name="cmbGynecologist" Content="Gynecologist" HorizontalAlignment="Left" Margin="382,197,0,0" VerticalAlignment="Top" GroupName="reportType"/>
+        <RadioButton x:Name="cmb1stTrimester" Content="1st Trimester" HorizontalAlignment="Left" Margin="75,197,0,0" VerticalAlignment="Top" GroupName="reportType" Background="FloralWhite"/>
+        <RadioButton x:Name="cmb2nd3rdTrimester" Content="2nd &amp; 3rd Trimester" HorizontalAlignment="Left" Margin="215,197,0,0" VerticalAlignment="Top" GroupName="reportType" Background="FloralWhite" />
+        <RadioButton x:Name="cmbGynecology" Content="Gynecology" HorizontalAlignment="Left" Margin="382,197,0,0" VerticalAlignment="Top" GroupName="reportType" Background="FloralWhite"/>
 
     </Grid>
 </Page>

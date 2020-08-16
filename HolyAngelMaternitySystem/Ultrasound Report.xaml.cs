@@ -39,7 +39,7 @@ namespace HolyAngelMaternitySystem
             txtFullName.Text = null;
             txtDate.Text = null;
             txt1stTriDays.Text = null;
-            txt1stTriPresentation.Text = null;
+            txt1stTriEDC.Text = null;
             txt1stTriWeeks.Text = null;
             txt2ndDays.Text = null;
             txt2ndPlacenta.Text = null;
@@ -48,7 +48,8 @@ namespace HolyAngelMaternitySystem
             txtDate.Text = null;
             txtDiagnosis.Document.Blocks.Clear();
             txtFluidVolume.Text = null;
-            txtOthers.Document.Blocks.Clear();
+            txt1stOthers.Document.Blocks.Clear();
+            txt2ndOthers.Document.Blocks.Clear();
             records.Clear();
         }
 
@@ -167,17 +168,19 @@ namespace HolyAngelMaternitySystem
                 {
                     string reportType = "";
                     string ultrasoundReport = "";
-                    string others = new TextRange(txtOthers.Document.ContentStart, txtOthers.Document.ContentEnd).Text;
+                    string others1stTri = txt1stTriEDC.Text + "; " + new TextRange(txt1stOthers.Document.ContentStart, txt1stOthers.Document.ContentEnd).Text;
+                    string others2ndTri = txt2ndTriEDC.Text + "; " + new TextRange(txt2ndOthers.Document.ContentStart, txt2ndOthers.Document.ContentEnd).Text;
+
                     //check what tab has text
                     if (cmb1stTrimester.IsChecked == true)
                     {
                         reportType = "1st Trimester";
-                        ultrasoundReport = "Pregnancy uterine " + txt1stTriWeeks.Text + " weeks " + txt1stTriDays.Text + " days by CRL" + System.Environment.NewLine + "live singleton" + System.Environment.NewLine + "Normal both ovaries with corpus leteum on " + txt1stTriPresentation.Text; 
+                        ultrasoundReport = "Pregnancy uterine " + txt1stTriWeeks.Text + " weeks " + txt1stTriDays.Text + " days by CRL" + System.Environment.NewLine + "live singleton" + System.Environment.NewLine + "Normal both ovaries with corpus leteum on " + txt1stCorpus.Text; 
                     }
                     else if (cmb2nd3rdTrimester.IsChecked == true)
                     {
                         reportType = "2nd & 3rd Trimester";
-                        ultrasoundReport = "Pregnancy uterine " + txt2ndWeeks.Text + " weeks " + txt2ndDays.Text + " days by fetal biometry" + System.Environment.NewLine + "Live, singleton, in " + txt2ndPresentation.Text + " presentation " + System.Environment.NewLine + txtFluidVolume.Text + " amniotic fluid volume" + System.Environment.NewLine + "placenta anterior/posterior Grade " + txt2ndPlacenta.Text + " low lying/high lying";
+                        ultrasoundReport = "Pregnancy uterine " + txt2ndWeeks.Text + " weeks " + txt2ndDays.Text + " days by fetal biometry" + System.Environment.NewLine + "Live, singleton, in " + txt2ndPresentation.Text + " presentation " + System.Environment.NewLine + txtFluidVolume.Text + " amniotic fluid volume" + System.Environment.NewLine + "Placenta " + txt2ndPlacenta.Text;
 
                     }
                     else if (cmbGynecologist.IsChecked == true)
@@ -206,8 +209,18 @@ namespace HolyAngelMaternitySystem
                                 cmd.Parameters.AddWithValue("@date", txtDate.Text);
                                 cmd.Parameters.AddWithValue("@reportType", reportType);
                                 cmd.Parameters.AddWithValue("@ultrasoundReport", ultrasoundReport);
-                                cmd.Parameters.AddWithValue("@others", others);
-                                //cmd.Parameters.AddWithValue("@eut", txtUltrasound.Text);
+                                if (!string.IsNullOrEmpty(others1stTri))
+                                {
+                                    cmd.Parameters.AddWithValue("@others", others1stTri);
+                                }
+                                else if (!string.IsNullOrEmpty(others2ndTri))
+                                {
+                                    cmd.Parameters.AddWithValue("@others", others2ndTri);
+                                }
+                                else
+                                {
+                                    cmd.Parameters.AddWithValue("@others", "");
+                                }
                                 try
                                 {
                                     count = cmd.ExecuteNonQuery();
