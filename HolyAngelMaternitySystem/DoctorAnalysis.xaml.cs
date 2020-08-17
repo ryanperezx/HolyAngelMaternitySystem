@@ -133,6 +133,7 @@ namespace HolyAngelMaternitySystem
             txtFindings.Document.Blocks.Clear();
             txtFH.Text = null;
             txtFHT.Text = null;
+            txtOBIndex.Text = null;
             populateTreatment();
             populateDiagnosis();
 
@@ -173,6 +174,9 @@ namespace HolyAngelMaternitySystem
                             int fhtIndex = reader.GetOrdinal("fht");
                             string fht = Convert.ToString(reader.GetValue(fhtIndex));
 
+                            int obIndexIndex = reader.GetOrdinal("obIndex");
+                            string obIndex = Convert.ToString(reader.GetValue(obIndexIndex));
+
                             int diagnosisIndex = reader.GetOrdinal("diagnosis");
                             string diagnosis = Convert.ToString(reader.GetValue(diagnosisIndex));
 
@@ -181,6 +185,9 @@ namespace HolyAngelMaternitySystem
 
                             int eutIndex = reader.GetOrdinal("earlyUltrasound");
                             string eut = Convert.ToString(reader.GetValue(eutIndex));
+
+                            int lmpIndex = reader.GetOrdinal("LMP");
+                            string lmp = Convert.ToString(reader.GetValue(lmpIndex));
 
                             int ultrasoundReportIndex = reader.GetOrdinal("ultrasoundReport");
                             string ultrasoundReport = Convert.ToString(reader.GetValue(ultrasoundReportIndex));
@@ -200,6 +207,8 @@ namespace HolyAngelMaternitySystem
                                 fh = fh,
                                 date = date,
                                 eut = eut,
+                                lmp = lmp,
+                                obIndex = obIndex,
                                 diagnosis = diagnosis,
                                 treatment = treatment,
                                 findings = findings,
@@ -248,6 +257,7 @@ namespace HolyAngelMaternitySystem
                     found.findings = Findings;
                     found.fh = txtFH.Text;
                     found.fht = txtFHT.Text;
+                    found.obIndex = txtOBIndex.Text;
                 }
                 else
                 {
@@ -279,7 +289,7 @@ namespace HolyAngelMaternitySystem
                         SqlConnection conn = DBUtils.GetDBConnection();
                         conn.Open();
                         var found = records.FirstOrDefault(x => Convert.ToDateTime(txtDate.Text) == Convert.ToDateTime(x.date));
-                        using (SqlCommand cmd = new SqlCommand("UPDATE tblPatientRecord SET findings = @findings, diagnosis = @diagnosis, treatment = @treatment, fh = @fh, fht = @fht where patientID = @patientID and dateVisit = @date", conn))
+                        using (SqlCommand cmd = new SqlCommand("UPDATE tblPatientRecord SET findings = @findings, diagnosis = @diagnosis, treatment = @treatment, fh = @fh, fht = @fht, obIndex = @obIndex where patientID = @patientID and dateVisit = @date", conn))
                         {
                             cmd.Parameters.AddWithValue("@findings", found.findings);
                             cmd.Parameters.AddWithValue("@diagnosis", found.diagnosis);
@@ -288,6 +298,7 @@ namespace HolyAngelMaternitySystem
                             cmd.Parameters.AddWithValue("@date", found.date);
                             cmd.Parameters.AddWithValue("@fh", found.fh);
                             cmd.Parameters.AddWithValue("@fht", found.fht);
+                            cmd.Parameters.AddWithValue("@obIndex", found.obIndex);
                             try
                             {
 

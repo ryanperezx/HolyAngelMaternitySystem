@@ -38,16 +38,20 @@ namespace HolyAngelMaternitySystem
             txtPatientID.Text = null;
             txtFullName.Text = null;
             txtDate.Text = null;
+
             txt1stTriDays.Text = null;
             txt1stTriEDC.Text = null;
             txt1stTriWeeks.Text = null;
+            txt1stCorpus.Text = null;
+
             txt2ndDays.Text = null;
             txt2ndPlacenta.Text = null;
             txt2ndPresentation.Text = null;
             txt2ndWeeks.Text = null;
-            txtDate.Text = null;
-            txtDiagnosis.Document.Blocks.Clear();
             txtFluidVolume.Text = null;
+            txt2ndTriEDC.Text = null;
+
+            txtDiagnosis.Document.Blocks.Clear();
             txt1stOthers.Document.Blocks.Clear();
             txt2ndOthers.Document.Blocks.Clear();
             records.Clear();
@@ -183,7 +187,7 @@ namespace HolyAngelMaternitySystem
                         ultrasoundReport = "Pregnancy uterine " + txt2ndWeeks.Text + " weeks " + txt2ndDays.Text + " days by fetal biometry" + System.Environment.NewLine + "Live, singleton, in " + txt2ndPresentation.Text + " presentation " + System.Environment.NewLine + txtFluidVolume.Text + " amniotic fluid volume" + System.Environment.NewLine + "Placenta " + txt2ndPlacenta.Text;
 
                     }
-                    else if (cmbGynecologist.IsChecked == true)
+                    else if (cmbGynecology.IsChecked == true)
                     {
                         reportType = "Gynecology";
                         ultrasoundReport = new TextRange(txtDiagnosis.Document.ContentStart, txtDiagnosis.Document.ContentEnd).Text;

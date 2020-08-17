@@ -118,7 +118,7 @@ namespace HolyAngelMaternitySystem
                                 int birthDateIndex = reader.GetOrdinal("birthDate");
                                 string birthDate = Convert.ToString(reader.GetValue(birthDateIndex));
 
-                                int age = Convert.ToDateTime(birthDate).Year - DateTime.Today.Year;
+                                int age = Math.Abs(Convert.ToDateTime(birthDate).Year - DateTime.Today.Year) - 1;
 
                                 records.Add(new PatientRecord
                                 {
@@ -169,7 +169,7 @@ namespace HolyAngelMaternitySystem
                                 int birthDateIndex = reader.GetOrdinal("birthDate");
                                 string birthDate = Convert.ToString(reader.GetValue(birthDateIndex));
 
-                                int age = Convert.ToDateTime(birthDate).Year - DateTime.Today.Year;
+                                int age = Math.Abs(Convert.ToDateTime(birthDate).Year - DateTime.Today.Year) - 1;
 
                                 records.Add(new PatientRecord
                                 {
@@ -229,7 +229,7 @@ namespace HolyAngelMaternitySystem
                                 int birthDateIndex = reader.GetOrdinal("birthDate");
                                 string birthDate = Convert.ToString(reader.GetValue(birthDateIndex));
 
-                                int age = Convert.ToDateTime(birthDate).Year - DateTime.Today.Year;
+                                int age = Math.Abs(Convert.ToDateTime(birthDate).Year - DateTime.Today.Year) - 1;
 
                                 records.Add(new PatientRecord
                                 {
@@ -284,7 +284,7 @@ namespace HolyAngelMaternitySystem
                                 int birthDateIndex = reader.GetOrdinal("birthDate");
                                 string birthDate = Convert.ToString(reader.GetValue(birthDateIndex));
 
-                                int age = Convert.ToDateTime(birthDate).Year - DateTime.Today.Year;
+                                int age = Math.Abs(Convert.ToDateTime(birthDate).Year - DateTime.Today.Year) - 1;
 
                                 records.Add(new PatientRecord
                                 {
