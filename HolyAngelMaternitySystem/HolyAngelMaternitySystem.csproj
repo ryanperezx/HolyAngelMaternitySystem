@@ -196,6 +196,9 @@
     <Compile Include="Accounts.xaml.cs">
       <DependentUpon>Accounts.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddDiagnosisTreatment.xaml.cs">
+      <DependentUpon>AddDiagnosisTreatment.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddPatientRecord.xaml.cs">
       <DependentUpon>AddPatientRecord.xaml</DependentUpon>
     </Compile>
@@ -220,6 +223,10 @@
       <DependentUpon>WelcomePage.xaml</DependentUpon>
     </Compile>
     <Page Include="Accounts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddDiagnosisTreatment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -148,6 +148,14 @@ namespace HolyAngelMaternitySystem
             set;
         }
 
+        //others
+
+        public int i
+        {
+            get;
+            set;
+        }
+
 
     }
 }

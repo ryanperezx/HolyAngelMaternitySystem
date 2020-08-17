@@ -47,10 +47,15 @@
                             </MenuItem.Icon>
                         </MenuItem>
                     </MenuItem>
-                    <MenuItem Header="_Accounts">
+                    <MenuItem Header="_Others">
                         <MenuItem x:Name="btnAccounts" Click="BtnAccounts_Click" Header="_Manage users">
                             <MenuItem.Icon>
                                 <iconPacks:PackIconMaterial Kind="AccountEdit"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem x:Name="btnAddDiagnosisTreatment" Click="BtnAddDiagnosisTreatment_Click" Header="_Add Diagnosis/Treatment">
+                            <MenuItem.Icon>
+                                <iconPacks:PackIconMaterial Kind="Stethoscope"/>
                             </MenuItem.Icon>
                         </MenuItem>
                     </MenuItem>

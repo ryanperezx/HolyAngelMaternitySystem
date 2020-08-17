@@ -27,6 +27,7 @@ namespace HolyAngelMaternitySystem
         WelcomePage wp = new WelcomePage();
         Accounts ac = new Accounts();
         UltrasoundReport ur = new UltrasoundReport();
+        AddDiagnosisTreatment adt = new AddDiagnosisTreatment();
         public MainWindow()
         {
             InitializeComponent();
@@ -117,6 +118,11 @@ namespace HolyAngelMaternitySystem
         private void BtnEarlyUltrasound_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(ur);
+        }
+
+        private void BtnAddDiagnosisTreatment_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(adt);
         }
     }
 }
