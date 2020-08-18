@@ -37,7 +37,7 @@
 
         <TextBox x:Name="txtOBIndex" HorizontalAlignment="Left" Height="23" Margin="210,487,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <ComboBox x:Name="cmbDiagnosis" IsEditable="True"  Controls:TextBoxHelper.Watermark="Write diagnosis here.." HorizontalAlignment="Left" Height="28" VerticalAlignment="Top" Width="400" Margin="54,536,0,0"/>
-        <ComboBox x:Name="cmbTreatment" IsEditable="True"  Controls:TextBoxHelper.Watermark="Write treatment.." HorizontalAlignment="Left" Height="28" VerticalAlignment="Top" Width="400" Margin="54,584,0,0"/>
+        <ComboBox x:Name="cmbTreatment" IsEditable="True"  Controls:TextBoxHelper.Watermark="Write treatment here.." HorizontalAlignment="Left" Height="28" VerticalAlignment="Top" Width="400" Margin="54,584,0,0"/>
         <Button x:Name="BtnAdd" Content="Add to list" Click="BtnAdd_Click" HorizontalAlignment="Left" Margin="121,632,0,0" VerticalAlignment="Top" Width="100"/>
         <Button x:Name="btnSave" Content="Save" Click="BtnSave_Click " HorizontalAlignment="Left" Margin="335,632,0,0" VerticalAlignment="Top" Width="74"/>
 

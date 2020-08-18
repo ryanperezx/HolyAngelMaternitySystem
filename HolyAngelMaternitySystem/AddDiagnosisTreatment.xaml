@@ -25,11 +25,11 @@
             <ComboBoxItem>Treatment</ComboBoxItem>
         </ComboBox>
         <Button x:Name="btnSave" Content="Save" Click="BtnSave_Click" HorizontalAlignment="Left" Margin="188,188,0,0" VerticalAlignment="Top" Width="127"/>
-        <StackPanel x:Name="stack" Orientation="Horizontal" Margin="0,85,345,0" HorizontalAlignment="Right" VerticalAlignment="Top">
+        <StackPanel x:Name="stack" Orientation="Horizontal" Margin="0,85,275,0" HorizontalAlignment="Right" VerticalAlignment="Top">
             <StackPanel.Resources>
                 <local:ExpanderToBooleanConverter x:Key="ExpanderToBooleanConverter" />
             </StackPanel.Resources>
-            <Expander IsExpanded="{Binding SelectedExpander, ConverterParameter=1, Converter={StaticResource ExpanderToBooleanConverter}, Mode=TwoWay}" HorizontalAlignment="Left" VerticalAlignment="Top" ExpandDirection="Right"  Height="440">
+            <Expander HorizontalAlignment="Left" VerticalAlignment="Top" ExpandDirection="Right"  Height="440">
                 <Expander.Header>
                     <TextBlock Text="Diagnosis List" RenderTransformOrigin=".5,.5">
                         <TextBlock.LayoutTransform>
@@ -38,15 +38,15 @@
                     </TextBlock>
                 </Expander.Header>
                 <StackPanel Orientation="Vertical">
-                    <DataGrid x:Name="dgDiagnosis" HorizontalAlignment="Left" Height="440" VerticalAlignment="Top" Width="565" ItemsSource="{Binding}" AutoGenerateColumns="False" CanUserAddRows="False">
+                    <DataGrid x:Name="dgDiagnosis" HorizontalAlignment="Left" Height="440" VerticalAlignment="Top" Width="300" ItemsSource="{Binding}" AutoGenerateColumns="False" CanUserAddRows="False">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="No" Binding="{Binding i}"/>
-                            <DataGridTextColumn Header="Diagnosis" Binding="{Binding diagnosis}" Width="150" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="No" Binding="{Binding i}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Diagnosis" Binding="{Binding diagnosis}" Width="250" IsReadOnly="True"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>
             </Expander>
-            <Expander IsExpanded="{Binding SelectedExpander, ConverterParameter=2, Converter={StaticResource ExpanderToBooleanConverter}, Mode=TwoWay}" HorizontalAlignment="Left" VerticalAlignment="Top" ExpandDirection="Right"  Height="440">
+            <Expander HorizontalAlignment="Left" VerticalAlignment="Top" ExpandDirection="Right"  Height="440">
                 <Expander.Header>
                     <TextBlock Text="Treatment List" RenderTransformOrigin=".5,.5">
                         <TextBlock.LayoutTransform>
@@ -55,10 +55,10 @@
                     </TextBlock>
                 </Expander.Header>
                 <StackPanel Orientation="Vertical">
-                    <DataGrid x:Name="dgTreatment" HorizontalAlignment="Left" Height="440" VerticalAlignment="Top" Width="565" ItemsSource="{Binding}" AutoGenerateColumns="False" CanUserAddRows="False">
+                    <DataGrid x:Name="dgTreatment" HorizontalAlignment="Left" Height="440" VerticalAlignment="Top" Width="300" ItemsSource="{Binding}" AutoGenerateColumns="False" CanUserAddRows="False">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="No" Binding="{Binding i}"/>
-                            <DataGridTextColumn Header="Treatment" Binding="{Binding treatment}" Width="150" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="No" Binding="{Binding i}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Treatment" Binding="{Binding treatment}" Width="250" IsReadOnly="True"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>
