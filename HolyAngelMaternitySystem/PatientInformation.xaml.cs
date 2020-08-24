@@ -21,7 +21,9 @@ namespace HolyAngelMaternitySystem
             cmbCivStatus.Items.Add("Single");
             cmbCivStatus.Items.Add("Married");
             cmbCivStatus.Items.Add("Divorced");
+            cmbCivStatus.Items.Add("Separated");
             cmbCivStatus.Items.Add("Widowed");
+            
         }
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)

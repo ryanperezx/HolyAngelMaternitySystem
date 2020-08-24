@@ -127,6 +127,7 @@ namespace HolyAngelMaternitySystem
             txtFullName.Text = null;
             txtPatientID.Text = null;
             cmbDiagnosis.Text = null;
+            cmbTreatment.Text = null;
             txtDate.Text = null;
             cmbDiagnosis.SelectedIndex = -1;
             cmbTreatment.SelectedIndex = -1;

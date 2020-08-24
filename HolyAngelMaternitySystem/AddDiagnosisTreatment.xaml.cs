@@ -19,7 +19,6 @@ namespace HolyAngelMaternitySystem
         public AddDiagnosisTreatment()
         {
             InitializeComponent();
-            stack.DataContext = new ExpanderListViewModel();
             dgDiagnosis.ItemsSource = diagnosisCollection;
             dgTreatment.ItemsSource = treatmentCollection;
             fillDiagnosis();
@@ -111,8 +110,8 @@ namespace HolyAngelMaternitySystem
             }
             else
             {
-                string sMessageBoxText = "Confirming deletion of Patient Information";
-                string sCaption = "Delete Patient Information";
+                string sMessageBoxText = "Confirming addition of Diagnosis or Treatment Record";
+                string sCaption = "Add Diagnosis/Treatment?";
                 MessageBoxButton btnMessageBox = MessageBoxButton.YesNoCancel;
                 MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
 
