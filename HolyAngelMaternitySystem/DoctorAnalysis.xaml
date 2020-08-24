@@ -28,14 +28,18 @@
         <TextBox x:Name="txtFullName" HorizontalAlignment="Left" Height="23" Margin="210,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196"/>
         <Label Content="Date:" HorizontalAlignment="Left" Margin="115,229,0,0" VerticalAlignment="Top"/>
         <DatePicker x:Name="txtDate" HorizontalAlignment="Left" Margin="210,229,0,0" VerticalAlignment="Top" Width="196"/>
-        <RichTextBox x:Name="txtFindings" Controls:TextBoxHelper.Watermark="OB/ Gyne History/ P.E/ Laboratory Findings" HorizontalAlignment="Left"  Height="100" VerticalAlignment="Top" Width="400" Margin="54,278,0,0"/>
+        <RichTextBox x:Name="txtFindings" Controls:TextBoxHelper.Watermark="OB/ Gyne History/ P.E/ Laboratory Findings" HorizontalAlignment="Left"  Height="100" VerticalAlignment="Top" Width="400" Margin="54,278,0,0">
+            <RichTextBox.Resources>
+                <Style TargetType="{x:Type Paragraph}">
+                    <Setter Property="Margin" Value="0"/>
+                </Style>
+            </RichTextBox.Resources>
+        </RichTextBox>
         <Label Content="FH:" HorizontalAlignment="Left" Margin="115,399,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtFH" HorizontalAlignment="Left" Height="23" Margin="210,399,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewTextInput="onlyNumbers"/>
         <Label Content="FHT:" HorizontalAlignment="Left" Margin="115,443,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtFHT" HorizontalAlignment="Left" Height="23" Margin="210,443,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewTextInput="onlyNumbers"/>
-        <Label Content="OB-Index:" HorizontalAlignment="Left" Margin="115,487,0,0" VerticalAlignment="Top"/>
 
-        <TextBox x:Name="txtOBIndex" HorizontalAlignment="Left" Height="23" Margin="210,487,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <ComboBox x:Name="cmbDiagnosis" IsEditable="True"  Controls:TextBoxHelper.Watermark="Write diagnosis here.." HorizontalAlignment="Left" Height="28" VerticalAlignment="Top" Width="400" Margin="54,536,0,0"/>
         <ComboBox x:Name="cmbTreatment" IsEditable="True"  Controls:TextBoxHelper.Watermark="Write treatment.." HorizontalAlignment="Left" Height="28" VerticalAlignment="Top" Width="400" Margin="54,584,0,0"/>
         <Button x:Name="BtnAdd" Content="Add to list" Click="BtnAdd_Click" HorizontalAlignment="Left" Margin="121,632,0,0" VerticalAlignment="Top" Width="100"/>

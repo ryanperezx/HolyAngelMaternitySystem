@@ -13,11 +13,13 @@ namespace HolyAngelMaternitySystem
     public partial class WelcomePage : Page
     {
         ObservableCollection<PatientRecord> records = new ObservableCollection<PatientRecord>();
+        QueueSystem qs = new QueueSystem();
         public WelcomePage()
         {
             InitializeComponent();
             lvPatientInfo.ItemsSource = records;
             fillList();
+            qs.Show();
         }
 
         private void fillList()
@@ -74,6 +76,70 @@ namespace HolyAngelMaternitySystem
                     }
                 }
             }
+        }
+
+        private void LblReset_PreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            fillList();
+            txtFullName.Text = null;
+            txtPatientID.Text = null;
+        }
+
+        private void LblSearch_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtPatientID.Text))
+            {
+                MessageBox.Show("Please enter patient ID");
+                txtPatientID.Focus();
+            }
+            else
+            {
+                SqlConnection conn = DBUtils.GetDBConnection();
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand("SELECT firstName, lastName from tblPersonalInfo where patientID = @patientID", conn))
+                {
+                    cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+
+                            while (reader.Read())
+                            {
+
+                                int firstNameIndex = reader.GetOrdinal("firstName");
+                                string firstName = Convert.ToString(reader.GetValue(firstNameIndex));
+
+                                int lastNameIndex = reader.GetOrdinal("lastName");
+                                string lastName = Convert.ToString(reader.GetValue(lastNameIndex));
+
+                                txtFullName.Text = firstName + " " + lastName;
+
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Patient does not exist");
+                        }
+                    }
+                }
+            }
+        }
+
+        private void LblPatientSearch_PreviewMouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            PatientList pl = new PatientList();
+            pl.Show();
+        }
+
+        private void BtnAddQueue_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnRemoveLast_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

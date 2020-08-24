@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Documents;
 using NLog;
 namespace HolyAngelMaternitySystem
 {
@@ -32,6 +33,7 @@ namespace HolyAngelMaternitySystem
         {
             if (string.IsNullOrEmpty(txtPatientID.Text))
             {
+                MessageBox.Show("Please enter patient ID");
                 txtPatientID.Focus();
             }
             else
@@ -143,6 +145,7 @@ namespace HolyAngelMaternitySystem
             txtAOG.Text = null;
             txtUltrasound.Text = null;
             txtLMP.Text = null;
+            txtOBIndex.Document.Blocks.Clear();
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
@@ -202,6 +205,51 @@ namespace HolyAngelMaternitySystem
                                     MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
                                     Log = LogManager.GetLogger("*");
                                     Log.Error(ex, "Query Error");
+                                }
+                            }
+
+                            string obIndex = new TextRange(txtOBIndex.Document.ContentStart, txtOBIndex.Document.ContentEnd).Text;
+                            using (SqlCommand cmd = new SqlCommand("SELECT COUNT(1) from tblObIndex where obIndex = @obIndex and patientID = @patientID", conn))
+                            {
+                                cmd.Parameters.AddWithValue("@obIndex", obIndex);
+                                cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
+                                count = (int)cmd.ExecuteScalar();  
+                            }
+                            if (count > 0)
+                            {
+                                using (SqlCommand cmd = new SqlCommand("UPDATE tblObIndex set obIndex = @obIndex where patientID = patientId", conn))
+                                {
+                                    cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
+                                    cmd.Parameters.AddWithValue("@obIndex", obIndex);
+                                    try
+                                    {
+                                        cmd.ExecuteNonQuery();
+                                    }
+                                    catch(SqlException ex)
+                                    {
+                                        MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
+                                        Log = LogManager.GetLogger("*");
+                                        Log.Error(ex, "Query Error");
+                                    }
+
+                                }
+                            }
+                            else
+                            {
+                                using (SqlCommand cmd = new SqlCommand("INSERT into tblObIndex (patientID, obIndex) VALUES (@patientID, @obIndex)", conn))
+                                {
+                                    cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
+                                    cmd.Parameters.AddWithValue("@obIndex", obIndex);
+                                    try
+                                    {
+                                        cmd.ExecuteNonQuery();
+                                    }
+                                    catch (SqlException ex)
+                                    {
+                                        MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
+                                        Log = LogManager.GetLogger("*");
+                                        Log.Error(ex, "Query Error");
+                                    }
                                 }
                             }
                             break;

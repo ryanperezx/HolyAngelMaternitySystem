@@ -13,9 +13,7 @@
 
     <Grid>
         <TextBlock HorizontalAlignment="Left" Margin="25,10,0,0" TextWrapping="Wrap" Text="Add Patient Record" FontWeight="Bold" VerticalAlignment="Top"/>
-        <Label x:Name="lblReset" PreviewMouseLeftButtonDown="LblReset_PreviewMouseLeftButtonDown" VerticalAlignment="Top"  Height="50" HorizontalAlignment="Right"  Cursor="Hand"  Width="50">
-            <iconPacks:PackIconMaterial Kind="Refresh" Height="40" Width="40" Foreground="ForestGreen" HorizontalAlignment="Left"/>
-        </Label>
+
         <Label x:Name="lblPatientSearch" PreviewMouseLeftButtonUp="LblPatientSearch_PreviewMouseLeftButtonUp" VerticalAlignment="Top" HorizontalAlignment="Left" Height="30" Width="30" ToolTip="Display Patient List" Cursor="Hand" Margin="140,5,0,0">
             <iconPacks:PackIconMaterial Kind="AccountSearch" Height="20" Width="20" Foreground="ForestGreen" HorizontalAlignment="Left"/>
         </Label>
@@ -26,19 +24,27 @@
         </Label>
         <Label Content="Patient's Name:" HorizontalAlignment="Left" Margin="115,178,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtFullName" HorizontalAlignment="Left" Height="23" Margin="222,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196" IsReadOnly="True"/>
-        <Label Content="Date:" HorizontalAlignment="Left" Margin="115,233,0,0" VerticalAlignment="Top"/>
-        <DatePicker x:Name="txtDate" HorizontalAlignment="Left" Margin="222,233,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Weight:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="115,288,0,0"/>
-        <TextBox x:Name="txtWeight" HorizontalAlignment="Left" Height="22" Margin="222,288,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Blood Pressure:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="115,343,0,0"/>
-        <TextBox x:Name="txtBP" HorizontalAlignment="Left" Height="22" Margin="222,343,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label Content="LMP:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="115,395,0,0"/>
-        <TextBox x:Name="txtLMP" HorizontalAlignment="Left" Height="23" Margin="222,395,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label Content="AOG by LMP:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="115,446,0,0"/>
-        <TextBox x:Name="txtAOG" HorizontalAlignment="Left" Height="22" Margin="222,446,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="btnSave" Click="BtnSave_Click" Content="Save" HorizontalAlignment="Left" Margin="176,573,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label Content="AOG by EUTZ:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="115,499,0,0"/>
-        <TextBox x:Name="txtUltrasound" HorizontalAlignment="Left" Height="22" Margin="222,499,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Date:" HorizontalAlignment="Left" Margin="115,227,0,0" VerticalAlignment="Top"/>
+        <DatePicker x:Name="txtDate" HorizontalAlignment="Left" Margin="222,227,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Weight:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="115,276,0,0"/>
+        <TextBox x:Name="txtWeight" HorizontalAlignment="Left" Height="22" Margin="222,276,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Blood Pressure:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="115,324,0,0"/>
+        <TextBox x:Name="txtBP" HorizontalAlignment="Left" Height="22" Margin="222,322,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="LMP:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="115,368,0,0"/>
+        <TextBox x:Name="txtLMP" HorizontalAlignment="Left" Height="23" Margin="222,367,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="AOG by LMP:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="115,414,0,0"/>
+        <TextBox x:Name="txtAOG" HorizontalAlignment="Left" Height="22" Margin="222,414,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="AOG by EUTZ:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="114,463,0,0"/>
+        <TextBox x:Name="txtUltrasound" HorizontalAlignment="Left" Height="22" Margin="221,463,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="OB-Index:" HorizontalAlignment="Left" Margin="38,547,0,0" VerticalAlignment="Top"/>
+        <RichTextBox x:Name="txtOBIndex" HorizontalAlignment="Left" Height="100" Margin="116,516,0,0" VerticalAlignment="Top" Width="301">
+            <RichTextBox.Resources>
+                <Style TargetType="{x:Type Paragraph}">
+                    <Setter Property="Margin" Value="0"/>
+                </Style>
+            </RichTextBox.Resources>
+        </RichTextBox>
+        <Button x:Name="btnSave" Click="BtnSave_Click" Content="Save" HorizontalAlignment="Left" Margin="189,639,0,0" VerticalAlignment="Top" Width="120"/>
         <DataGrid x:Name="dgList" HorizontalAlignment="Right" Height="560" Width="820" VerticalAlignment="Top" ItemsSource="{Binding}" Margin="0,92,34,0" AutoGenerateColumns="False" CanUserAddRows="False" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Date" Binding="{Binding date}" Width="120" IsReadOnly="True"/>
@@ -47,7 +53,6 @@
                 <DataGridTextColumn Header="LMP" Binding="{Binding lmp}" IsReadOnly="True" Width="120 "/>
                 <DataGridTextColumn Header="AOG by LMP" Binding="{Binding aog}" Width="120" IsReadOnly="True"/>
                 <DataGridTextColumn Header="AOG by EUTZ" Binding="{Binding eut}" Width="120" IsReadOnly="True"/>
-
             </DataGrid.Columns>
         </DataGrid>
 

@@ -42,7 +42,13 @@
                     <TextBox x:Name="txt1stCorpus" HorizontalAlignment="Left" Height="23" Margin="111,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                     <Label Content="EDC:" HorizontalAlignment="Left" Margin="16,135,0,0" VerticalAlignment="Top"/>
                     <TextBox x:Name="txt1stTriEDC" HorizontalAlignment="Left" Height="23" Margin="111,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                    <RichTextBox x:Name="txt1stOthers" Controls:TextBoxHelper.Watermark="Input other remarks here.." HorizontalAlignment="Left" Height="100"  VerticalAlignment="Top" Width="363" Margin="15,190,0,0"/>
+                    <RichTextBox x:Name="txt1stOthers" Controls:TextBoxHelper.Watermark="Input other remarks here.." HorizontalAlignment="Left" Height="100"  VerticalAlignment="Top" Width="363" Margin="15,190,0,0">
+                        <RichTextBox.Resources>
+                            <Style TargetType="{x:Type Paragraph}">
+                                <Setter Property="Margin" Value="0"/>
+                            </Style>
+                        </RichTextBox.Resources>
+                    </RichTextBox>
                 </Grid>
             </Expander>
             <Expander IsExpanded="{Binding SelectedExpander, ConverterParameter=2, Converter={StaticResource ExpanderToBooleanConverter}, Mode=TwoWay}" Width="400" Header="Ultrasound Report Obstetrics for 2nd and 3rd Trimester" HorizontalAlignment="Left" VerticalAlignment="Top">
@@ -59,12 +65,24 @@
                     <TextBox x:Name="txt2ndPlacenta" HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="78,141,0,0"/>
                     <Label Content="EDC:" HorizontalAlignment="Left" Margin="203,141,0,0" VerticalAlignment="Top"/>
                     <TextBox x:Name="txt2ndTriEDC" HorizontalAlignment="Left" Height="23" Margin="255,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                    <RichTextBox x:Name="txt2ndOthers" Controls:TextBoxHelper.Watermark="Input other remarks here.." HorizontalAlignment="Left" Height="100"  VerticalAlignment="Top" Width="363" Margin="15,190,0,0"/>
+                    <RichTextBox x:Name="txt2ndOthers" Controls:TextBoxHelper.Watermark="Input other remarks here.." HorizontalAlignment="Left" Height="100"  VerticalAlignment="Top" Width="363" Margin="15,190,0,0">
+                        <RichTextBox.Resources>
+                            <Style TargetType="{x:Type Paragraph}">
+                                <Setter Property="Margin" Value="0"/>
+                            </Style>
+                        </RichTextBox.Resources>
+                    </RichTextBox>
                 </Grid>
             </Expander>
             <Expander IsExpanded="{Binding SelectedExpander, ConverterParameter=3, Converter={StaticResource ExpanderToBooleanConverter}, Mode=TwoWay}" Width="400" Header="Ultrasound Report Gynecology" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <Grid Height="300">
-                    <RichTextBox x:Name="txtDiagnosis" Controls:TextBoxHelper.Watermark="Ultrasound Report Gynecology Diagnosis" FontSize="14" HorizontalAlignment="Left" Height="280"  VerticalAlignment="Top" Width="363" Margin="13,10,0,0"/>
+                    <RichTextBox x:Name="txtDiagnosis" Controls:TextBoxHelper.Watermark="Ultrasound Report Gynecology Diagnosis" FontSize="14" HorizontalAlignment="Left" Height="280"  VerticalAlignment="Top" Width="363" Margin="13,10,0,0">
+                        <RichTextBox.Resources>
+                            <Style TargetType="{x:Type Paragraph}">
+                                <Setter Property="Margin" Value="0"/>
+                            </Style>
+                        </RichTextBox.Resources>
+                    </RichTextBox>
                 </Grid>
             </Expander>
         </StackPanel>

@@ -206,6 +206,10 @@
     <Compile Include="DBUtils.cs" />
     <Compile Include="ExpanderListViewModel.cs" />
     <Compile Include="ExpanderToBooleanConverter.cs" />
+    <Compile Include="QueueSystem.xaml.cs">
+      <DependentUpon>QueueSystem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScreenHandler.cs" />
     <Compile Include="Ultrasound Report.xaml.cs">
       <DependentUpon>Ultrasound Report.xaml</DependentUpon>
     </Compile>
@@ -231,6 +235,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddPatientRecord.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="QueueSystem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
