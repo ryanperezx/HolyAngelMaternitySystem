@@ -139,13 +139,13 @@ namespace HolyAngelMaternitySystem
             records.Clear();
             txtPatientID.Text = null;
             txtBP.Text = null;
-            txtDate.Text = null;
             txtFullName.Text = null;
             txtWeight.Text = null;
             txtAOG.Text = null;
             txtUltrasound.Text = null;
             txtLMP.Text = null;
             txtOBIndex.Document.Blocks.Clear();
+            txtDate.Text = DateTime.Today.ToString();
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)

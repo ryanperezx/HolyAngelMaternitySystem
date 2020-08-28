@@ -62,7 +62,6 @@ namespace HolyAngelMaternitySystem
 
                                 txtAge.Text = Convert.ToString(Math.Abs(Convert.ToDateTime(txtBirthDate.Text).Year - DateTime.Today.Year) - 1);
 
-
                                 txtFullName.Text = firstName + " " + lastName;
 
                             }
@@ -81,7 +80,7 @@ namespace HolyAngelMaternitySystem
         {
             SqlConnection conn = DBUtils.GetDBConnection();
             conn.Open();
-            using (SqlCommand cmd = new SqlCommand("SELECT * from tblPatientRecord where patientID = @patientID", conn))
+            using (SqlCommand cmd = new SqlCommand("SELECT * from tblPatientRecord pr LEFT JOIN tblObIndex oi on pr.patientID = oi.patientID where pr.patientID = @patientID", conn))
             {
                 cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
                 using (SqlDataReader reader = cmd.ExecuteReader())
@@ -112,6 +111,9 @@ namespace HolyAngelMaternitySystem
                             int fhtIndex = reader.GetOrdinal("fht");
                             string fht = Convert.ToString(reader.GetValue(fhtIndex));
 
+                            int obIndexIndex = reader.GetOrdinal("obIndex");
+                            string obIndex = Convert.ToString(reader.GetValue(obIndexIndex));
+
                             int diagnosisIndex = reader.GetOrdinal("diagnosis");
                             string diagnosis = Convert.ToString(reader.GetValue(diagnosisIndex));
 
@@ -120,6 +122,9 @@ namespace HolyAngelMaternitySystem
 
                             int eutIndex = reader.GetOrdinal("earlyUltrasound");
                             string eut = Convert.ToString(reader.GetValue(eutIndex));
+
+                            int lmpIndex = reader.GetOrdinal("LMP");
+                            string lmp = Convert.ToString(reader.GetValue(lmpIndex));
 
                             int ultrasoundReportIndex = reader.GetOrdinal("ultrasoundReport");
                             string ultrasoundReport = Convert.ToString(reader.GetValue(ultrasoundReportIndex));
@@ -139,6 +144,8 @@ namespace HolyAngelMaternitySystem
                                 fh = fh,
                                 date = date,
                                 eut = eut,
+                                lmp = lmp,
+                                obIndex = obIndex,
                                 diagnosis = diagnosis,
                                 treatment = treatment,
                                 findings = findings,

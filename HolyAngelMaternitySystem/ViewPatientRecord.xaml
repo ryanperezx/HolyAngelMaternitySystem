@@ -47,6 +47,7 @@
                     <GridViewColumn Header="FHT(bpm)" DisplayMemberBinding="{Binding fht}" Width="80"/>
                     <GridViewColumn Header="AOG by LMP" DisplayMemberBinding="{Binding aog}" Width="100" />
                     <GridViewColumn Header="AOG by EUTZ" DisplayMemberBinding="{Binding eut}" Width="100"/>
+                    <GridViewColumn Header="OB Index" DisplayMemberBinding="{Binding obIndex}" Width="100"/> 
                     <GridViewColumn Header="Diagnosis" DisplayMemberBinding="{Binding diagnosis}" Width="100" />
                     <GridViewColumn Header="Treatment" DisplayMemberBinding="{Binding treatment}" Width="100"/>
                     <GridViewColumn Header="OB/ Gyne History/ P.E/ Laboratory Findings" DisplayMemberBinding="{Binding findings}" />

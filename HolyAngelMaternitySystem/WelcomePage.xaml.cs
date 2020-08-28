@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using System.Windows;
 using System.Windows.Controls;
-
+using System.Linq;
 
 namespace HolyAngelMaternitySystem
 {
@@ -13,6 +13,8 @@ namespace HolyAngelMaternitySystem
     public partial class WelcomePage : Page
     {
         ObservableCollection<PatientRecord> records = new ObservableCollection<PatientRecord>();
+        ObservableCollection<PatientRecord> pationtList = new ObservableCollection<PatientRecord>();
+    
         QueueSystem qs = new QueueSystem();
         public WelcomePage()
         {
@@ -131,15 +133,57 @@ namespace HolyAngelMaternitySystem
             PatientList pl = new PatientList();
             pl.Show();
         }
-
+        int i = 1; //for number of patients
         private void BtnAddQueue_Click(object sender, RoutedEventArgs e)
         {
+            if(qs.patientList.Count == 0)
+            {
+                qs.txtCurrent.Text = txtFullName.Text;
+            }
 
+            qs.patientList.Add(new PatientRecord
+            {
+                i = i,
+                patientID = txtPatientID.Text,
+                fullName = txtFullName.Text
+            });
+
+            if (qs.patientList.Count > 1 && string.IsNullOrEmpty(qs.txtNext.Text))
+            {
+                qs.txtNext.Text = qs.patientList[i-1].fullName;
+            }
+
+            i++;
         }
 
         private void BtnRemoveLast_Click(object sender, RoutedEventArgs e)
         {
+            if (qs.patientList.Count == 0){
+                MessageBox.Show("Queue is empty");
+                qs.txtCurrent.Text = null;
+                i = 0;
+            }
+            else
+            {
+                qs.patientList.RemoveAt(0);
+                var found = qs.patientList.FirstOrDefault(x => x.i == i - 1);
+                if(found != null && !string.IsNullOrEmpty(qs.txtNext.Text) && qs.patientList.Count != 0) //meaning patientList at i - 1 exist.
+                {
+                    qs.txtCurrent.Text = qs.txtNext.Text;
+                    qs.txtNext.Text = found.fullName;
+                }
+                else
+                {
+                    qs.txtCurrent.Text = qs.txtNext.Text;
+                    qs.txtNext.Text = null;
+                }
+                i--;
+                if (i < 0)
+                    i = 0;
 
+            }
         }
+
+
     }
 }

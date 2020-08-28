@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HolyAngelMaternitySystem
 {
-   class PatientRecord
+   public class PatientRecord
     {
 
         //patient basic info
@@ -156,6 +156,7 @@ namespace HolyAngelMaternitySystem
             set;
         }
 
+        
 
     }
 }

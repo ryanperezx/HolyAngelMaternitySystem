@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Forms;
+using System.Collections.ObjectModel;
 
 namespace HolyAngelMaternitySystem
 {
@@ -9,9 +10,11 @@ namespace HolyAngelMaternitySystem
     /// </summary>
     public partial class QueueSystem : Window
     {
+        public ObservableCollection<PatientRecord> patientList = new ObservableCollection<PatientRecord>();
         public QueueSystem()
         {
             InitializeComponent();
+            lvQueue.ItemsSource = patientList;
         }
 
         private void ShowOnMonitor(int monitor, Window window)
@@ -33,5 +36,6 @@ namespace HolyAngelMaternitySystem
             ShowOnMonitor(1, senderWindow);
             senderWindow.WindowState = WindowState.Maximized;
         }
+
     }
 }

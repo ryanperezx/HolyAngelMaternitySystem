@@ -128,7 +128,7 @@ namespace HolyAngelMaternitySystem
             txtPatientID.Text = null;
             cmbDiagnosis.Text = null;
             cmbTreatment.Text = null;
-            txtDate.Text = null;
+            txtDate.Text = DateTime.Today.ToString();
             cmbDiagnosis.SelectedIndex = -1;
             cmbTreatment.SelectedIndex = -1;
             txtFindings.Document.Blocks.Clear();
@@ -136,14 +136,13 @@ namespace HolyAngelMaternitySystem
             txtFHT.Text = null;
             populateTreatment();
             populateDiagnosis();
-
         }
 
         private void fillList()
         {
             SqlConnection conn = DBUtils.GetDBConnection();
             conn.Open();
-            using (SqlCommand cmd = new SqlCommand("SELECT * from tblPatientRecord where patientID = @patientID", conn))
+            using (SqlCommand cmd = new SqlCommand("SELECT * from tblPatientRecord pr LEFT JOIN tblObIndex oi on pr.patientID = oi.patientID where pr.patientID = @patientID ", conn))
             {
                 cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
                 using (SqlDataReader reader = cmd.ExecuteReader())
