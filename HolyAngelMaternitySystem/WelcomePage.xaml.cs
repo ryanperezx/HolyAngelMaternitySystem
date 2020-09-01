@@ -136,24 +136,41 @@ namespace HolyAngelMaternitySystem
         int i = 1; //for number of patients
         private void BtnAddQueue_Click(object sender, RoutedEventArgs e)
         {
-            if(qs.patientList.Count == 0)
+            if(string.IsNullOrEmpty(txtPatientID.Text) && string.IsNullOrEmpty(txtPatientID.Text))
             {
-                qs.txtCurrent.Text = txtFullName.Text;
+                MessageBox.Show("Patient ID or/and patient name is empty");
+            }
+            else
+            {
+                var found = qs.patientList.FirstOrDefault(x => x.patientID == txtPatientID.Text && x.fullName == txtFullName.Text);
+
+                if(found == null)
+                {
+                    if (qs.patientList.Count == 0)
+                    {
+                        qs.txtCurrent.Text = txtFullName.Text;
+                    }
+
+                    qs.patientList.Add(new PatientRecord
+                    {
+                        i = i,
+                        patientID = txtPatientID.Text,
+                        fullName = txtFullName.Text
+                    });
+
+                    if (qs.patientList.Count > 1 && string.IsNullOrEmpty(qs.txtNext.Text))
+                    {
+                        qs.txtNext.Text = qs.patientList[i - 1].fullName;
+                    }
+                    i++;
+
+                }
+                else
+                {
+                    MessageBox.Show("Patient is already on the Queue");
+                }
             }
 
-            qs.patientList.Add(new PatientRecord
-            {
-                i = i,
-                patientID = txtPatientID.Text,
-                fullName = txtFullName.Text
-            });
-
-            if (qs.patientList.Count > 1 && string.IsNullOrEmpty(qs.txtNext.Text))
-            {
-                qs.txtNext.Text = qs.patientList[i-1].fullName;
-            }
-
-            i++;
         }
 
         private void BtnRemoveLast_Click(object sender, RoutedEventArgs e)
