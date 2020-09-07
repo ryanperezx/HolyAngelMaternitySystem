@@ -274,7 +274,12 @@ namespace HolyAngelMaternitySystem
         private void BtnOBIndex_Click(object sender, RoutedEventArgs e)
         {
             string obIndex = new TextRange(txtOBIndex.Document.ContentStart, txtOBIndex.Document.ContentEnd).Text;
-            if (string.IsNullOrEmpty(obIndex)){
+            if (string.IsNullOrEmpty(txtPatientID.Text) && string.IsNullOrEmpty(txtFullName.Text))
+            {
+                MessageBox.Show("Please search for the patient ID first.");
+                txtPatientID.Focus();
+            }
+            else if (string.IsNullOrEmpty(obIndex)){
                 MessageBox.Show("OB-Index field is empty");
                 txtOBIndex.Focus();
             }
