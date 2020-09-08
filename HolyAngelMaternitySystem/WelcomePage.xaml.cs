@@ -178,7 +178,7 @@ namespace HolyAngelMaternitySystem
             if (qs.patientList.Count == 0){
                 MessageBox.Show("Queue is empty");
                 qs.txtCurrent.Text = null;
-                i = 0;
+                i = 1;
             }
             else
             {
@@ -196,7 +196,7 @@ namespace HolyAngelMaternitySystem
                 }
                 i--;
                 if (i < 0)
-                    i = 0;
+                    i = 1;
 
             }
         }
