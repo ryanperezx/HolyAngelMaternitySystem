@@ -9,16 +9,23 @@
         WindowState="Maximized"
         Title="QueueSystem" Height="768" Width="1366" Loaded="Window_Loaded">
     <Grid>
-        <ListView x:Name="lvQueue" FontSize="16" HorizontalAlignment="Left" Height="658" VerticalAlignment="Top" Width="400" Margin="10,10,0,0">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Queue no" DisplayMemberBinding="{Binding i}" Width="100"/>
-                    <GridViewColumn Header="Patient ID" DisplayMemberBinding="{Binding patientID}" Width="150"/>
-                    <GridViewColumn Header="Patient Name" DisplayMemberBinding="{Binding fullName}" Width="200"/>
-
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <DataGrid x:Name="lvQueue" FontSize="16" ItemsSource="{Binding}" HorizontalAlignment="Left" Height="658" VerticalAlignment="Top" Width="400" Margin="10,10,0,0" AutoGenerateColumns="False" CanUserAddRows="False">
+            <DataGrid.Resources>
+                <local:IndexConverter x:Key="IndexConverter" />
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Queue no" IsReadOnly="True">
+                    <DataGridTextColumn.Binding>
+                        <MultiBinding Converter="{StaticResource IndexConverter}">
+                            <Binding Mode="OneWay" RelativeSource="{RelativeSource AncestorType={x:Type DataGridRow}}"/>
+                            <Binding Mode="OneWay" RelativeSource="{RelativeSource AncestorType={x:Type DataGrid}}" Path="Items.Count"/>
+                        </MultiBinding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Patient ID" Binding="{Binding patientID}" Width="150" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Patient Name" Binding="{Binding fullName}" Width="200" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
         <TextBlock HorizontalAlignment="Left" Margin="501,72,0,0" TextWrapping="Wrap" FontSize="48"  Text="Currently processing:" VerticalAlignment="Top"/>
         <TextBox x:Name="txtCurrent" HorizontalAlignment="Left" Height="100" Margin="501,141,0,0" FontSize="64" TextWrapping="Wrap" VerticalAlignment="Top" Width="750"/>
 

@@ -2,6 +2,8 @@
 using System.Windows;
 using System.Windows.Forms;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Windows.Data;
 
 namespace HolyAngelMaternitySystem
 {

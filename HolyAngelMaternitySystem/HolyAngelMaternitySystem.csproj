@@ -220,6 +220,7 @@
     <Compile Include="DoctorAnalysis.xaml.cs">
       <DependentUpon>DoctorAnalysis.xaml</DependentUpon>
     </Compile>
+    <Compile Include="IndexConverter.cs" />
     <Compile Include="ViewPatientRecord.xaml.cs">
       <DependentUpon>ViewPatientRecord.xaml</DependentUpon>
     </Compile>

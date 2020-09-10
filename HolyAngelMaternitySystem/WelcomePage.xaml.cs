@@ -4,6 +4,8 @@ using System.Data.SqlClient;
 using System.Windows;
 using System.Windows.Controls;
 using System.Linq;
+using System.ComponentModel;
+using System.Windows.Data;
 
 namespace HolyAngelMaternitySystem
 {
@@ -133,7 +135,6 @@ namespace HolyAngelMaternitySystem
             PatientList pl = new PatientList();
             pl.Show();
         }
-        int i = 1; //for number of patients
         private void BtnAddQueue_Click(object sender, RoutedEventArgs e)
         {
             if(string.IsNullOrEmpty(txtPatientID.Text) && string.IsNullOrEmpty(txtPatientID.Text))
@@ -153,16 +154,14 @@ namespace HolyAngelMaternitySystem
 
                     qs.patientList.Add(new PatientRecord
                     {
-                        i = i,
                         patientID = txtPatientID.Text,
                         fullName = txtFullName.Text
                     });
 
                     if (qs.patientList.Count > 1 && string.IsNullOrEmpty(qs.txtNext.Text))
                     {
-                        qs.txtNext.Text = qs.patientList[i - 1].fullName;
+                        qs.txtNext.Text = qs.patientList[qs.patientList.Count - 1].fullName;
                     }
-                    i++;
 
                 }
                 else
@@ -178,26 +177,33 @@ namespace HolyAngelMaternitySystem
             if (qs.patientList.Count == 0){
                 MessageBox.Show("Queue is empty");
                 qs.txtCurrent.Text = null;
-                i = 1;
             }
             else
             {
                 qs.patientList.RemoveAt(0);
-                var found = qs.patientList.FirstOrDefault(x => x.i == i - 1);
-                if(found != null && !string.IsNullOrEmpty(qs.txtNext.Text) && qs.patientList.Count != 0) //meaning patientList at i - 1 exist.
+                int count = qs.patientList.Count;
+                if(count > 3)
                 {
+                    var found = qs.patientList.SkipWhile(item => item.fullName != qs.txtCurrent.Text).Skip(1).FirstOrDefault();
                     qs.txtCurrent.Text = qs.txtNext.Text;
                     qs.txtNext.Text = found.fullName;
                 }
-                else
+                else if(count == 2)
+                {
+                    var found = qs.patientList.SkipWhile(item => item.fullName != qs.txtNext.Text).Skip(1).FirstOrDefault();
+                    qs.txtCurrent.Text = qs.txtNext.Text;
+                    qs.txtNext.Text = found.fullName;
+                }
+                else if(count == 1)
                 {
                     qs.txtCurrent.Text = qs.txtNext.Text;
                     qs.txtNext.Text = null;
                 }
-                i--;
-                if (i < 0)
-                    i = 1;
-
+                else
+                {
+                    qs.txtCurrent.Text = null;
+                    qs.txtNext.Text = null;
+                }
             }
         }
     }
