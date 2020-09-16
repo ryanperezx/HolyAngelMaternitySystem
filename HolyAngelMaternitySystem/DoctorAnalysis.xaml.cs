@@ -101,6 +101,7 @@ namespace HolyAngelMaternitySystem
                                 string lastName = Convert.ToString(reader.GetValue(lastNameIndex));
 
                                 txtFullName.Text = firstName + " " + lastName;
+                                records.Clear();
 
                             }
                             fillList();
@@ -275,7 +276,7 @@ namespace HolyAngelMaternitySystem
             }
             else
             {
-                string sMessageBoxText = "Confirming update of Patient Record";
+                string sMessageBoxText = "PLEASE ADD TO LIST FIRST BEFORE SAVING" + "Confirming update of Patient Record";
                 string sCaption = "Update Patient Record";
                 MessageBoxButton btnMessageBox = MessageBoxButton.YesNoCancel;
                 MessageBoxImage icnMessageBox = MessageBoxImage.Warning;

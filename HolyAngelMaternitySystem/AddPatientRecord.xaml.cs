@@ -69,7 +69,9 @@ namespace HolyAngelMaternitySystem
                                 txtUltrasound.Text = null;
                                 txtLMP.Text = null;
 
-                                computeAgeOfGestation();
+                                records.Clear();
+
+                                //computeAgeOfGestation();
                             }
                         }
                         else
@@ -103,24 +105,23 @@ namespace HolyAngelMaternitySystem
 
                         int dateIndex = reader.GetOrdinal("dateVisit");
                         DateTime date = Convert.ToDateTime(reader.GetValue(dateIndex));
-                    
 
-                        char[] delimiterChars = { ' ', '/'};
+
+                        char[] delimiterChars = { ' ', '/' };
                         string[] temp = aog.Split(delimiterChars);
-
                         double week = Convert.ToInt16(temp[0]);
                         double day = Convert.ToInt16(temp[1]);
 
                         double difference = (DateTime.Today - date).TotalDays;
 
-                        while(difference >= 7)
+                        while (difference >= 7)
                         {
                             week += 1;
                             difference -= 7;
                         }
                         day += difference;
 
-                        if(day >= 7)
+                        if (day >= 7)
                         {
                             week += 1;
                             day -= 7;
@@ -150,7 +151,7 @@ namespace HolyAngelMaternitySystem
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(txtPatientID.Text) || string.IsNullOrEmpty(txtFullName.Text) || string.IsNullOrEmpty(txtDate.Text) || string.IsNullOrEmpty(txtBP.Text) || string.IsNullOrEmpty(txtWeight.Text) || string.IsNullOrEmpty(txtAOG.Text))
+            if (string.IsNullOrEmpty(txtPatientID.Text) || string.IsNullOrEmpty(txtFullName.Text) || string.IsNullOrEmpty(txtDate.Text))
             {
                 MessageBox.Show("One or more fields are empty!");
             }
@@ -279,57 +280,77 @@ namespace HolyAngelMaternitySystem
                 MessageBox.Show("Please search for the patient ID first.");
                 txtPatientID.Focus();
             }
-            else if (string.IsNullOrEmpty(obIndex)){
+            else if (string.IsNullOrEmpty(obIndex))
+            {
                 MessageBox.Show("OB-Index field is empty");
                 txtOBIndex.Focus();
             }
             else
             {
-                int count = 0;
-                SqlConnection conn = DBUtils.GetDBConnection();
-                conn.Open();
-                using (SqlCommand cmd = new SqlCommand("SELECT COUNT(1) from tblObIndex where obIndex = @obIndex and patientID = @patientID", conn))
-                {
-                    cmd.Parameters.AddWithValue("@obIndex", obIndex);
-                    cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
-                    count = (int)cmd.ExecuteScalar();
-                }
-                if (count > 0)
-                {
-                    using (SqlCommand cmd = new SqlCommand("UPDATE tblObIndex set obIndex = @obIndex where patientID = patientId", conn))
-                    {
-                        cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
-                        cmd.Parameters.AddWithValue("@obIndex", obIndex);
-                        try
-                        {
-                            cmd.ExecuteNonQuery();
-                        }
-                        catch (SqlException ex)
-                        {
-                            MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
-                            Log = LogManager.GetLogger("*");
-                            Log.Error(ex, "Query Error");
-                        }
+                string sMessageBoxText = "Confirming Update/Adding OB Index";
+                string sCaption = "Save OB Index?";
+                MessageBoxButton btnMessageBox = MessageBoxButton.YesNoCancel;
+                MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
 
-                    }
-                }
-                else
+                MessageBoxResult dr = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+                switch (dr)
                 {
-                    using (SqlCommand cmd = new SqlCommand("INSERT into tblObIndex (patientID, obIndex) VALUES (@patientID, @obIndex)", conn))
-                    {
-                        cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
-                        cmd.Parameters.AddWithValue("@obIndex", obIndex);
-                        try
+                    case MessageBoxResult.Yes:
+                        int count = 0;
+                        SqlConnection conn = DBUtils.GetDBConnection();
+                        conn.Open();
+                        using (SqlCommand cmd = new SqlCommand("SELECT COUNT(1) from tblObIndex where patientID = @patientID", conn))
                         {
-                            cmd.ExecuteNonQuery();
+                            cmd.Parameters.AddWithValue("@obIndex", obIndex);
+                            cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
+                            count = (int)cmd.ExecuteScalar();
                         }
-                        catch (SqlException ex)
+                        if (count > 0)
                         {
-                            MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
-                            Log = LogManager.GetLogger("*");
-                            Log.Error(ex, "Query Error");
+                            using (SqlCommand cmd = new SqlCommand("UPDATE tblObIndex set obIndex = @obIndex where patientID = patientId", conn))
+                            {
+                                cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
+                                cmd.Parameters.AddWithValue("@obIndex", obIndex);
+                                try
+                                {
+                                    cmd.ExecuteNonQuery();
+                                    MessageBox.Show("Updated OB-Index Record");
+                                }
+                                catch (SqlException ex)
+                                {
+
+                                    MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
+                                    Log = LogManager.GetLogger("*");
+                                    Log.Error(ex, "Query Error");
+                                }
+
+                            }
                         }
-                    }
+                        else
+                        {
+                            using (SqlCommand cmd = new SqlCommand("INSERT into tblObIndex (patientID, obIndex) VALUES (@patientID, @obIndex)", conn))
+                            {
+                                cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
+                                cmd.Parameters.AddWithValue("@obIndex", obIndex);
+                                try
+                                {
+                                    cmd.ExecuteNonQuery();
+                                    MessageBox.Show("Added OB-Index Record");
+                                }
+                                catch (SqlException ex)
+                                {
+                                    MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
+                                    Log = LogManager.GetLogger("*");
+                                    Log.Error(ex, "Query Error");
+                                }
+                            }
+                        }
+                        break;
+                    case MessageBoxResult.No:
+                        return;
+                    case MessageBoxResult.Cancel:
+                        return;
+
                 }
             }
 

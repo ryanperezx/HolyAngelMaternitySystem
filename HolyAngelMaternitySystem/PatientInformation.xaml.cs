@@ -259,10 +259,22 @@ namespace HolyAngelMaternitySystem
 
             SqlConnection conn = DBUtils.GetDBConnection();
             conn.Open();
-            using (SqlCommand cmd = new SqlCommand("SELECT COUNT(patientID) from tblPersonalInfo", conn))
+            using (SqlCommand cmd = new SqlCommand("SELECT TOP(1) patientID from tblPersonalInfo ORDER BY id DESC", conn))
             {
-                int userCount = (int)cmd.ExecuteScalar();
-                txtPatientID.Text = Convert.ToString(year.Year) + "-" + (userCount + 1);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    reader.Read();
+                    int countIndex = reader.GetOrdinal("patientID");
+                    string count = Convert.ToString(reader.GetValue(countIndex));
+
+                    char[] delimiterChars = { '-'};
+                    string[] temp = count.Split(delimiterChars);
+
+                    double finalCount = Convert.ToInt16(temp[1]);
+                    txtPatientID.Text = Convert.ToString(year.Year) + "-" + (finalCount + 1);
+                }
+
+
             }
 
         }

@@ -64,6 +64,8 @@ namespace HolyAngelMaternitySystem
 
                                 txtFullName.Text = firstName + " " + lastName;
 
+                                records.Clear();
+
                             }
                             fillList();
                         }

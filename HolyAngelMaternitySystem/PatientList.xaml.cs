@@ -16,6 +16,58 @@ namespace HolyAngelMaternitySystem
         {
             InitializeComponent();
             lvPatientInfo.ItemsSource = records;
+
+            SqlConnection conn = DBUtils.GetDBConnection();
+            conn.Open();
+            using (SqlCommand cmd = new SqlCommand("SELECT patientID, firstName, lastName, homeAddress, civStatus, cellphoneNo, birthDate from tblPersonalInfo", conn))
+            {
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        records.Clear();
+                        while (reader.Read())
+                        {
+
+                            int patientIDIndex = reader.GetOrdinal("patientID");
+                            string patientID = Convert.ToString(reader.GetValue(patientIDIndex));
+
+                            int firstNameIndex = reader.GetOrdinal("firstName");
+                            string firstName = Convert.ToString(reader.GetValue(firstNameIndex));
+
+                            int lastNameIndex = reader.GetOrdinal("lastName");
+                            string lastName = Convert.ToString(reader.GetValue(lastNameIndex));
+
+                            int addressIndex = reader.GetOrdinal("homeAddress");
+                            string address = Convert.ToString(reader.GetValue(addressIndex));
+
+                            int statusIndex = reader.GetOrdinal("civStatus");
+                            string status = Convert.ToString(reader.GetValue(statusIndex));
+
+                            int cellNoIndex = reader.GetOrdinal("cellphoneNo");
+                            string cellNo = Convert.ToString(reader.GetValue(cellNoIndex));
+
+                            int birthDateIndex = reader.GetOrdinal("birthDate");
+                            string birthDate = Convert.ToString(reader.GetValue(birthDateIndex));
+
+                            int age = Math.Abs(Convert.ToDateTime(birthDate).Year - DateTime.Today.Year) - 1;
+                            records.Add(new PatientRecord
+                            {
+                                patientID = patientID,
+                                fullName = firstName + " " + lastName,
+                                address = address,
+                                status = status,
+                                contactNo = cellNo,
+                                birthDate = birthDate,
+                                age = age
+                            });
+
+
+                        }
+                    }
+                }
+            }
         }
 
         private void TxtPatientID_TextChanged(object sender, TextChangedEventArgs e)
@@ -87,7 +139,7 @@ namespace HolyAngelMaternitySystem
                 using (SqlCommand cmd = new SqlCommand("SELECT patientID, firstName, lastName, homeAddress, civStatus, cellphoneNo, birthDate from tblPersonalInfo where firstName LIKE @firstName and lastName LIKE @lastName", conn))
                 {
                     cmd.Parameters.AddWithValue("@firstName", '%' + txtFirstName.Text + '%');
-                    cmd.Parameters.AddWithValue("@lastName",  '%' + txtLastName.Text + '%');
+                    cmd.Parameters.AddWithValue("@lastName", '%' + txtLastName.Text + '%');
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {

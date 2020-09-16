@@ -128,7 +128,7 @@ namespace HolyAngelMaternitySystem
                                 txtFullName.Text = firstName + " " + lastName;
 
                                 count = 1;
-
+                                records.Clear();
                             }
                         }
                         else
