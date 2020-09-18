@@ -54,7 +54,7 @@ namespace HolyAngelMaternitySystem
 
         //patient record
 
-        public double weight
+        public string weight
         {
             get;
             set;

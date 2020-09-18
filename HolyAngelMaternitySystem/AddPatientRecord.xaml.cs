@@ -244,7 +244,7 @@ namespace HolyAngelMaternitySystem
                             string aog = Convert.ToString(reader.GetValue(aogIndex));
 
                             int weightIndex = reader.GetOrdinal("weight");
-                            double weight = Convert.ToDouble(reader.GetValue(weightIndex));
+                            string weight = Convert.ToString(reader.GetValue(weightIndex));
 
                             int bloodPressureIndex = reader.GetOrdinal("bloodPressure");
                             string bloodPressure = Convert.ToString(reader.GetValue(bloodPressureIndex));
