@@ -34,10 +34,12 @@
         <TextBox x:Name="txtBP" HorizontalAlignment="Left" Height="22" Margin="222,322,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label Content="LMP:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="115,368,0,0"/>
         <TextBox x:Name="txtLMP" HorizontalAlignment="Left" Height="23" Margin="222,367,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label Content="AOG by LMP:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="115,414,0,0"/>
-        <TextBox x:Name="txtAOG" HorizontalAlignment="Left" Height="22" Margin="222,414,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label Content="AOG by EUTZ:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="114,463,0,0"/>
-        <TextBox x:Name="txtUltrasound" HorizontalAlignment="Left" Height="22" Margin="221,463,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="EDC by Ultrasound:" HorizontalAlignment="Left" Margin="105,413,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtEDCUltrasound" HorizontalAlignment="Left" Height="23" Margin="222,413,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="AOG by LMP:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="26,460,0,0"/>
+        <TextBox x:Name="txtAOG" HorizontalAlignment="Left" Height="22" Margin="120,460,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="AOG by EUTZ:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="251,460,0,0"/>
+        <TextBox x:Name="txtUltrasound" HorizontalAlignment="Left" Height="22" Margin="355,460,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="btnSave" Click="BtnSave_Click" Content="Save" HorizontalAlignment="Left" Margin="222,512,0,0" VerticalAlignment="Top" Width="120"/>
         <Label Content="OB-Index:" HorizontalAlignment="Left" Margin="20,600,0,0" VerticalAlignment="Top"/>
         <RichTextBox x:Name="txtOBIndex" HorizontalAlignment="Left" Height="100" Margin="87,560,0,0" VerticalAlignment="Top" Width="301">
@@ -54,6 +56,7 @@
                 <DataGridTextColumn Header="Weight" Binding="{Binding weight}" IsReadOnly="True" Width="120"/>
                 <DataGridTextColumn Header="Blood Pressure" Binding="{Binding bloodPressure}" IsReadOnly="True" Width="120 "/>
                 <DataGridTextColumn Header="LMP" Binding="{Binding lmp}" IsReadOnly="True" Width="120 "/>
+                <DataGridTextColumn Header="EDC by Ultrasound" Binding="{Binding edcByUltrasound}" IsReadOnly="True" Width="150"/>
                 <DataGridTextColumn Header="AOG by LMP" Binding="{Binding aog}" Width="120" IsReadOnly="True"/>
                 <DataGridTextColumn Header="AOG by EUTZ" Binding="{Binding eut}" Width="120" IsReadOnly="True"/>
             </DataGrid.Columns>

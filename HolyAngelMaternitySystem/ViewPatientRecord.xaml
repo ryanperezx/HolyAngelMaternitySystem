@@ -43,6 +43,7 @@
                     <GridViewColumn Header="Date" DisplayMemberBinding="{Binding date}" Width="120"/>
                     <GridViewColumn Header="Weight" DisplayMemberBinding="{Binding weight}" Width="100"/>
                     <GridViewColumn Header="Blood Pressure" DisplayMemberBinding="{Binding bloodPressure}" Width="120 "/>
+                    <GridViewColumn Header="Vaccination" DisplayMemberBinding="{Binding vaccination}" Width="120"/>
                     <GridViewColumn Header="FH(cm)" DisplayMemberBinding="{Binding fh}" Width="80"/>
                     <GridViewColumn Header="FHT(bpm)" DisplayMemberBinding="{Binding fht}" Width="80"/>
                     <GridViewColumn Header="AOG by LMP" DisplayMemberBinding="{Binding aog}" Width="100" />

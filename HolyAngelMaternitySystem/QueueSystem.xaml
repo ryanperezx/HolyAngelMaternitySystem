@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         WindowStartupLocation="Manual"
         WindowState="Maximized"
-        Title="QueueSystem" Height="768" Width="1366" Loaded="Window_Loaded">
+        Title="Queue System" Height="768" Width="1366" Loaded="Window_Loaded">
     <Grid>
         <DataGrid x:Name="lvQueue" FontSize="16" ItemsSource="{Binding}" HorizontalAlignment="Left" Height="658" VerticalAlignment="Top" Width="400" Margin="10,10,0,0" AutoGenerateColumns="False" CanUserAddRows="False">
             <DataGrid.Resources>

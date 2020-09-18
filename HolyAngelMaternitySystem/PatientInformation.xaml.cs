@@ -42,6 +42,11 @@ namespace HolyAngelMaternitySystem
             txtFirstName.Text = null;
             txtLastName.Text = null;
             cmbCivStatus.SelectedIndex = -1;
+
+            btnAdd.IsEnabled = false;
+            btnEdit.IsEnabled = false;
+            btnDelete.IsEnabled = false;
+            btnSave.IsEnabled = true;
         }
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
@@ -322,6 +327,10 @@ namespace HolyAngelMaternitySystem
                                 txtFirstName.IsReadOnly = true;
                                 txtLastName.IsReadOnly = true;
 
+                                btnEdit.IsEnabled = true;
+                                btnDelete.IsEnabled = true;
+                                btnAdd.IsEnabled = false;
+
                                 state = 2;
                             }
                         }
@@ -349,6 +358,10 @@ namespace HolyAngelMaternitySystem
             txtPatientID.Text = null;
             txtCellNo.Text = null;
 
+            btnAdd.IsEnabled = true;
+            btnEdit.IsEnabled = false;
+            btnSave.IsEnabled = false;
+            btnDelete.IsEnabled = false;
         }
 
         private void LblReset_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)

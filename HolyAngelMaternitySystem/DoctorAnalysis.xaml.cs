@@ -129,9 +129,11 @@ namespace HolyAngelMaternitySystem
             txtPatientID.Text = null;
             cmbDiagnosis.Text = null;
             cmbTreatment.Text = null;
+            cmbVaccination.Text = null;
             txtDate.Text = DateTime.Today.ToString();
             cmbDiagnosis.SelectedIndex = -1;
             cmbTreatment.SelectedIndex = -1;
+            cmbVaccination.SelectedIndex = -1;
             txtFindings.Document.Blocks.Clear();
             txtFH.Text = null;
             txtFHT.Text = null;
@@ -186,6 +188,12 @@ namespace HolyAngelMaternitySystem
                             int eutIndex = reader.GetOrdinal("earlyUltrasound");
                             string eut = Convert.ToString(reader.GetValue(eutIndex));
 
+                            int edcByUltrasoundIndex = reader.GetOrdinal("edcByUltrasound");
+                            string edcByUltrasound = Convert.ToString(reader.GetValue(edcByUltrasoundIndex));
+
+                            int vaccinationIndex = reader.GetOrdinal("vaccination");
+                            string vaccination = Convert.ToString(reader.GetValue(vaccinationIndex));
+
                             int lmpIndex = reader.GetOrdinal("LMP");
                             string lmp = Convert.ToString(reader.GetValue(lmpIndex));
 
@@ -211,6 +219,8 @@ namespace HolyAngelMaternitySystem
                                 obIndex = obIndex,
                                 diagnosis = diagnosis,
                                 treatment = treatment,
+                                edcByUltrasound = edcByUltrasound,
+                                vaccination = vaccination,
                                 findings = findings,
                                 ultrasoundReport = ultrasoundReport,
                                 reportType = reportType,
@@ -276,7 +286,7 @@ namespace HolyAngelMaternitySystem
             }
             else
             {
-                string sMessageBoxText = "PLEASE ADD TO LIST FIRST BEFORE SAVING" + "Confirming update of Patient Record";
+                string sMessageBoxText = "Confirming update of Patient Record";
                 string sCaption = "Update Patient Record";
                 MessageBoxButton btnMessageBox = MessageBoxButton.YesNoCancel;
                 MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
@@ -288,13 +298,14 @@ namespace HolyAngelMaternitySystem
                         SqlConnection conn = DBUtils.GetDBConnection();
                         conn.Open();
                         var found = records.FirstOrDefault(x => Convert.ToDateTime(txtDate.Text) == Convert.ToDateTime(x.date));
-                        using (SqlCommand cmd = new SqlCommand("UPDATE tblPatientRecord SET findings = @findings, diagnosis = @diagnosis, treatment = @treatment, fh = @fh, fht = @fht where patientID = @patientID and dateVisit = @date", conn))
+                        using (SqlCommand cmd = new SqlCommand("UPDATE tblPatientRecord SET findings = @findings, diagnosis = @diagnosis, treatment = @treatment, fh = @fh, fht = @fht, vaccination = @vaccination where patientID = @patientID and dateVisit = @date", conn))
                         {
                             cmd.Parameters.AddWithValue("@findings", found.findings);
                             cmd.Parameters.AddWithValue("@diagnosis", found.diagnosis);
                             cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
                             cmd.Parameters.AddWithValue("@treatment", found.treatment);
                             cmd.Parameters.AddWithValue("@date", found.date);
+                            cmd.Parameters.AddWithValue("@vaccination", found.vaccination);
                             cmd.Parameters.AddWithValue("@fh", found.fh);
                             cmd.Parameters.AddWithValue("@fht", found.fht);
                             try

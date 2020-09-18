@@ -144,6 +144,7 @@ namespace HolyAngelMaternitySystem
             txtWeight.Text = null;
             txtAOG.Text = null;
             txtUltrasound.Text = null;
+            txtEDCUltrasound.Text = null;
             txtLMP.Text = null;
             txtOBIndex.Document.Blocks.Clear();
             txtDate.Text = DateTime.Today.ToString();
@@ -184,12 +185,13 @@ namespace HolyAngelMaternitySystem
                     switch (dr)
                     {
                         case MessageBoxResult.Yes:
-                            using (SqlCommand cmd = new SqlCommand("INSERT into tblPatientRecord (patientID, dateVisit, bloodPressure, weight, ageOfGestation, earlyUltrasound, LMP) VALUES (@patientID, @date, @bloodPressure, @weight, @aog, @eut, @LMP)", conn))
+                            using (SqlCommand cmd = new SqlCommand("INSERT into tblPatientRecord (patientID, dateVisit, bloodPressure, weight, ageOfGestation, earlyUltrasound, LMP, edcByUltrasound) VALUES (@patientID, @date, @bloodPressure, @weight, @aog, @eut, @LMP, @edcByUltrasound)", conn))
                             {
                                 cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
                                 cmd.Parameters.AddWithValue("@date", txtDate.Text);
                                 cmd.Parameters.AddWithValue("@bloodPressure", txtBP.Text);
                                 cmd.Parameters.AddWithValue("@weight", txtWeight.Text);
+                                cmd.Parameters.AddWithValue("@edcByUltrasound", txtEDCUltrasound.Text);
                                 cmd.Parameters.AddWithValue("@aog", txtAOG.Text);
                                 cmd.Parameters.AddWithValue("@eut", txtUltrasound.Text);
                                 cmd.Parameters.AddWithValue("@LMP", txtLMP.Text);
@@ -228,7 +230,7 @@ namespace HolyAngelMaternitySystem
         {
             SqlConnection conn = DBUtils.GetDBConnection();
             conn.Open();
-            using (SqlCommand cmd = new SqlCommand("SELECT dateVisit, weight, bloodPressure, ageOfGestation, earlyUltrasound, LMP from tblPatientRecord where patientID = @patientID", conn))
+            using (SqlCommand cmd = new SqlCommand("SELECT dateVisit, weight, bloodPressure, ageOfGestation, earlyUltrasound, LMP, edcByUltrasound from tblPatientRecord where patientID = @patientID", conn))
             {
                 cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
                 using (SqlDataReader reader = cmd.ExecuteReader())
@@ -256,12 +258,16 @@ namespace HolyAngelMaternitySystem
                             int lmpIndex = reader.GetOrdinal("LMP");
                             string lmp = Convert.ToString(reader.GetValue(lmpIndex));
 
+                            int edcByUltrasoundIndex = reader.GetOrdinal("edcByUltrasound");
+                            string edcByUltrasound = Convert.ToString(reader.GetValue(edcByUltrasoundIndex));
+
                             records.Add(new PatientRecord
                             {
                                 aog = aog,
                                 eut = eut,
                                 weight = weight,
                                 bloodPressure = bloodPressure,
+                                edcByUltrasound = edcByUltrasound,
                                 date = date.ToString("MM/dd/yyyy"),
                                 lmp = lmp
                             });

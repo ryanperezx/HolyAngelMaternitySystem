@@ -90,6 +90,12 @@ namespace HolyAngelMaternitySystem
             set;
         }
 
+        public string edcByUltrasound
+        {
+            get;
+            set;
+        }
+
         //doctor analysis
 
         public string diagnosis
@@ -117,6 +123,12 @@ namespace HolyAngelMaternitySystem
         }
 
         public string fht
+        {
+            get;
+            set;
+        }
+
+        public string vaccination
         {
             get;
             set;

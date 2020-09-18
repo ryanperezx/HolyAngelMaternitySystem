@@ -41,8 +41,8 @@
         <Label Content="Cellphone No.:" HorizontalAlignment="Left" Margin="115,380,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtCellNo"  HorizontalAlignment="Left" Height="23" Margin="210,380 ,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="130"/>
         <Button x:Name="btnAdd" Click="BtnAdd_Click" Content="ADD" HorizontalAlignment="Left" Margin="148,464,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="btnSave" Click="BtnSave_Click" Content="Save" HorizontalAlignment="Left" Margin="258,464,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button ToolTip="Only address, birthdate, status, and cellphone number can be updated" x:Name="btnEdit" Click="BtnEdit_Click" Content="Edit" HorizontalAlignment="Left" Margin="368,464,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="btnDelete" Click="BtnDelete_Click" Content="Delete" HorizontalAlignment="Left" Margin="481,464,0,0" VerticalAlignment="Top" Width="74"/>
+        <Button x:Name="btnSave" Click="BtnSave_Click" Content="Save" HorizontalAlignment="Left" Margin="258,464,0,0" VerticalAlignment="Top" Width="75" IsEnabled="false"/>
+        <Button ToolTip="Only address, birthdate, status, and cellphone number can be updated" x:Name="btnEdit" Click="BtnEdit_Click" Content="Edit" HorizontalAlignment="Left" Margin="368,464,0,0" VerticalAlignment="Top" Width="75"  IsEnabled="false"/>
+        <Button x:Name="btnDelete" Click="BtnDelete_Click" Content="Delete" HorizontalAlignment="Left" Margin="481,464,0,0" VerticalAlignment="Top" Width="74"  IsEnabled="false"/>
     </Grid>
 </Page>
