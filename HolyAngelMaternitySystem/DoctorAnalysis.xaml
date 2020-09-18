@@ -35,14 +35,21 @@
                 </Style>
             </RichTextBox.Resources>
         </RichTextBox>
-        <Label Content="Vaccination:" HorizontalAlignment="Left" Margin="115,396,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="cmbVaccination" HorizontalAlignment="Left" Height="23" Margin="210,396,0,0" VerticalAlignment="Top" Width="120">
-            <ComboBoxItem>Tetanus Toxoid</ComboBoxItem>
+        <Label Content="Vaccinations Given :" HorizontalAlignment="Left" Margin="115,396,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cmbVaccination" HorizontalAlignment="Left" Height="23" Margin="235,396,0,0" VerticalAlignment="Top" Width="120">
+            <ComboBoxItem>Td1</ComboBoxItem>
+            <ComboBoxItem>Td2</ComboBoxItem>
+            <ComboBoxItem>Tdap</ComboBoxItem>
+            <ComboBoxItem>TT</ComboBoxItem>
         </ComboBox>
-        <Label Content="FH:" HorizontalAlignment="Left" Margin="115,441,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtFH" HorizontalAlignment="Left" Height="23" Margin="210,441,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label Content="FHT:" HorizontalAlignment="Left" Margin="115,485,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtFHT" HorizontalAlignment="Left" Height="23" Margin="210,485,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
+        <Label Content="FH:" HorizontalAlignment="Left" Margin="55,442,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtFH" HorizontalAlignment="Left" Height="23" Margin="110,442,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="FHT:" HorizontalAlignment="Left" Margin="55,486,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtFHT" HorizontalAlignment="Left" Height="23" Margin="110,486,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
+        <Label Content="AOG by EUTZ:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="246,442,0,0"/>
+        <Label Content="EDC by EUTZ:" HorizontalAlignment="Left" Margin="246,486,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtUltrasound" HorizontalAlignment="Left" Height="22" Margin="345,442,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>   
+        <TextBox x:Name="txtEDCUltrasound" HorizontalAlignment="Left" Height="23" Margin="345,486,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <ComboBox x:Name="cmbDiagnosis" IsEditable="True"  Controls:TextBoxHelper.Watermark="Write diagnosis here.." HorizontalAlignment="Left" Height="28" VerticalAlignment="Top" Width="400" Margin="54,536,0,0"/>
         <ComboBox x:Name="cmbTreatment" IsEditable="True"  Controls:TextBoxHelper.Watermark="Write treatment here.." HorizontalAlignment="Left" Height="28" VerticalAlignment="Top" Width="400" Margin="54,584,0,0"/>
         <Button x:Name="BtnAdd" Content="Add to list" Click="BtnAdd_Click" HorizontalAlignment="Left" Margin="121,632,0,0" VerticalAlignment="Top" Width="100"/>
@@ -50,19 +57,20 @@
 
         <DataGrid x:Name="dgList" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,92,34,0"  Height="560" Width="820" AutoGenerateColumns="False" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Date" Binding="{Binding date }" Width="110" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Weight" Binding="{Binding weight}" IsReadOnly="True" Width="90"/>
-                <DataGridTextColumn Header="Blood Pressure" Binding="{Binding bloodPressure}" IsReadOnly="True" Width="120 "/>
-                <DataGridTextColumn Header="Vaccination" Binding="{Binding vaccination}" IsReadOnly="True" Width="120"/>
-                <DataGridTextColumn Header="FH(cm)" Binding="{Binding fh}" Width="80" IsReadOnly="True"/>
-                <DataGridTextColumn Header="FHT(bpm)" Binding="{Binding fht}" Width="80" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Date" Binding="{Binding date }" Width="90" IsReadOnly="True"/>
+                <DataGridTextColumn Header="WT" Binding="{Binding weight}" IsReadOnly="True" Width="50"/>
+                <DataGridTextColumn Header="BP" Binding="{Binding bloodPressure}" IsReadOnly="True" Width="60"/>
+                <DataGridTextColumn Header="Vaccination" Binding="{Binding vaccination}" IsReadOnly="True" Width="100"/>
+                <DataGridTextColumn Header="FH" Binding="{Binding fh}" Width="50" IsReadOnly="True"/>
+                <DataGridTextColumn Header="FHT" Binding="{Binding fht}" Width="50" IsReadOnly="True"/>
                 <DataGridTextColumn Header="LMP" Binding="{Binding lmp}" Width="100" IsReadOnly="True"/>
-                <DataGridTextColumn Header="EDC by Ultrasound" Binding="{Binding edcByUltrasound}" IsReadOnly="True" Width="150"/>
-                <DataGridTextColumn Header="AOG by LMP" Binding="{Binding aog}" Width="100" IsReadOnly="True"/>
-                <DataGridTextColumn Header="AOG by EUTZ" Binding="{Binding eut}" Width="100" IsReadOnly="True"/>
-                <DataGridTextColumn Header="OB-Index" Binding="{Binding obIndex}" IsReadOnly="True" Width="120"/>
-                <DataGridTextColumn Header="Diagnosis" Binding="{Binding diagnosis}" IsReadOnly="True" Width="120"/>
-                <DataGridTextColumn Header="Treatment" Binding="{Binding treatment}" IsReadOnly="True" Width="120"/>
+                <DataGridTextColumn Header="EDC &#x0a;Ultrasound" Binding="{Binding edcByUltrasound}" IsReadOnly="True" Width="100"/>
+                <DataGridTextColumn Header="EDC &#x0a;LMP" Binding="{Binding edcByLMP}" IsReadOnly="True" Width="100"/>
+                <DataGridTextColumn Header="AOG &#x0a;LMP" Binding="{Binding aog}" Width="60" IsReadOnly="True"/>
+                <DataGridTextColumn Header="AOG &#x0a;EUTZ" Binding="{Binding eut}" Width="60" IsReadOnly="True"/>
+                <DataGridTextColumn Header="OB-Index" Binding="{Binding obIndex}" IsReadOnly="True" Width="150"/>
+                <DataGridTextColumn Header="Diagnosis" Binding="{Binding diagnosis}" IsReadOnly="True" Width="200"/>
+                <DataGridTextColumn Header="Treatment" Binding="{Binding treatment}" IsReadOnly="True" Width="200"/>
                 <DataGridTextColumn Header="OB/ Gyne History/ P.E/ Laboratory Findings" Binding="{Binding findings}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Report Type" Binding="{Binding reportType}" Width="200" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Ultrasound Report" Binding="{Binding ultrasoundReport}" Width="300" IsReadOnly="True"/>

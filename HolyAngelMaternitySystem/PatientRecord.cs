@@ -96,6 +96,12 @@ namespace HolyAngelMaternitySystem
             set;
         }
 
+        public string edcByLMP
+        {
+            get;
+            set;
+        }
+
         //doctor analysis
 
         public string diagnosis

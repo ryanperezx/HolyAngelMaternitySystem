@@ -191,6 +191,9 @@ namespace HolyAngelMaternitySystem
                             int edcByUltrasoundIndex = reader.GetOrdinal("edcByUltrasound");
                             string edcByUltrasound = Convert.ToString(reader.GetValue(edcByUltrasoundIndex));
 
+                            int edcByLMPIndex = reader.GetOrdinal("edcByLMP");
+                            string edcByLMP = Convert.ToString(reader.GetValue(edcByLMPIndex));
+
                             int vaccinationIndex = reader.GetOrdinal("vaccination");
                             string vaccination = Convert.ToString(reader.GetValue(vaccinationIndex));
 
@@ -220,6 +223,7 @@ namespace HolyAngelMaternitySystem
                                 diagnosis = diagnosis,
                                 treatment = treatment,
                                 edcByUltrasound = edcByUltrasound,
+                                edcByLMP = edcByLMP,
                                 vaccination = vaccination,
                                 findings = findings,
                                 ultrasoundReport = ultrasoundReport,
@@ -268,6 +272,8 @@ namespace HolyAngelMaternitySystem
                     found.fh = txtFH.Text;
                     found.vaccination = cmbVaccination.Text;
                     found.fht = txtFHT.Text;
+                    found.eut = txtUltrasound.Text;
+                    found.edcByUltrasound = txtEDCUltrasound.Text;
                 }
                 else
                 {
@@ -299,14 +305,16 @@ namespace HolyAngelMaternitySystem
                         SqlConnection conn = DBUtils.GetDBConnection();
                         conn.Open();
                         var found = records.FirstOrDefault(x => Convert.ToDateTime(txtDate.Text) == Convert.ToDateTime(x.date));
-                        using (SqlCommand cmd = new SqlCommand("UPDATE tblPatientRecord SET findings = @findings, diagnosis = @diagnosis, treatment = @treatment, fh = @fh, fht = @fht, vaccination = @vaccination where patientID = @patientID and dateVisit = @date", conn))
+                        using (SqlCommand cmd = new SqlCommand("UPDATE tblPatientRecord SET earlyUltrasound = @eut, findings = @findings, diagnosis = @diagnosis, treatment = @treatment, fh = @fh, fht = @fht, vaccination = @vaccination, edcByUltrasound = @edcByUltrasound where patientID = @patientID and dateVisit = @date", conn))
                         {
                             cmd.Parameters.AddWithValue("@findings", found.findings);
                             cmd.Parameters.AddWithValue("@diagnosis", found.diagnosis);
+                            cmd.Parameters.AddWithValue("@eut", found.eut);
                             cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
                             cmd.Parameters.AddWithValue("@treatment", found.treatment);
                             cmd.Parameters.AddWithValue("@date", found.date);
                             cmd.Parameters.AddWithValue("@vaccination", found.vaccination);
+                            cmd.Parameters.AddWithValue("@edcByUltrasound", found.edcByUltrasound);
                             cmd.Parameters.AddWithValue("@fh", found.fh);
                             cmd.Parameters.AddWithValue("@fht", found.fht);
                             try

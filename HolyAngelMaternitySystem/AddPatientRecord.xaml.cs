@@ -68,6 +68,8 @@ namespace HolyAngelMaternitySystem
                                 txtWeight.Text = null;
                                 txtUltrasound.Text = null;
                                 txtLMP.Text = null;
+                                txtEDCLMP.Text = null;
+                                txtEDCUltrasound.Text = null;
 
                                 records.Clear();
 
@@ -145,6 +147,7 @@ namespace HolyAngelMaternitySystem
             txtAOG.Text = null;
             txtUltrasound.Text = null;
             txtEDCUltrasound.Text = null;
+            txtEDCLMP.Text = null;
             txtLMP.Text = null;
             txtOBIndex.Document.Blocks.Clear();
             txtDate.Text = DateTime.Today.ToString();
@@ -185,13 +188,14 @@ namespace HolyAngelMaternitySystem
                     switch (dr)
                     {
                         case MessageBoxResult.Yes:
-                            using (SqlCommand cmd = new SqlCommand("INSERT into tblPatientRecord (patientID, dateVisit, bloodPressure, weight, ageOfGestation, earlyUltrasound, LMP, edcByUltrasound) VALUES (@patientID, @date, @bloodPressure, @weight, @aog, @eut, @LMP, @edcByUltrasound)", conn))
+                            using (SqlCommand cmd = new SqlCommand("INSERT into tblPatientRecord (patientID, dateVisit, bloodPressure, weight, ageOfGestation, earlyUltrasound, LMP, edcByUltrasound, edcByLMP) VALUES (@patientID, @date, @bloodPressure, @weight, @aog, @eut, @LMP, @edcByUltrasound, @edcByLMP)", conn))
                             {
                                 cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
                                 cmd.Parameters.AddWithValue("@date", txtDate.Text);
                                 cmd.Parameters.AddWithValue("@bloodPressure", txtBP.Text);
                                 cmd.Parameters.AddWithValue("@weight", txtWeight.Text);
                                 cmd.Parameters.AddWithValue("@edcByUltrasound", txtEDCUltrasound.Text);
+                                cmd.Parameters.AddWithValue("@edcByLMP", txtEDCLMP.Text);
                                 cmd.Parameters.AddWithValue("@aog", txtAOG.Text);
                                 cmd.Parameters.AddWithValue("@eut", txtUltrasound.Text);
                                 cmd.Parameters.AddWithValue("@LMP", txtLMP.Text);
@@ -230,7 +234,7 @@ namespace HolyAngelMaternitySystem
         {
             SqlConnection conn = DBUtils.GetDBConnection();
             conn.Open();
-            using (SqlCommand cmd = new SqlCommand("SELECT dateVisit, weight, bloodPressure, ageOfGestation, earlyUltrasound, LMP, edcByUltrasound from tblPatientRecord where patientID = @patientID", conn))
+            using (SqlCommand cmd = new SqlCommand("SELECT dateVisit, weight, bloodPressure, ageOfGestation, earlyUltrasound, LMP, edcByUltrasound, edcByLMP from tblPatientRecord where patientID = @patientID", conn))
             {
                 cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
                 using (SqlDataReader reader = cmd.ExecuteReader())
@@ -261,6 +265,9 @@ namespace HolyAngelMaternitySystem
                             int edcByUltrasoundIndex = reader.GetOrdinal("edcByUltrasound");
                             string edcByUltrasound = Convert.ToString(reader.GetValue(edcByUltrasoundIndex));
 
+                            int edcByLMPIndex = reader.GetOrdinal("edcByLMP");
+                            string edcByLMP = Convert.ToString(reader.GetValue(edcByLMPIndex));
+
                             records.Add(new PatientRecord
                             {
                                 aog = aog,
@@ -268,6 +275,7 @@ namespace HolyAngelMaternitySystem
                                 weight = weight,
                                 bloodPressure = bloodPressure,
                                 edcByUltrasound = edcByUltrasound,
+                                edcByLMP = edcByLMP,
                                 date = date.ToString("MM/dd/yyyy"),
                                 lmp = lmp
                             });

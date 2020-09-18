@@ -19,7 +19,7 @@ namespace HolyAngelMaternitySystem
 
             SqlConnection conn = DBUtils.GetDBConnection();
             conn.Open();
-            using (SqlCommand cmd = new SqlCommand("SELECT patientID, firstName, lastName, homeAddress, civStatus, cellphoneNo, birthDate from tblPersonalInfo", conn))
+            using (SqlCommand cmd = new SqlCommand("SELECT patientID, firstName, lastName, homeAddress, civStatus, cellphoneNo, birthDate from tblPersonalInfo ORDER BY id", conn))
             {
 
                 using (SqlDataReader reader = cmd.ExecuteReader())

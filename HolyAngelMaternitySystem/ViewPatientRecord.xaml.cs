@@ -128,6 +128,9 @@ namespace HolyAngelMaternitySystem
                             int edcByUltrasoundIndex = reader.GetOrdinal("edcByUltrasound");
                             string edcByUltrasound = Convert.ToString(reader.GetValue(edcByUltrasoundIndex));
 
+                            int edcByLMPIndex = reader.GetOrdinal("edcByLMP");
+                            string edcByLMP = Convert.ToString(reader.GetValue(edcByLMPIndex));
+
                             int vaccinationIndex = reader.GetOrdinal("vaccination");
                             string vaccination = Convert.ToString(reader.GetValue(vaccinationIndex));
 
@@ -157,6 +160,7 @@ namespace HolyAngelMaternitySystem
                                 diagnosis = diagnosis,
                                 treatment = treatment,
                                 edcByUltrasound = edcByUltrasound,
+                                edcByLMP = edcByLMP,
                                 vaccination = vaccination,
                                 findings = findings,
                                 ultrasoundReport = ultrasoundReport,

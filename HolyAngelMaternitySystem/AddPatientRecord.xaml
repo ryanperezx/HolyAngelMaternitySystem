@@ -13,7 +13,7 @@
 
     <Grid>
         <TextBlock HorizontalAlignment="Left" Margin="25,10,0,0" TextWrapping="Wrap" Text="Add Patient Record" FontWeight="Bold" VerticalAlignment="Top"/>
-        <Label x:Name="lblReset" PreviewMouseLeftButtonDown="LblReset_PreviewMouseLeftButtonDown" VerticalAlignment="Top"  Height="50" HorizontalAlignment="Right"  Cursor="Hand"  Width="50">
+        <Label x:Name="lblReset" PreviewMouseLeftButtonDown="LblReset_PreviewMouseLeftButtonDown" VerticalAlignment="Top"  Height="50" HorizontalAlignment="Right"  Cursor="Hand"  Width="50" >
             <iconPacks:PackIconMaterial Kind="Refresh" Height="40" Width="40" Foreground="ForestGreen" HorizontalAlignment="Left"/>
         </Label>
         <Label x:Name="lblPatientSearch" PreviewMouseLeftButtonUp="LblPatientSearch_PreviewMouseLeftButtonUp" VerticalAlignment="Top" HorizontalAlignment="Left" Height="30" Width="30" ToolTip="Display Patient List" Cursor="Hand" Margin="140,5,0,0">
@@ -34,12 +34,14 @@
         <TextBox x:Name="txtBP" HorizontalAlignment="Left" Height="22" Margin="222,322,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label Content="LMP:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="115,368,0,0"/>
         <TextBox x:Name="txtLMP" HorizontalAlignment="Left" Height="23" Margin="222,367,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label Content="EDC by Ultrasound:" HorizontalAlignment="Left" Margin="105,413,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtEDCUltrasound" HorizontalAlignment="Left" Height="23" Margin="222,413,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label Content="AOG by LMP:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="26,460,0,0"/>
-        <TextBox x:Name="txtAOG" HorizontalAlignment="Left" Height="22" Margin="120,460,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label Content="AOG by EUTZ:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="251,460,0,0"/>
-        <TextBox x:Name="txtUltrasound" HorizontalAlignment="Left" Height="22" Margin="355,460,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="EDC by EUTZ:" HorizontalAlignment="Left" Margin="273,410,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtEDCUltrasound" HorizontalAlignment="Left" Height="23" Margin="140,410,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="EDC by LMP:" HorizontalAlignment="Left" Margin="25,410,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtEDCLMP" HorizontalAlignment="Left" Height="23" Margin="365,410,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
+        <Label Content="AOG by LMP:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="23,460,0,0"/>
+        <TextBox x:Name="txtAOG" HorizontalAlignment="Left" Height="22" Margin="140,460,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="AOG by EUTZ:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="275,460,0,0"/>
+        <TextBox x:Name="txtUltrasound" HorizontalAlignment="Left" Height="22" Margin="365,460,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="btnSave" Click="BtnSave_Click" Content="Save" HorizontalAlignment="Left" Margin="222,512,0,0" VerticalAlignment="Top" Width="120"/>
         <Label Content="OB-Index:" HorizontalAlignment="Left" Margin="20,600,0,0" VerticalAlignment="Top"/>
         <RichTextBox x:Name="txtOBIndex" HorizontalAlignment="Left" Height="100" Margin="87,560,0,0" VerticalAlignment="Top" Width="301">
@@ -49,14 +51,15 @@
                 </Style>
             </RichTextBox.Resources>
         </RichTextBox>
-        <Button x:Name="btnOBIndex" Content="Update OB-INDEX" Click="BtnOBIndex_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="106" Margin="395,590,0,0" Height="32"/>
+        <Button x:Name="btnOBIndex" Content="Update OB-INDEX" Click="BtnOBIndex_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="106" Margin="393,594,0,0" Height="32"/>
         <DataGrid x:Name="dgList" HorizontalAlignment="Right" Height="560" Width="820" VerticalAlignment="Top" ItemsSource="{Binding}" Margin="0,92,34,0" AutoGenerateColumns="False" CanUserAddRows="False" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Date" Binding="{Binding date}" Width="120" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Weight" Binding="{Binding weight}" IsReadOnly="True" Width="120"/>
-                <DataGridTextColumn Header="Blood Pressure" Binding="{Binding bloodPressure}" IsReadOnly="True" Width="120 "/>
-                <DataGridTextColumn Header="LMP" Binding="{Binding lmp}" IsReadOnly="True" Width="120 "/>
+                <DataGridTextColumn Header="Date" Binding="{Binding date}" Width="100" IsReadOnly="True"/>
+                <DataGridTextColumn Header="WT" Binding="{Binding weight}" IsReadOnly="True" Width="50"/>
+                <DataGridTextColumn Header="BP" Binding="{Binding bloodPressure}" IsReadOnly="True" Width="60"/>
+                <DataGridTextColumn Header="LMP" Binding="{Binding lmp}" IsReadOnly="True" Width="100 "/>
                 <DataGridTextColumn Header="EDC by Ultrasound" Binding="{Binding edcByUltrasound}" IsReadOnly="True" Width="150"/>
+                <DataGridTextColumn Header="EDC by LMP" Binding="{Binding edcByLMP}" IsReadOnly="True" Width="100"/>
                 <DataGridTextColumn Header="AOG by LMP" Binding="{Binding aog}" Width="120" IsReadOnly="True"/>
                 <DataGridTextColumn Header="AOG by EUTZ" Binding="{Binding eut}" Width="120" IsReadOnly="True"/>
             </DataGrid.Columns>

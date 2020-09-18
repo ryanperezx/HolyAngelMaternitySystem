@@ -40,17 +40,19 @@
         <ListView x:Name="lvPatientInfo" HorizontalAlignment="Right" VerticalAlignment="Top" ItemsSource="{Binding}" Margin="0,92,34,0"  Height="560" Width="820">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Date" DisplayMemberBinding="{Binding date}" Width="120"/>
-                    <GridViewColumn Header="Weight" DisplayMemberBinding="{Binding weight}" Width="100"/>
-                    <GridViewColumn Header="Blood Pressure" DisplayMemberBinding="{Binding bloodPressure}" Width="120 "/>
+                    <GridViewColumn Header="Date" DisplayMemberBinding="{Binding date}" Width="100"/>
+                    <GridViewColumn Header="WT" DisplayMemberBinding="{Binding weight}" Width="50"/>
+                    <GridViewColumn Header="BP" DisplayMemberBinding="{Binding bloodPressure}" Width="70"/>
                     <GridViewColumn Header="Vaccination" DisplayMemberBinding="{Binding vaccination}" Width="120"/>
-                    <GridViewColumn Header="FH(cm)" DisplayMemberBinding="{Binding fh}" Width="80"/>
-                    <GridViewColumn Header="FHT(bpm)" DisplayMemberBinding="{Binding fht}" Width="80"/>
-                    <GridViewColumn Header="AOG by LMP" DisplayMemberBinding="{Binding aog}" Width="100" />
-                    <GridViewColumn Header="AOG by EUTZ" DisplayMemberBinding="{Binding eut}" Width="100"/>
-                    <GridViewColumn Header="OB Index" DisplayMemberBinding="{Binding obIndex}" Width="100"/> 
-                    <GridViewColumn Header="Diagnosis" DisplayMemberBinding="{Binding diagnosis}" Width="100" />
-                    <GridViewColumn Header="Treatment" DisplayMemberBinding="{Binding treatment}" Width="100"/>
+                    <GridViewColumn Header="FH" DisplayMemberBinding="{Binding fh}" Width="60"/>
+                    <GridViewColumn Header="FHT" DisplayMemberBinding="{Binding fht}" Width="60"/>
+                    <GridViewColumn Header="EDC &#x0a;Ultrasound" DisplayMemberBinding="{Binding edcByUltrasound}"  Width="100"/>
+                    <GridViewColumn Header="EDC &#x0a;LMP" DisplayMemberBinding="{Binding edcByLMP}" Width="100"/>
+                    <GridViewColumn Header="AOG &#x0a;LMP" DisplayMemberBinding="{Binding aog}" Width="100" />
+                    <GridViewColumn Header="AOG &#x0a;EUTZ" DisplayMemberBinding="{Binding eut}" Width="100"/>
+                    <GridViewColumn Header="OB Index" DisplayMemberBinding="{Binding obIndex}" Width="150"/> 
+                    <GridViewColumn Header="Diagnosis" DisplayMemberBinding="{Binding diagnosis}" Width="150" />
+                    <GridViewColumn Header="Treatment" DisplayMemberBinding="{Binding treatment}" Width="150"/>
                     <GridViewColumn Header="OB/ Gyne History/ P.E/ Laboratory Findings" DisplayMemberBinding="{Binding findings}" />
                     <GridViewColumn Header="Report Type" DisplayMemberBinding="{Binding reportType}" Width="200" />
                     <GridViewColumn Header="Ultrasound Report" DisplayMemberBinding="{Binding ultrasoundReport}" Width="300" />
