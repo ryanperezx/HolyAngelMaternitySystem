@@ -213,11 +213,11 @@ namespace HolyAngelMaternitySystem
                                 cmd.Parameters.AddWithValue("@date", txtDate.Text);
                                 cmd.Parameters.AddWithValue("@reportType", reportType);
                                 cmd.Parameters.AddWithValue("@ultrasoundReport", ultrasoundReport);
-                                if (!string.IsNullOrEmpty(others1stTri))
+                                if (cmb1stTrimester.IsChecked == true)
                                 {
                                     cmd.Parameters.AddWithValue("@others", others1stTri);
                                 }
-                                else if (!string.IsNullOrEmpty(others2ndTri))
+                                else if (cmb2nd3rdTrimester.IsChecked == true)
                                 {
                                     cmd.Parameters.AddWithValue("@others", others2ndTri);
                                 }

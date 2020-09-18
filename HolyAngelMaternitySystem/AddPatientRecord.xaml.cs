@@ -164,9 +164,10 @@ namespace HolyAngelMaternitySystem
                 int count = 0;
                 SqlConnection conn = DBUtils.GetDBConnection();
                 conn.Open();
-                using (SqlCommand cmd = new SqlCommand("SELECT COUNT(1) from tblPersonalInfo where patientID = @patientID", conn))
+                using (SqlCommand cmd = new SqlCommand("SELECT COUNT(1) from tblPersonalInfo where patientID = @patientID and date = @date", conn))
                 {
                     cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
+                    cmd.Parameters.AddWithValue("@date", txtDate.Text);
                     try
                     {
                         count = (int)cmd.ExecuteScalar();
@@ -177,54 +178,75 @@ namespace HolyAngelMaternitySystem
                         MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
                     }
                 }
-                if (count > 0)
+                if(count == 0)
                 {
-                    string sMessageBoxText = "Confirming Adding Patient Record";
-                    string sCaption = "Save Patient Record?";
-                    MessageBoxButton btnMessageBox = MessageBoxButton.YesNoCancel;
-                    MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
-
-                    MessageBoxResult dr = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
-                    switch (dr)
+                    using (SqlCommand cmd = new SqlCommand("SELECT COUNT(1) from tblPersonalInfo where patientID = @patientID", conn))
                     {
-                        case MessageBoxResult.Yes:
-                            using (SqlCommand cmd = new SqlCommand("INSERT into tblPatientRecord (patientID, dateVisit, bloodPressure, weight, ageOfGestation, earlyUltrasound, LMP, edcByUltrasound, edcByLMP) VALUES (@patientID, @date, @bloodPressure, @weight, @aog, @eut, @LMP, @edcByUltrasound, @edcByLMP)", conn))
-                            {
-                                cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
-                                cmd.Parameters.AddWithValue("@date", txtDate.Text);
-                                cmd.Parameters.AddWithValue("@bloodPressure", txtBP.Text);
-                                cmd.Parameters.AddWithValue("@weight", txtWeight.Text);
-                                cmd.Parameters.AddWithValue("@edcByUltrasound", txtEDCUltrasound.Text);
-                                cmd.Parameters.AddWithValue("@edcByLMP", txtEDCLMP.Text);
-                                cmd.Parameters.AddWithValue("@aog", txtAOG.Text);
-                                cmd.Parameters.AddWithValue("@eut", txtUltrasound.Text);
-                                cmd.Parameters.AddWithValue("@LMP", txtLMP.Text);
-                                try
+                        cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
+                        try
+                        {
+                            count = (int)cmd.ExecuteScalar();
+
+                        }
+                        catch (SqlException ex)
+                        {
+                            MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
+                        }
+                    }
+                    if (count > 0)
+                    {
+                        string sMessageBoxText = "Confirming Adding Patient Record";
+                        string sCaption = "Save Patient Record?";
+                        MessageBoxButton btnMessageBox = MessageBoxButton.YesNoCancel;
+                        MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
+
+                        MessageBoxResult dr = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+                        switch (dr)
+                        {
+                            case MessageBoxResult.Yes:
+                                using (SqlCommand cmd = new SqlCommand("INSERT into tblPatientRecord (patientID, dateVisit, bloodPressure, weight, ageOfGestation, earlyUltrasound, LMP, edcByUltrasound, edcByLMP) VALUES (@patientID, @date, @bloodPressure, @weight, @aog, @eut, @LMP, @edcByUltrasound, @edcByLMP)", conn))
                                 {
-                                    cmd.ExecuteNonQuery();
-                                    MessageBox.Show("Record has been added!");
-                                    Log = LogManager.GetLogger("patientRecord");
-                                    Log.Info("Patient:  " + txtPatientID.Text + " has added an record!");
-                                    fillRecord();
+                                    cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
+                                    cmd.Parameters.AddWithValue("@date", txtDate.Text);
+                                    cmd.Parameters.AddWithValue("@bloodPressure", txtBP.Text);
+                                    cmd.Parameters.AddWithValue("@weight", txtWeight.Text);
+                                    cmd.Parameters.AddWithValue("@edcByUltrasound", txtEDCUltrasound.Text);
+                                    cmd.Parameters.AddWithValue("@edcByLMP", txtEDCLMP.Text);
+                                    cmd.Parameters.AddWithValue("@aog", txtAOG.Text);
+                                    cmd.Parameters.AddWithValue("@eut", txtUltrasound.Text);
+                                    cmd.Parameters.AddWithValue("@LMP", txtLMP.Text);
+                                    try
+                                    {
+                                        cmd.ExecuteNonQuery();
+                                        MessageBox.Show("Record has been added!");
+                                        Log = LogManager.GetLogger("patientRecord");
+                                        Log.Info("Patient:  " + txtPatientID.Text + " has added an record!");
+                                        fillRecord();
+                                    }
+                                    catch (SqlException ex)
+                                    {
+                                        MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
+                                        Log = LogManager.GetLogger("*");
+                                        Log.Error(ex, "Query Error");
+                                    }
                                 }
-                                catch (SqlException ex)
-                                {
-                                    MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
-                                    Log = LogManager.GetLogger("*");
-                                    Log.Error(ex, "Query Error");
-                                }
-                            }
-                            break;
-                        case MessageBoxResult.No:
-                            return;
-                        case MessageBoxResult.Cancel:
-                            return;
+                                break;
+                            case MessageBoxResult.No:
+                                return;
+                            case MessageBoxResult.Cancel:
+                                return;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Patient does not exist.");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Patient does not exist.");
+                    MessageBox.Show("A record exists with the given date.");
                 }
+
 
             }
 

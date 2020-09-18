@@ -28,15 +28,20 @@
         <TextBox x:Name="txtFullName" HorizontalAlignment="Left" Height="23" Margin="210,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196"/>
         <Label Content="Date:" HorizontalAlignment="Left" Margin="115,229,0,0" VerticalAlignment="Top"/>
         <DatePicker x:Name="txtDate" HorizontalAlignment="Left" Margin="210,229,0,0" VerticalAlignment="Top" Width="196"/>
-        <RichTextBox x:Name="txtFindings" Controls:TextBoxHelper.Watermark="OB/ Gyne History/ P.E/ Laboratory Findings" HorizontalAlignment="Left"  Height="100" VerticalAlignment="Top" Width="400" Margin="54,278,0,0">
+        <RichTextBox x:Name="txtFindings" Controls:TextBoxHelper.Watermark="OB/ Gyne History/ P.E/ Laboratory Findings" HorizontalAlignment="Left"  Height="77" VerticalAlignment="Top" Width="400" Margin="54,278,0,0">
             <RichTextBox.Resources>
                 <Style TargetType="{x:Type Paragraph}">
                     <Setter Property="Margin" Value="0"/>
                 </Style>
             </RichTextBox.Resources>
         </RichTextBox>
-        <Label Content="Vaccinations Given :" HorizontalAlignment="Left" Margin="115,396,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="cmbVaccination" HorizontalAlignment="Left" Height="23" Margin="235,396,0,0" VerticalAlignment="Top" Width="120">
+        <Label Content="Vaccinations Given :" HorizontalAlignment="Left" Margin="54,383,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cmbVaccination" HorizontalAlignment="Left" Height="52" Margin="174,370,0,0" VerticalAlignment="Top" IsEditable="True" Width="280">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBox AcceptsReturn="True" Width="280" Height="52"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
             <ComboBoxItem>Td1</ComboBoxItem>
             <ComboBoxItem>Td2</ComboBoxItem>
             <ComboBoxItem>Tdap</ComboBoxItem>
@@ -48,7 +53,7 @@
         <TextBox x:Name="txtFHT" HorizontalAlignment="Left" Height="23" Margin="110,486,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
         <Label Content="AOG by EUTZ:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="246,442,0,0"/>
         <Label Content="EDC by EUTZ:" HorizontalAlignment="Left" Margin="246,486,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtUltrasound" HorizontalAlignment="Left" Height="22" Margin="345,442,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>   
+        <TextBox x:Name="txtUltrasound" HorizontalAlignment="Left" Height="22" Margin="345,442,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="txtEDCUltrasound" HorizontalAlignment="Left" Height="23" Margin="345,486,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <ComboBox x:Name="cmbDiagnosis" IsEditable="True"  Controls:TextBoxHelper.Watermark="Write diagnosis here.." HorizontalAlignment="Left" Height="28" VerticalAlignment="Top" Width="400" Margin="54,536,0,0"/>
         <ComboBox x:Name="cmbTreatment" IsEditable="True"  Controls:TextBoxHelper.Watermark="Write treatment here.." HorizontalAlignment="Left" Height="28" VerticalAlignment="Top" Width="400" Margin="54,584,0,0"/>
@@ -69,10 +74,9 @@
                 <DataGridTextColumn Header="AOG &#x0a;LMP" Binding="{Binding aog}" Width="60" IsReadOnly="True"/>
                 <DataGridTextColumn Header="AOG &#x0a;EUTZ" Binding="{Binding eut}" Width="60" IsReadOnly="True"/>
                 <DataGridTextColumn Header="OB-Index" Binding="{Binding obIndex}" IsReadOnly="True" Width="150"/>
-                <DataGridTextColumn Header="Diagnosis" Binding="{Binding diagnosis}" IsReadOnly="True" Width="200"/>
-                <DataGridTextColumn Header="Treatment" Binding="{Binding treatment}" IsReadOnly="True" Width="200"/>
+                <DataGridTextColumn Header="Diagnosis" Binding="{Binding diagnosis}" IsReadOnly="True" Width="250"/>
+                <DataGridTextColumn Header="Treatment" Binding="{Binding treatment}" IsReadOnly="True" Width="250"/>
                 <DataGridTextColumn Header="OB/ Gyne History/ P.E/ Laboratory Findings" Binding="{Binding findings}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Report Type" Binding="{Binding reportType}" Width="200" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Ultrasound Report" Binding="{Binding ultrasoundReport}" Width="300" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Others" Binding="{Binding others}" Width="300" IsReadOnly="True"/>
             </DataGrid.Columns>
