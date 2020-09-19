@@ -101,6 +101,9 @@ namespace HolyAngelMaternitySystem
                                 string lastName = Convert.ToString(reader.GetValue(lastNameIndex));
 
                                 txtFullName.Text = firstName + " " + lastName;
+
+                                txtDate.Text = DateTime.Today.ToString("MM/dd/yyyy");
+
                                 records.Clear();
 
                             }

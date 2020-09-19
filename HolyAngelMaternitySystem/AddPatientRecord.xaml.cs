@@ -64,12 +64,13 @@ namespace HolyAngelMaternitySystem
 
                                 txtAOG.Text = null;
                                 txtBP.Text = null;
-                                txtDate.Text = null;
+                                txtDate.Text = DateTime.Today.ToString("MM/dd/yyyy");
                                 txtWeight.Text = null;
                                 txtUltrasound.Text = null;
                                 txtLMP.Text = null;
                                 txtEDCLMP.Text = null;
                                 txtEDCUltrasound.Text = null;
+
 
                                 records.Clear();
 
@@ -164,7 +165,7 @@ namespace HolyAngelMaternitySystem
                 int count = 0;
                 SqlConnection conn = DBUtils.GetDBConnection();
                 conn.Open();
-                using (SqlCommand cmd = new SqlCommand("SELECT COUNT(1) from tblPersonalInfo where patientID = @patientID and date = @date", conn))
+                using (SqlCommand cmd = new SqlCommand("SELECT COUNT(1) from tblPatientRecord where patientID = @patientID and dateVisit = @date", conn))
                 {
                     cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
                     cmd.Parameters.AddWithValue("@date", txtDate.Text);

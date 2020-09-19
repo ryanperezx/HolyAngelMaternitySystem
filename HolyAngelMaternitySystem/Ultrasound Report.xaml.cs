@@ -125,6 +125,9 @@ namespace HolyAngelMaternitySystem
                                 int lastNameIndex = reader.GetOrdinal("lastName");
                                 string lastName = Convert.ToString(reader.GetValue(lastNameIndex));
 
+                                txtDate.Text = DateTime.Today.ToString("MM/dd/yyyy");
+
+
                                 txtFullName.Text = firstName + " " + lastName;
 
                                 count = 1;
