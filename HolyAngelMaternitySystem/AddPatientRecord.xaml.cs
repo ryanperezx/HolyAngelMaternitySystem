@@ -58,6 +58,7 @@ namespace HolyAngelMaternitySystem
                                 int lastNameIndex = reader.GetOrdinal("lastName");
                                 string lastName = Convert.ToString(reader.GetValue(lastNameIndex));
 
+                                txtPatientID.IsEnabled = false;
                                 txtFullName.Text = firstName + " " + lastName;
 
                                 count = 1;
@@ -142,6 +143,7 @@ namespace HolyAngelMaternitySystem
         {
             records.Clear();
             txtPatientID.Text = null;
+            txtPatientID.IsEnabled = true;
             txtBP.Text = null;
             txtFullName.Text = null;
             txtWeight.Text = null;

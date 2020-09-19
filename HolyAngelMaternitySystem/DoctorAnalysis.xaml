@@ -42,10 +42,11 @@
                     <TextBox AcceptsReturn="True" Width="280" Height="52"/>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
-            <ComboBoxItem>Td1</ComboBoxItem>
-            <ComboBoxItem>Td2</ComboBoxItem>
-            <ComboBoxItem>Tdap</ComboBoxItem>
-            <ComboBoxItem>TT</ComboBoxItem>
+            <ComboBoxItem>Td1 @ HC</ComboBoxItem>
+            <ComboBoxItem>Td2 @ HC</ComboBoxItem>
+            <ComboBoxItem>Td1, Td2 @ HC</ComboBoxItem>
+            <ComboBoxItem>Tdap @ HC</ComboBoxItem>
+            <ComboBoxItem>TT @ HC</ComboBoxItem>
         </ComboBox>
         <Label Content="FH:" HorizontalAlignment="Left" Margin="55,442,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtFH" HorizontalAlignment="Left" Height="23" Margin="110,442,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
@@ -73,12 +74,12 @@
                 <DataGridTextColumn Header="EDC &#x0a;LMP" Binding="{Binding edcByLMP}" IsReadOnly="True" Width="100"/>
                 <DataGridTextColumn Header="AOG &#x0a;LMP" Binding="{Binding aog}" Width="60" IsReadOnly="True"/>
                 <DataGridTextColumn Header="AOG &#x0a;EUTZ" Binding="{Binding eut}" Width="60" IsReadOnly="True"/>
-                <DataGridTextColumn Header="OB-Index" Binding="{Binding obIndex}" IsReadOnly="True" Width="150"/>
+                <DataGridTextColumn Header="OB-Index" Binding="{Binding obIndex}" IsReadOnly="True" Width="300"/>
                 <DataGridTextColumn Header="Diagnosis" Binding="{Binding diagnosis}" IsReadOnly="True" Width="250"/>
                 <DataGridTextColumn Header="Treatment" Binding="{Binding treatment}" IsReadOnly="True" Width="250"/>
                 <DataGridTextColumn Header="OB/ Gyne History/ P.E/ Laboratory Findings" Binding="{Binding findings}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Ultrasound Report" Binding="{Binding ultrasoundReport}" Width="300" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Others" Binding="{Binding others}" Width="300" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Others" Binding="{Binding others}" Width="150" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

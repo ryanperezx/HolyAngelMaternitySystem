@@ -31,18 +31,18 @@
             </ListView.View>
         </ListView>
 
-        <Label x:Name="lblPatientSearch" PreviewMouseLeftButtonUp="LblPatientSearch_PreviewMouseLeftButtonUp" VerticalAlignment="Top" HorizontalAlignment="Left" Height="30" Width="30" ToolTip="Display Patient List" Cursor="Hand" Margin="1042,273,0,0">
+        <TextBlock HorizontalAlignment="Left" Margin="1080,217,0,0" TextWrapping="Wrap" FontSize="24" Text="Add Patient to Queue" VerticalAlignment="Top" Visibility="Collapsed"/>
+        <Label x:Name="lblPatientSearch" PreviewMouseLeftButtonUp="LblPatientSearch_PreviewMouseLeftButtonUp" VerticalAlignment="Top" HorizontalAlignment="Left" Height="30" Width="30" ToolTip="Display Patient List" Cursor="Hand" Margin="1042,273,0,0" Visibility="Collapsed">
             <iconPacks:PackIconMaterial Kind="AccountSearch" Height="20" Width="20" Foreground="ForestGreen" HorizontalAlignment="Left"/>
         </Label>
-        <TextBox x:Name="txtPatientID" HorizontalAlignment="Left" Height="23" Margin="1170,274,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="txtFullName" HorizontalAlignment="Left" Height="23" Margin="1170,321,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
-        <Button x:Name="btnAddQueue" Content="Add to Queue" HorizontalAlignment="Left" Margin="1039,407,0,0" VerticalAlignment="Top" Width="107" Height="40" Click="BtnAddQueue_Click"/>
-        <Button x:Name="btnRemoveLast" Content="Remove last" HorizontalAlignment="Left" Margin="1194,407,0,0" VerticalAlignment="Top" Width="135" Height="40" Click="BtnRemoveLast_Click"/>
-        <Label Content="Patient ID:" HorizontalAlignment="Left" Margin="1077,274,0,0" VerticalAlignment="Top"/>
-        <Label Content="Patient Name:" HorizontalAlignment="Left" Margin="1077,321,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblSearch" Cursor="Hand" MouseLeftButtonUp="LblSearch_MouseLeftButtonUp" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Width="30" Margin="1295,270,0,0"  Foreground="ForestGreen" >
+        <TextBox x:Name="txtPatientID" HorizontalAlignment="Left" Height="23" Margin="1170,274,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Visibility="Collapsed"/>
+        <TextBox x:Name="txtFullName" HorizontalAlignment="Left" Height="23" Margin="1170,321,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" IsReadOnly="True" Visibility="Collapsed"/>
+        <Button x:Name="btnAddQueue" Content="Add to Queue" HorizontalAlignment="Left" Margin="1039,407,0,0" VerticalAlignment="Top" Width="107" Height="40" Click="BtnAddQueue_Click" Visibility="Collapsed"/>
+        <Button x:Name="btnRemoveLast" Content="Remove last" HorizontalAlignment="Left" Margin="1194,407,0,0" VerticalAlignment="Top" Width="135" Height="40" Click="BtnRemoveLast_Click" Visibility="Collapsed"/>
+        <Label Content="Patient ID:" HorizontalAlignment="Left" Margin="1077,274,0,0" VerticalAlignment="Top" Visibility="Collapsed"/>
+        <Label Content="Patient Name:" HorizontalAlignment="Left" Margin="1077,321,0,0" VerticalAlignment="Top" Visibility="Collapsed"/>
+        <Label x:Name="lblSearch" Cursor="Hand" MouseLeftButtonUp="LblSearch_MouseLeftButtonUp" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Width="30" Margin="1295,270,0,0"  Foreground="ForestGreen" Visibility="Collapsed" >
             <iconPacks:PackIconMaterial  Kind="Magnify" Height="20" Width="20"/>
         </Label>
-        <TextBlock HorizontalAlignment="Left" Margin="1080,217,0,0" TextWrapping="Wrap" FontSize="24" Text="Add Patient to Queue" VerticalAlignment="Top"/>
     </Grid>
 </Page>

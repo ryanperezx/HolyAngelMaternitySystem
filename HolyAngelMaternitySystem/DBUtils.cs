@@ -12,7 +12,7 @@ namespace HolyAngelMaternitySystem
         public static SqlConnection GetDBConnection()
         {
             string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            string datasource = "192.168.0.15";
+            string datasource = "192.168.0.100";
             string database = "HolyAngelMaternityPolyclinicDB;" +
                 "User ID=admin;" +
                 "Password=Deaths123";

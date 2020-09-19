@@ -231,7 +231,36 @@ namespace HolyAngelMaternitySystem
                                 try
                                 {
                                     cmd.ExecuteNonQuery();
-                                    MessageBox.Show("Patient Information has been deleted!");
+                                }
+                                catch (SqlException ex)
+                                {
+                                    MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
+                                    Log = LogManager.GetLogger("*");
+                                    Log.Error(ex, "Query Error");
+                                }
+                            }
+                            using (SqlCommand cmd = new SqlCommand("DELETE from tblPatientRecord where patientID = @patientID", conn))
+                            {
+                                cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
+
+                                try
+                                {
+                                    cmd.ExecuteNonQuery();
+                                }
+                                catch (SqlException ex)
+                                {
+                                    MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
+                                    Log = LogManager.GetLogger("*");
+                                    Log.Error(ex, "Query Error");
+                                }
+                            }
+                            using (SqlCommand cmd = new SqlCommand("DELETE from tblObIndex where patientID = @patientID", conn))
+                            {
+                                cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
+
+                                try
+                                {
+                                    cmd.ExecuteNonQuery();
                                     emptyFields();
                                 }
                                 catch (SqlException ex)
@@ -241,6 +270,9 @@ namespace HolyAngelMaternitySystem
                                     Log.Error(ex, "Query Error");
                                 }
                             }
+
+                            MessageBox.Show("Patient Information has been deleted!");
+
                             break;
                         case MessageBoxResult.No:
                             return;
@@ -324,6 +356,8 @@ namespace HolyAngelMaternitySystem
                                 int birthDateIndex = reader.GetOrdinal("birthDate");
                                 txtBirthDate.Text = Convert.ToString(reader.GetValue(birthDateIndex));
 
+                                txtPatientID.IsEnabled = false;
+
                                 txtFirstName.IsReadOnly = true;
                                 txtLastName.IsReadOnly = true;
 
@@ -347,7 +381,9 @@ namespace HolyAngelMaternitySystem
         {
             lblGenerate.Visibility = Visibility.Collapsed;
             lblSearch.Visibility = Visibility.Visible;
+            txtPatientID.IsEnabled = true;
             txtPatientID.IsReadOnly = false;
+
             state = 0;
 
             txtAddress.Text = null;

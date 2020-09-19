@@ -23,7 +23,7 @@ namespace HolyAngelMaternitySystem
             InitializeComponent();
             lvPatientInfo.ItemsSource = records;
             fillList();
-            qs.Show();
+            qs.Close();
         }
 
         private void fillList()
@@ -31,8 +31,9 @@ namespace HolyAngelMaternitySystem
             SqlConnection conn = DBUtils.GetDBConnection();
             conn.Open();
             //query should be based on patientrecord
-            using (SqlCommand cmd = new SqlCommand("SELECT DISTINCT TOP 10 pi.patientID, pi.firstName, pi.lastName, pi.homeAddress, pi.civStatus, pi.cellphoneNo, pi.birthDate from tblPersonalInfo pi INNER JOIN tblPatientRecord pr on pi.patientID = pr.patientID", conn))
+            using (SqlCommand cmd = new SqlCommand("SELECT DISTINCT TOP 10 pi.patientID, pi.firstName, pi.lastName, pi.homeAddress, pi.civStatus, pi.cellphoneNo, pi.birthDate from tblPersonalInfo pi INNER JOIN tblPatientRecord pr on pi.patientID = pr.patientID and pr.dateVisit = @date", conn))
             {
+                cmd.Parameters.AddWithValue("@date", DateTime.Today.ToString("M/dd/yyyy"));
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     if (reader.HasRows)

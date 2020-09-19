@@ -100,6 +100,7 @@ namespace HolyAngelMaternitySystem
                                 int lastNameIndex = reader.GetOrdinal("lastName");
                                 string lastName = Convert.ToString(reader.GetValue(lastNameIndex));
 
+                                txtPatientID.IsEnabled = false;
                                 txtFullName.Text = firstName + " " + lastName;
 
                                 txtDate.Text = DateTime.Today.ToString("MM/dd/yyyy");
@@ -130,6 +131,9 @@ namespace HolyAngelMaternitySystem
             records.Clear();
             txtFullName.Text = null;
             txtPatientID.Text = null;
+            txtPatientID.IsEnabled = true;
+            txtEDCUltrasound.Text = null;
+            txtUltrasound.Text = null;
             cmbDiagnosis.Text = null;
             cmbTreatment.Text = null;
             cmbVaccination.Text = null;
@@ -148,7 +152,7 @@ namespace HolyAngelMaternitySystem
         {
             SqlConnection conn = DBUtils.GetDBConnection();
             conn.Open();
-            using (SqlCommand cmd = new SqlCommand("SELECT * from tblPatientRecord pr LEFT JOIN tblObIndex oi on pr.patientID = oi.patientID where pr.patientID = @patientID ", conn))
+            using (SqlCommand cmd = new SqlCommand("SELECT * from tblPatientRecord pr LEFT JOIN tblObIndex oi on pr.patientID = oi.patientID where pr.patientID = @patientID", conn))
             {
                 cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
                 using (SqlDataReader reader = cmd.ExecuteReader())
@@ -257,7 +261,7 @@ namespace HolyAngelMaternitySystem
             {
                 MessageBox.Show("Please enter date that is to be updated");
             }
-            else if(string.IsNullOrEmpty(cmbDiagnosis.Text) && string.IsNullOrEmpty(cmbTreatment.Text) && string.IsNullOrEmpty(Findings))
+            else if(string.IsNullOrEmpty(cmbDiagnosis.Text) && string.IsNullOrEmpty(cmbTreatment.Text))
             {
                 MessageBox.Show("One or more fields are empty!");
             }
@@ -316,7 +320,14 @@ namespace HolyAngelMaternitySystem
                             cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
                             cmd.Parameters.AddWithValue("@treatment", found.treatment);
                             cmd.Parameters.AddWithValue("@date", found.date);
-                            cmd.Parameters.AddWithValue("@vaccination", found.vaccination);
+                            if (string.IsNullOrEmpty(found.vaccination))
+                            {
+                                cmd.Parameters.AddWithValue("@vaccination", DBNull.Value);
+                            }
+                            else
+                            {
+                                cmd.Parameters.AddWithValue("@vaccination", found.vaccination);
+                            }
                             cmd.Parameters.AddWithValue("@edcByUltrasound", found.edcByUltrasound);
                             cmd.Parameters.AddWithValue("@fh", found.fh);
                             cmd.Parameters.AddWithValue("@fht", found.fht);

@@ -36,6 +36,7 @@ namespace HolyAngelMaternitySystem
         private void emptyField()
         {
             txtPatientID.Text = null;
+            txtPatientID.IsEnabled = true;
             txtFullName.Text = null;
             txtDate.Text = null;
 
@@ -125,8 +126,8 @@ namespace HolyAngelMaternitySystem
                                 int lastNameIndex = reader.GetOrdinal("lastName");
                                 string lastName = Convert.ToString(reader.GetValue(lastNameIndex));
 
+                                txtPatientID.IsEnabled = false;
                                 txtDate.Text = DateTime.Today.ToString("MM/dd/yyyy");
-
 
                                 txtFullName.Text = firstName + " " + lastName;
 
