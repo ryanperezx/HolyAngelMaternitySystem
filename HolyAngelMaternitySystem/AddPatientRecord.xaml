@@ -35,9 +35,9 @@
         <Label Content="LMP:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="115,368,0,0"/>
         <TextBox x:Name="txtLMP" HorizontalAlignment="Left" Height="23" Margin="222,367,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label Content="EDC by EUTZ:" HorizontalAlignment="Left" Margin="273,410,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtEDCUltrasound" HorizontalAlignment="Left" Height="23" Margin="140,410,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtEDCLMP" HorizontalAlignment="Left" Height="23" Margin="140,410,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label Content="EDC by LMP:" HorizontalAlignment="Left" Margin="25,410,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtEDCLMP" HorizontalAlignment="Left" Height="23" Margin="365,410,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
+        <TextBox x:Name="txtEDCUltrasound" HorizontalAlignment="Left" Height="23" Margin="365,410,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
         <Label Content="AOG by LMP:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="23,460,0,0"/>
         <TextBox x:Name="txtAOG" HorizontalAlignment="Left" Height="22" Margin="140,460,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label Content="AOG by EUTZ:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="275,460,0,0"/>
