@@ -20,12 +20,33 @@ namespace HolyAngelMaternitySystem
         public Login()
         {
             InitializeComponent();
+            if(IsServerConnected() != true)
+            {
+                MessageBox.Show("There is no connection with the database, please check your network and see if the device is connected.");
+            }
+
+        }
+
+        private static bool IsServerConnected()
+        {
+            using (SqlConnection connection = DBUtils.GetDBConnection())
+            {
+                try
+                {
+                    connection.Open();
+                    return true;
+                }
+                catch (SqlException)
+                {
+                    return false;
+                }
+            }
         }
 
         private void LblForgot_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             Hide();
-            new ForgotPassword("admin").ShowDialog();
+            new ForgotPassword(txtUsername.Text).ShowDialog();
             ShowDialog();
         }
 
@@ -75,7 +96,7 @@ namespace HolyAngelMaternitySystem
                 SqlConnection conn = DBUtils.GetDBConnection();
                 conn.Open();
                 Nullable<int> loginAttempts;
-                using (SqlCommand cmd = new SqlCommand("Select tries FROM tblAccounts WHERE username = @username", conn))
+                using (SqlCommand cmd = new SqlCommand("SELECT tries FROM tblAccounts WHERE username = @username", conn))
                 {
                     cmd.Parameters.AddWithValue("@username", txtUsername.Text);
                     loginAttempts = Convert.ToInt32(cmd.ExecuteScalar());

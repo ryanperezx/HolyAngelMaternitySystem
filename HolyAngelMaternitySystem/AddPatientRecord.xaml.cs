@@ -346,7 +346,7 @@ namespace HolyAngelMaternitySystem
                         }
                         if (count > 0)
                         {
-                            using (SqlCommand cmd = new SqlCommand("UPDATE tblObIndex set obIndex = @obIndex where patientID = patientId", conn))
+                            using (SqlCommand cmd = new SqlCommand("UPDATE tblObIndex set obIndex = @obIndex where patientID = patientID", conn))
                             {
                                 cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
                                 cmd.Parameters.AddWithValue("@obIndex", obIndex);

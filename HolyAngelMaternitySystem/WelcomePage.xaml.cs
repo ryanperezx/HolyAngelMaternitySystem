@@ -23,7 +23,7 @@ namespace HolyAngelMaternitySystem
             InitializeComponent();
             lvPatientInfo.ItemsSource = records;
             fillList();
-            qs.Show();
+            qs.Close();
         }
 
         private void fillList()

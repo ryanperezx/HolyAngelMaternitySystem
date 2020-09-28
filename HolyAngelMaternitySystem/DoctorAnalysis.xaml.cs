@@ -32,7 +32,7 @@ namespace HolyAngelMaternitySystem
         {
             SqlConnection conn = DBUtils.GetDBConnection();
             conn.Open();
-            using (SqlCommand cmd = new SqlCommand("SELECT diagnosis from tblDiagnosis", conn))
+            using (SqlCommand cmd = new SqlCommand("SELECT diagnosis from tblDiagnosis ORDER BY id ASC", conn))
             {
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
@@ -55,7 +55,7 @@ namespace HolyAngelMaternitySystem
         {
             SqlConnection conn = DBUtils.GetDBConnection();
             conn.Open();
-            using (SqlCommand cmd = new SqlCommand("SELECT treatment from tblTreatment", conn))
+            using (SqlCommand cmd = new SqlCommand("SELECT treatment from tblTreatment ORDER BY id ASC", conn))
             {
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {

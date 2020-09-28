@@ -42,11 +42,11 @@
                     <TextBox AcceptsReturn="True" Width="280" Height="52"/>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
-            <ComboBoxItem>Td1 @ HC</ComboBoxItem>
-            <ComboBoxItem>Td2 @ HC</ComboBoxItem>
-            <ComboBoxItem>Td1, Td2 @ HC</ComboBoxItem>
-            <ComboBoxItem>Tdap @ HC</ComboBoxItem>
-            <ComboBoxItem>TT @ HC</ComboBoxItem>
+            <ComboBoxItem>Td1 given @ HC</ComboBoxItem>
+            <ComboBoxItem>Td2 given @ HC</ComboBoxItem>
+            <ComboBoxItem>Td1, Td2 given @ HC</ComboBoxItem>
+            <ComboBoxItem>Tdap given @ HC</ComboBoxItem>
+            <ComboBoxItem>TT given @ HC</ComboBoxItem>
         </ComboBox>
         <Label Content="FH:" HorizontalAlignment="Left" Margin="55,442,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtFH" HorizontalAlignment="Left" Height="23" Margin="110,442,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
@@ -66,7 +66,7 @@
                 <DataGridTextColumn Header="Date" Binding="{Binding date }" Width="90" IsReadOnly="True"/>
                 <DataGridTextColumn Header="WT" Binding="{Binding weight}" IsReadOnly="True" Width="50"/>
                 <DataGridTextColumn Header="BP" Binding="{Binding bloodPressure}" IsReadOnly="True" Width="60"/>
-                <DataGridTextColumn Header="Vaccination" Binding="{Binding vaccination}" IsReadOnly="True" Width="100"/>
+                <DataGridTextColumn Header="Vaccination" Binding="{Binding vaccination}" IsReadOnly="True" Width="140"/>
                 <DataGridTextColumn Header="FH" Binding="{Binding fh}" Width="50" IsReadOnly="True"/>
                 <DataGridTextColumn Header="FHT" Binding="{Binding fht}" Width="50" IsReadOnly="True"/>
                 <DataGridTextColumn Header="LMP" Binding="{Binding lmp}" Width="100" IsReadOnly="True"/>
@@ -77,8 +77,8 @@
                 <DataGridTextColumn Header="OB-Index" Binding="{Binding obIndex}" IsReadOnly="True" Width="300"/>
                 <DataGridTextColumn Header="Diagnosis" Binding="{Binding diagnosis}" IsReadOnly="True" Width="250"/>
                 <DataGridTextColumn Header="Treatment" Binding="{Binding treatment}" IsReadOnly="True" Width="250"/>
-                <DataGridTextColumn Header="OB/ Gyne History/ P.E/ Laboratory Findings" Binding="{Binding findings}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Ultrasound Report" Binding="{Binding ultrasoundReport}" Width="300" IsReadOnly="True"/>
+                <DataGridTextColumn Header="OB/ Gyne History/ P.E/ Lab. Findings" Binding="{Binding findings}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Ultrasound Report" Binding="{Binding ultrasoundReport}" Width="270" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Others" Binding="{Binding others}" Width="150" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
