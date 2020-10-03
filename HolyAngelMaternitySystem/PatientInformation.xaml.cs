@@ -254,22 +254,6 @@ namespace HolyAngelMaternitySystem
                                     Log.Error(ex, "Query Error");
                                 }
                             }
-                            using (SqlCommand cmd = new SqlCommand("DELETE from tblObIndex where patientID = @patientID", conn))
-                            {
-                                cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
-
-                                try
-                                {
-                                    cmd.ExecuteNonQuery();
-                                    emptyFields();
-                                }
-                                catch (SqlException ex)
-                                {
-                                    MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
-                                    Log = LogManager.GetLogger("*");
-                                    Log.Error(ex, "Query Error");
-                                }
-                            }
 
                             MessageBox.Show("Patient Information has been deleted!");
 

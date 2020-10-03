@@ -25,7 +25,7 @@
             <iconPacks:PackIconMaterial  Kind="Magnify" Height="24" Width="23"/>
         </Label>
         <Label Content="Patient's Name:" HorizontalAlignment="Left" Margin="115,178,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtFullName" HorizontalAlignment="Left" Height="23" Margin="210,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196"/>
+        <TextBox x:Name="txtFullName" HorizontalAlignment="Left" Height="23" Margin="210,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196" IsReadOnly="True"/>
         <Label Content="Date:" HorizontalAlignment="Left" Margin="115,229,0,0" VerticalAlignment="Top"/>
         <DatePicker x:Name="txtDate" HorizontalAlignment="Left" Margin="210,229,0,0" VerticalAlignment="Top" Width="196"/>
         <RichTextBox x:Name="txtFindings" Controls:TextBoxHelper.Watermark="OB/ Gyne History/ P.E/ Laboratory Findings" HorizontalAlignment="Left"  Height="77" VerticalAlignment="Top" Width="400" Margin="54,278,0,0">

@@ -178,7 +178,9 @@ namespace HolyAngelMaternitySystem
                     }
                     catch (SqlException ex)
                     {
-                        MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
+                        MessageBox.Show("An error has been encountered! Log has been updated with the error");
+                        Log = LogManager.GetLogger("*");
+                        Log.Error(ex, "Query Error");
                     }
                 }
                 if(count == 0)
@@ -193,7 +195,9 @@ namespace HolyAngelMaternitySystem
                         }
                         catch (SqlException ex)
                         {
-                            MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
+                            MessageBox.Show("An error has been encountered! Log has been updated with the error ");
+                            Log = LogManager.GetLogger("*");
+                            Log.Error(ex, "Query Error");
                         }
                     }
                     if (count > 0)
@@ -228,7 +232,7 @@ namespace HolyAngelMaternitySystem
                                     }
                                     catch (SqlException ex)
                                     {
-                                        MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
+                                        MessageBox.Show("An error has been encountered! Log has been updated with the error ");
                                         Log = LogManager.GetLogger("*");
                                         Log.Error(ex, "Query Error");
                                     }
@@ -259,7 +263,7 @@ namespace HolyAngelMaternitySystem
         {
             SqlConnection conn = DBUtils.GetDBConnection();
             conn.Open();
-            using (SqlCommand cmd = new SqlCommand("SELECT dateVisit, weight, bloodPressure, ageOfGestation, earlyUltrasound, LMP, edcByUltrasound, edcByLMP from tblPatientRecord where patientID = @patientID", conn))
+            using (SqlCommand cmd = new SqlCommand("SELECT dateVisit, weight, bloodPressure, ageOfGestation, earlyUltrasound, LMP, edcByUltrasound, edcByLMP from tblPatientRecord where patientID = @patientID ORDER BY CONVERT(varchar(10), dateVisit, 101)", conn))
             {
                 cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
                 using (SqlDataReader reader = cmd.ExecuteReader())
@@ -338,7 +342,7 @@ namespace HolyAngelMaternitySystem
                         int count = 0;
                         SqlConnection conn = DBUtils.GetDBConnection();
                         conn.Open();
-                        using (SqlCommand cmd = new SqlCommand("SELECT COUNT(1) from tblObIndex where patientID = @patientID", conn))
+                        using (SqlCommand cmd = new SqlCommand("SELECT COUNT(1) from tblPersonalInfo where patientID = @patientID", conn))
                         {
                             cmd.Parameters.AddWithValue("@obIndex", obIndex);
                             cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
@@ -346,7 +350,7 @@ namespace HolyAngelMaternitySystem
                         }
                         if (count > 0)
                         {
-                            using (SqlCommand cmd = new SqlCommand("UPDATE tblObIndex set obIndex = @obIndex where patientID = patientID", conn))
+                            using (SqlCommand cmd = new SqlCommand("UPDATE tblPersonalInfo set obIndex = @obIndex where patientID = @patientID", conn))
                             {
                                 cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
                                 cmd.Parameters.AddWithValue("@obIndex", obIndex);
@@ -367,22 +371,7 @@ namespace HolyAngelMaternitySystem
                         }
                         else
                         {
-                            using (SqlCommand cmd = new SqlCommand("INSERT into tblObIndex (patientID, obIndex) VALUES (@patientID, @obIndex)", conn))
-                            {
-                                cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
-                                cmd.Parameters.AddWithValue("@obIndex", obIndex);
-                                try
-                                {
-                                    cmd.ExecuteNonQuery();
-                                    MessageBox.Show("Added OB-Index Record");
-                                }
-                                catch (SqlException ex)
-                                {
-                                    MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
-                                    Log = LogManager.GetLogger("*");
-                                    Log.Error(ex, "Query Error");
-                                }
-                            }
+                            MessageBox.Show("Patient does not exist");
                         }
                         break;
                     case MessageBoxResult.No:
