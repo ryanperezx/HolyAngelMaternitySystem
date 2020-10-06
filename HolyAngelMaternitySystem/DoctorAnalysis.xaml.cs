@@ -279,8 +279,14 @@ namespace HolyAngelMaternitySystem
                     found.fh = txtFH.Text;
                     found.vaccination = cmbVaccination.Text;
                     found.fht = txtFHT.Text;
-                    found.eut = txtUltrasound.Text;
-                    found.edcByUltrasound = txtEDCUltrasound.Text;
+                    if (!string.IsNullOrEmpty(txtUltrasound.Text))
+                    {
+                        found.eut = txtUltrasound.Text;
+                    }
+                    if (!string.IsNullOrEmpty(txtEDCUltrasound.Text))
+                    {
+                        found.edcByUltrasound = txtEDCUltrasound.Text;
+                    }
                 }
                 else
                 {
@@ -312,46 +318,180 @@ namespace HolyAngelMaternitySystem
                         SqlConnection conn = DBUtils.GetDBConnection();
                         conn.Open();
                         var found = records.FirstOrDefault(x => Convert.ToDateTime(txtDate.Text) == Convert.ToDateTime(x.date));
-                        using (SqlCommand cmd = new SqlCommand("UPDATE tblPatientRecord SET earlyUltrasound = @eut, findings = @findings, diagnosis = @diagnosis, treatment = @treatment, fh = @fh, fht = @fht, vaccination = @vaccination, edcByUltrasound = @edcByUltrasound where patientID = @patientID and dateVisit = @date", conn))
+                        if(!string.IsNullOrEmpty(found.eut) && !string.IsNullOrEmpty(found.edcByUltrasound))
                         {
-                            cmd.Parameters.AddWithValue("@findings", found.findings);
-                            cmd.Parameters.AddWithValue("@diagnosis", found.diagnosis);
-                            cmd.Parameters.AddWithValue("@eut", found.eut);
-                            cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
-                            cmd.Parameters.AddWithValue("@treatment", found.treatment);
-                            cmd.Parameters.AddWithValue("@date", found.date);
-                            if (string.IsNullOrEmpty(found.vaccination))
+                            using (SqlCommand cmd = new SqlCommand("UPDATE tblPatientRecord SET earlyUltrasound = @eut, findings = @findings, diagnosis = @diagnosis, treatment = @treatment, fh = @fh, fht = @fht, vaccination = @vaccination, edcByUltrasound = @edcByUltrasound where patientID = @patientID and dateVisit = @date", conn))
                             {
-                                cmd.Parameters.AddWithValue("@vaccination", DBNull.Value);
-                            }
-                            else
-                            {
-                                cmd.Parameters.AddWithValue("@vaccination", found.vaccination);
-                            }
-                            cmd.Parameters.AddWithValue("@edcByUltrasound", found.edcByUltrasound);
-                            cmd.Parameters.AddWithValue("@fh", found.fh);
-                            cmd.Parameters.AddWithValue("@fht", found.fht);
-                            try
-                            {
-
-                                int count = cmd.ExecuteNonQuery();
-                                if (count > 0)
+                                cmd.Parameters.AddWithValue("@findings", found.findings);
+                                cmd.Parameters.AddWithValue("@diagnosis", found.diagnosis);
+                                cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
+                                cmd.Parameters.AddWithValue("@treatment", found.treatment);
+                                cmd.Parameters.AddWithValue("@date", found.date);
+                                if (string.IsNullOrEmpty(found.vaccination))
                                 {
-                                    MessageBox.Show("Record has been updated!");
-                                    Log = LogManager.GetLogger("patientRecord");
-                                    Log.Info("Patient:  " + txtPatientID.Text + " has been updated with doctor's analysis!");
-
+                                    cmd.Parameters.AddWithValue("@vaccination", DBNull.Value);
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Patient doesn't have any record on the input date!");
+                                    cmd.Parameters.AddWithValue("@vaccination", found.vaccination);
+                                }
+                                cmd.Parameters.AddWithValue("@eut", found.eut);
+                                cmd.Parameters.AddWithValue("@edcByUltrasound", found.edcByUltrasound);
+                                cmd.Parameters.AddWithValue("@fh", found.fh);
+                                cmd.Parameters.AddWithValue("@fht", found.fht);
+                                try
+                                {
+
+                                    int count = cmd.ExecuteNonQuery();
+                                    if (count > 0)
+                                    {
+                                        MessageBox.Show("Record has been updated!");
+                                        Log = LogManager.GetLogger("patientRecord");
+                                        Log.Info("Patient:  " + txtPatientID.Text + " has been updated with doctor's analysis!");
+
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Patient doesn't have any record on the input date!");
+                                    }
+                                }
+                                catch (SqlException ex)
+                                {
+                                    MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
+                                    Log = LogManager.GetLogger("*");
+                                    Log.Error(ex, "Query Error");
                                 }
                             }
-                            catch (SqlException ex)
+                        }
+                        else if(!string.IsNullOrEmpty(found.eut) && string.IsNullOrEmpty(found.edcByUltrasound))
+                        {
+                            using (SqlCommand cmd = new SqlCommand("UPDATE tblPatientRecord SET earlyUltrasound = @eut, findings = @findings, diagnosis = @diagnosis, treatment = @treatment, fh = @fh, fht = @fht, vaccination = @vaccination where patientID = @patientID and dateVisit = @date", conn))
                             {
-                                MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
-                                Log = LogManager.GetLogger("*");
-                                Log.Error(ex, "Query Error");
+                                cmd.Parameters.AddWithValue("@findings", found.findings);
+                                cmd.Parameters.AddWithValue("@diagnosis", found.diagnosis);
+                                cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
+                                cmd.Parameters.AddWithValue("@treatment", found.treatment);
+                                cmd.Parameters.AddWithValue("@date", found.date);
+                                if (string.IsNullOrEmpty(found.vaccination))
+                                {
+                                    cmd.Parameters.AddWithValue("@vaccination", DBNull.Value);
+                                }
+                                else
+                                {
+                                    cmd.Parameters.AddWithValue("@vaccination", found.vaccination);
+                                }
+                                cmd.Parameters.AddWithValue("@eut", found.eut);
+                                cmd.Parameters.AddWithValue("@fh", found.fh);
+                                cmd.Parameters.AddWithValue("@fht", found.fht);
+                                try
+                                {
+
+                                    int count = cmd.ExecuteNonQuery();
+                                    if (count > 0)
+                                    {
+                                        MessageBox.Show("Record has been updated!");
+                                        Log = LogManager.GetLogger("patientRecord");
+                                        Log.Info("Patient:  " + txtPatientID.Text + " has been updated with doctor's analysis!");
+
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Patient doesn't have any record on the input date!");
+                                    }
+                                }
+                                catch (SqlException ex)
+                                {
+                                    MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
+                                    Log = LogManager.GetLogger("*");
+                                    Log.Error(ex, "Query Error");
+                                }
+                            }
+                        }
+                        else if(string.IsNullOrEmpty(found.eut) && !string.IsNullOrEmpty(found.edcByUltrasound))
+                        {
+                            using (SqlCommand cmd = new SqlCommand("UPDATE tblPatientRecord SET findings = @findings, diagnosis = @diagnosis, treatment = @treatment, fh = @fh, fht = @fht, vaccination = @vaccination, edcByUltrasound = @edcByUltrasound where patientID = @patientID and dateVisit = @date", conn))
+                            {
+                                cmd.Parameters.AddWithValue("@findings", found.findings);
+                                cmd.Parameters.AddWithValue("@diagnosis", found.diagnosis);
+                                cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
+                                cmd.Parameters.AddWithValue("@treatment", found.treatment);
+                                cmd.Parameters.AddWithValue("@date", found.date);
+                                if (string.IsNullOrEmpty(found.vaccination))
+                                {
+                                    cmd.Parameters.AddWithValue("@vaccination", DBNull.Value);
+                                }
+                                else
+                                {
+                                    cmd.Parameters.AddWithValue("@vaccination", found.vaccination);
+                                }
+                                cmd.Parameters.AddWithValue("@edcByUltrasound", found.edcByUltrasound);
+                                cmd.Parameters.AddWithValue("@fh", found.fh);
+                                cmd.Parameters.AddWithValue("@fht", found.fht);
+                                try
+                                {
+
+                                    int count = cmd.ExecuteNonQuery();
+                                    if (count > 0)
+                                    {
+                                        MessageBox.Show("Record has been updated!");
+                                        Log = LogManager.GetLogger("patientRecord");
+                                        Log.Info("Patient:  " + txtPatientID.Text + " has been updated with doctor's analysis!");
+
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Patient doesn't have any record on the input date!");
+                                    }
+                                }
+                                catch (SqlException ex)
+                                {
+                                    MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
+                                    Log = LogManager.GetLogger("*");
+                                    Log.Error(ex, "Query Error");
+                                }
+                            }
+                        }
+                        else
+                        {
+                            using (SqlCommand cmd = new SqlCommand("UPDATE tblPatientRecord SET findings = @findings, diagnosis = @diagnosis, treatment = @treatment, fh = @fh, fht = @fht, vaccination = @vaccination where patientID = @patientID and dateVisit = @date", conn))
+                            {
+                                cmd.Parameters.AddWithValue("@findings", found.findings);
+                                cmd.Parameters.AddWithValue("@diagnosis", found.diagnosis);
+                                cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
+                                cmd.Parameters.AddWithValue("@treatment", found.treatment);
+                                cmd.Parameters.AddWithValue("@date", found.date);
+                                if (string.IsNullOrEmpty(found.vaccination))
+                                {
+                                    cmd.Parameters.AddWithValue("@vaccination", DBNull.Value);
+                                }
+                                else
+                                {
+                                    cmd.Parameters.AddWithValue("@vaccination", found.vaccination);
+                                }
+                                cmd.Parameters.AddWithValue("@fh", found.fh);
+                                cmd.Parameters.AddWithValue("@fht", found.fht);
+                                try
+                                {
+
+                                    int count = cmd.ExecuteNonQuery();
+                                    if (count > 0)
+                                    {
+                                        MessageBox.Show("Record has been updated!");
+                                        Log = LogManager.GetLogger("patientRecord");
+                                        Log.Info("Patient:  " + txtPatientID.Text + " has been updated with doctor's analysis!");
+
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Patient doesn't have any record on the input date!");
+                                    }
+                                }
+                                catch (SqlException ex)
+                                {
+                                    MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
+                                    Log = LogManager.GetLogger("*");
+                                    Log.Error(ex, "Query Error");
+                                }
                             }
                         }
                         break;

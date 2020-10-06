@@ -32,8 +32,6 @@ namespace HolyAngelMaternitySystem
             lblGenerate.Visibility = Visibility.Visible;
             lblSearch.Visibility = Visibility.Collapsed;
             txtPatientID.IsReadOnly = true;
-            txtFirstName.IsReadOnly = false;
-            txtLastName.IsReadOnly = false;
             txtFirstName.Text = null;
             txtLastName.Text = null;
             txtAddress.Text = null;
@@ -142,8 +140,10 @@ namespace HolyAngelMaternitySystem
                         case MessageBoxResult.Yes:
                             SqlConnection conn = DBUtils.GetDBConnection();
                             conn.Open();
-                            using (SqlCommand cmd = new SqlCommand("UPDATE tblPersonalInfo SET homeAddress = @address, birthDate = @birthDate, civStatus = @civStatus, cellphoneNo = @cellNo where patientID = @patientID", conn))
+                            using (SqlCommand cmd = new SqlCommand("UPDATE tblPersonalInfo SET firstName = @firstName, lastName = @lastName, homeAddress = @address, birthDate = @birthDate, civStatus = @civStatus, cellphoneNo = @cellNo where patientID = @patientID", conn))
                             {
+                                cmd.Parameters.AddWithValue("@firstName", txtFirstName.Text);
+                                cmd.Parameters.AddWithValue("@lastName", txtLastName.Text);
                                 cmd.Parameters.AddWithValue("@address", txtAddress.Text);
                                 cmd.Parameters.AddWithValue("@civStatus", cmbCivStatus.Text);
                                 cmd.Parameters.AddWithValue("@birthDate", txtBirthDate.Text);
@@ -342,8 +342,6 @@ namespace HolyAngelMaternitySystem
 
                                 txtPatientID.IsEnabled = false;
 
-                                txtFirstName.IsReadOnly = true;
-                                txtLastName.IsReadOnly = true;
 
                                 btnEdit.IsEnabled = true;
                                 btnDelete.IsEnabled = true;
