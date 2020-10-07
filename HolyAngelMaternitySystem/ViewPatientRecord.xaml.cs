@@ -82,7 +82,7 @@ namespace HolyAngelMaternitySystem
         {
             SqlConnection conn = DBUtils.GetDBConnection();
             conn.Open();
-            using (SqlCommand cmd = new SqlCommand("SELECT * from tblPatientRecord pr LEFT JOIN tblPersonalInfo pi on pr.patientID = pi.patientID where pr.patientID = @patientID ORDER BY CONVERT(varchar(10), dateVisit, 101)", conn))
+            using (SqlCommand cmd = new SqlCommand("SELECT * from tblPatientRecord pr LEFT JOIN tblPersonalInfo pi on pr.patientID = pi.patientID where pr.patientID = @patientID ORDER BY CAST(dateVisit AS datetime) ASC", conn))
             {
                 cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
                 using (SqlDataReader reader = cmd.ExecuteReader())

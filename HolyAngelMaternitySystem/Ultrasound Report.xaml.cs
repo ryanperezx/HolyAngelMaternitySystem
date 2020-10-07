@@ -62,7 +62,7 @@ namespace HolyAngelMaternitySystem
         {
             SqlConnection conn = DBUtils.GetDBConnection();
             conn.Open();
-            using (SqlCommand cmd = new SqlCommand("SELECT dateVisit, reportType, ultrasoundReport, others from tblPatientRecord where patientID = @patientID", conn))
+            using (SqlCommand cmd = new SqlCommand("SELECT dateVisit, reportType, ultrasoundReport, others from tblPatientRecord where patientID = @patientID ORDER BY CAST(dateVisit AS datetime) ASC", conn))
             {
                 cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
                 using (SqlDataReader reader = cmd.ExecuteReader())

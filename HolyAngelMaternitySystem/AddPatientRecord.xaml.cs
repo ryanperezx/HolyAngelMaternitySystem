@@ -197,7 +197,7 @@ namespace HolyAngelMaternitySystem
                         {
                             MessageBox.Show("An error has been encountered! Log has been updated with the error ");
                             Log = LogManager.GetLogger("*");
-                            Log.Error(ex, "Query Error");
+                            Log.Error("Query Error", ex);
                         }
                     }
                     if (count > 0)
@@ -234,7 +234,7 @@ namespace HolyAngelMaternitySystem
                                     {
                                         MessageBox.Show("An error has been encountered! Log has been updated with the error ");
                                         Log = LogManager.GetLogger("*");
-                                        Log.Error(ex, "Query Error");
+                                        Log.Error("Query Error", ex);
                                     }
                                 }
                                 break;
@@ -251,7 +251,48 @@ namespace HolyAngelMaternitySystem
                 }
                 else
                 {
-                    MessageBox.Show("A record exists with the given date.");
+                    string sMessageBoxText = "Confirming Updating Patient Record";
+                    string sCaption = "Update Patient Record?";
+                    MessageBoxButton btnMessageBox = MessageBoxButton.YesNoCancel;
+                    MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
+
+                    MessageBoxResult dr = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+                    switch (dr)
+                    {
+                        case MessageBoxResult.Yes:
+                            using (SqlCommand cmd = new SqlCommand("UPDATE tblPatientRecord set bloodPressure = @bloodPressure, weight = @weight, ageOfGestation = @aog, earlyUltrasound = @eut, LMP = @LMP, edcByUltrasound = @edcByUltrasound, edcByLMP = @edcByLMP where patientID = @patientID and dateVisit = @date", conn))
+                            {
+                                cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
+                                cmd.Parameters.AddWithValue("@date", txtDate.Text);
+                                cmd.Parameters.AddWithValue("@bloodPressure", txtBP.Text);
+                                cmd.Parameters.AddWithValue("@weight", txtWeight.Text);
+                                cmd.Parameters.AddWithValue("@edcByUltrasound", txtEDCUltrasound.Text);
+                                cmd.Parameters.AddWithValue("@edcByLMP", txtEDCLMP.Text);
+                                cmd.Parameters.AddWithValue("@aog", txtAOG.Text);
+                                cmd.Parameters.AddWithValue("@eut", txtUltrasound.Text);
+                                cmd.Parameters.AddWithValue("@LMP", txtLMP.Text);
+                                try
+                                {
+                                    cmd.ExecuteNonQuery();
+                                    MessageBox.Show("Record has been updated!");
+                                    Log = LogManager.GetLogger("patientRecord");
+                                    Log.Info("Patient:  " + txtPatientID.Text + " record has been updated!");
+                                    fillRecord();
+                                }
+                                catch (SqlException ex)
+                                {
+                                    MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
+                                    Log = LogManager.GetLogger("*");
+                                    Log.Error("Query Error", ex);
+
+                                }
+                            }
+                            break;
+                        case MessageBoxResult.No:
+                            return;
+                        case MessageBoxResult.Cancel:
+                            return;
+                    }
                 }
 
 
@@ -263,7 +304,7 @@ namespace HolyAngelMaternitySystem
         {
             SqlConnection conn = DBUtils.GetDBConnection();
             conn.Open();
-            using (SqlCommand cmd = new SqlCommand("SELECT dateVisit, weight, bloodPressure, ageOfGestation, earlyUltrasound, LMP, edcByUltrasound, edcByLMP from tblPatientRecord where patientID = @patientID ORDER BY CONVERT(varchar(10), dateVisit, 101)", conn))
+            using (SqlCommand cmd = new SqlCommand("SELECT dateVisit, weight, bloodPressure, ageOfGestation, earlyUltrasound, LMP, edcByUltrasound, edcByLMP from tblPatientRecord where patientID = @patientID ORDER BY CAST(dateVisit AS datetime) ASC", conn))
             {
                 cmd.Parameters.AddWithValue("@patientID", txtPatientID.Text);
                 using (SqlDataReader reader = cmd.ExecuteReader())
