@@ -24,7 +24,10 @@
             <ComboBoxItem>Diagnosis</ComboBoxItem>
             <ComboBoxItem>Treatment</ComboBoxItem>
         </ComboBox>
-        <Button x:Name="btnSave" Content="Save" Click="BtnSave_Click" HorizontalAlignment="Left" Margin="188,188,0,0" VerticalAlignment="Top" Width="127"/>
+        <Button x:Name="btnSave" Content="Save" Click="BtnSave_Click" HorizontalAlignment="Left" Margin="136,185,0,0" VerticalAlignment="Top" Width="127"/>
+        <ComboBox x:Name="cmbDeleteChoice" Controls:TextBoxHelper.Watermark="Select treatment or diagnosis record" HorizontalAlignment="Left" Margin="136,430,0,0" VerticalAlignment="Top" Width="370"/>
+
+        <Button x:Name="btnDelete" Content="Delete" Click="BtnDelete_Click" HorizontalAlignment="Left" Margin="136,485,0,0" VerticalAlignment="Top" Width="127"/>
         <StackPanel x:Name="stack" Orientation="Horizontal" Margin="0,85,275,0" HorizontalAlignment="Right" VerticalAlignment="Top">
             <StackPanel.Resources>
                 <local:ExpanderToBooleanConverter x:Key="ExpanderToBooleanConverter" />

@@ -49,6 +49,7 @@ namespace HolyAngelMaternitySystem
                     if (reader.HasRows)
                     {
                         diagnosisCollection.Clear();
+                        cmbDeleteChoice.Items.Clear();
                         int i = 1;
                         while (reader.Read())
                         {
@@ -61,6 +62,7 @@ namespace HolyAngelMaternitySystem
                                 i = i
                             });
                             i++;
+                            cmbDeleteChoice.Items.Add(diagnosis);
                         }
                     }
                 }
@@ -78,6 +80,7 @@ namespace HolyAngelMaternitySystem
                     if (reader.HasRows)
                     {
                         treatmentCollection.Clear();
+                        cmbDeleteChoice.Items.Clear();
                         int i = 1;
                         while (reader.Read())
                         {
@@ -89,12 +92,113 @@ namespace HolyAngelMaternitySystem
                                 treatment = treatment,
                                 i = i
                             });
+                            cmbDeleteChoice.Items.Add(treatment);
                             i++;
                         }
                     }
                 }
             }
         }
+
+        private void BtnDelete_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (string.IsNullOrEmpty(cmbDeleteChoice.Text))
+            {
+                MessageBox.Show("Please select from the choices");
+                cmbDeleteChoice.Focus();
+            }
+            else
+            {
+                string sMessageBoxText = "Confirming deletion of Diagnosis or Treatment Record";
+                string sCaption = "Delete Diagnosis/Treatment?";
+                MessageBoxButton btnMessageBox = MessageBoxButton.YesNoCancel;
+                MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
+
+                MessageBoxResult dr = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+                switch (dr)
+                {
+                    case MessageBoxResult.Yes:
+                        SqlConnection conn = DBUtils.GetDBConnection();
+                        conn.Open();
+                        int count = 0;
+                        using (SqlCommand cmd = new SqlCommand("SELECT COUNT(1) from tblDiagnosis where diagnosis = @diagnosis", conn))
+                        {
+                            cmd.Parameters.AddWithValue("@diagnosis", cmbDeleteChoice.Text);
+                            try
+                            {
+                                count = (int)cmd.ExecuteScalar();
+                            }
+                            catch (SqlException ex)
+                            {
+                                MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
+                                Log = LogManager.GetLogger("*");
+                                Log.Error(ex, "Query Error");
+                            }
+                        }
+                        if (count > 0)
+                        {
+                            using (SqlCommand cmd = new SqlCommand("DELETE from tblDiagnosis where diagnosis = @diagnosis)", conn))
+                            {
+                                cmd.Parameters.AddWithValue("@diagnosis", cmbDeleteChoice.Text);
+                                try
+                                {
+                                    cmd.ExecuteNonQuery();
+                                    MessageBox.Show("Record deleted successfully");
+                                }
+                                catch (SqlException ex)
+                                {
+                                    MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
+                                    Log = LogManager.GetLogger("*");
+                                    Log.Error(ex, "Query Error");
+                                }
+                            }
+                        }
+                        using (SqlCommand cmd = new SqlCommand("SELECT COUNT(1) from tblTreatment where treatment = @treatment", conn))
+                        {
+                            cmd.Parameters.AddWithValue("@treatment", cmbDeleteChoice.Text);
+                            try
+                            {
+                                count = (int)cmd.ExecuteScalar();
+                            }
+                            catch (SqlException ex)
+                            {
+                                MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
+                                Log = LogManager.GetLogger("*");
+                                Log.Error(ex, "Query Error");
+                            }
+                        }
+                        if (count > 0)
+                        {
+                            using (SqlCommand cmd = new SqlCommand("DELETE from tblTreatment where treatment = @treatment)", conn))
+                            {
+                                cmd.Parameters.AddWithValue("@treatment", cmbDeleteChoice.Text);
+                                try
+                                {
+                                    cmd.ExecuteNonQuery();
+                                    MessageBox.Show("Record deleted successfully");
+                                }
+                                catch (SqlException ex)
+                                {
+                                    MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
+                                    Log = LogManager.GetLogger("*");
+                                    Log.Error(ex, "Query Error");
+                                }
+                            }
+                        }
+                        cmbDeleteChoice.SelectedIndex = -1;
+                        fillTreatment();
+                        fillDiagnosis();
+                        break;
+                    case MessageBoxResult.No:
+                        return;
+                    case MessageBoxResult.Cancel:
+                        return;
+                }
+            }
+        }
+
+
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
