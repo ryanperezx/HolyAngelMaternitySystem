@@ -122,6 +122,7 @@ namespace HolyAngelMaternitySystem
                         SqlConnection conn = DBUtils.GetDBConnection();
                         conn.Open();
                         int count = 0;
+                        bool success = false;
                         using (SqlCommand cmd = new SqlCommand("SELECT COUNT(1) from tblDiagnosis where diagnosis = @diagnosis", conn))
                         {
                             cmd.Parameters.AddWithValue("@diagnosis", cmbDeleteChoice.Text);
@@ -138,13 +139,14 @@ namespace HolyAngelMaternitySystem
                         }
                         if (count > 0)
                         {
-                            using (SqlCommand cmd = new SqlCommand("DELETE from tblDiagnosis where diagnosis = @diagnosis)", conn))
+                            using (SqlCommand cmd = new SqlCommand("DELETE from tblDiagnosis where diagnosis = @diagnosis", conn))
                             {
                                 cmd.Parameters.AddWithValue("@diagnosis", cmbDeleteChoice.Text);
                                 try
                                 {
                                     cmd.ExecuteNonQuery();
                                     MessageBox.Show("Record deleted successfully");
+                                    success = true;
                                 }
                                 catch (SqlException ex)
                                 {
@@ -154,29 +156,15 @@ namespace HolyAngelMaternitySystem
                                 }
                             }
                         }
-                        using (SqlCommand cmd = new SqlCommand("SELECT COUNT(1) from tblTreatment where treatment = @treatment", conn))
+                        if(success == false)
                         {
-                            cmd.Parameters.AddWithValue("@treatment", cmbDeleteChoice.Text);
-                            try
-                            {
-                                count = (int)cmd.ExecuteScalar();
-                            }
-                            catch (SqlException ex)
-                            {
-                                MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
-                                Log = LogManager.GetLogger("*");
-                                Log.Error(ex, "Query Error");
-                            }
-                        }
-                        if (count > 0)
-                        {
-                            using (SqlCommand cmd = new SqlCommand("DELETE from tblTreatment where treatment = @treatment)", conn))
+                            using (SqlCommand cmd = new SqlCommand("SELECT COUNT(1) from tblTreatment where treatment = @treatment", conn))
                             {
                                 cmd.Parameters.AddWithValue("@treatment", cmbDeleteChoice.Text);
                                 try
                                 {
-                                    cmd.ExecuteNonQuery();
-                                    MessageBox.Show("Record deleted successfully");
+                                    count = (int)cmd.ExecuteScalar();
+                                    success = true;
                                 }
                                 catch (SqlException ex)
                                 {
@@ -185,10 +173,31 @@ namespace HolyAngelMaternitySystem
                                     Log.Error(ex, "Query Error");
                                 }
                             }
+                            if (count > 0)
+                            {
+                                using (SqlCommand cmd = new SqlCommand("DELETE from tblTreatment where treatment = @treatment", conn))
+                                {
+                                    cmd.Parameters.AddWithValue("@treatment", cmbDeleteChoice.Text);
+                                    try
+                                    {
+                                        cmd.ExecuteNonQuery();
+                                        MessageBox.Show("Record deleted successfully");
+                                    }
+                                    catch (SqlException ex)
+                                    {
+                                        MessageBox.Show("An error has been encountered! Log has been updated with the error " + ex);
+                                        Log = LogManager.GetLogger("*");
+                                        Log.Error(ex, "Query Error");
+                                    }
+                                }
+                            }
                         }
-                        cmbDeleteChoice.SelectedIndex = -1;
-                        fillTreatment();
-                        fillDiagnosis();
+                        if (success)
+                        {
+                            cmbDeleteChoice.SelectedIndex = -1;
+                            fillTreatment();
+                            fillDiagnosis();
+                        }
                         break;
                     case MessageBoxResult.No:
                         return;

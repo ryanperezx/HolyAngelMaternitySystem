@@ -11,7 +11,7 @@ namespace HolyAngelMaternitySystem
     {
         public static SqlConnection GetDBConnection()
         {
-            string datasource = "192.168.0.100";
+            string datasource = "192.168.1.200";
             string database = "HolyAngelMaternityPolyclinicDB;" +
                 "User ID=admin;" +
                 "Password=Deaths123";
